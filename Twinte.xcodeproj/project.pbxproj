@@ -13,8 +13,10 @@
 		3C0FC8A1238247CC00055141 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC89F238247CC00055141 /* Main.storyboard */; };
 		3C0FC8A3238247CD00055141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C0FC8A6238247CD00055141 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A4238247CD00055141 /* LaunchScreen.storyboard */; };
+		3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C829CE02383D5EE008C3475 /* WebKit.framework */; };
 		3CCF54322382FB6F00149E44 /* sp.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CCF54312382FB6E00149E44 /* sp.js */; };
 		3CE721622383A26600363500 /* Twintelogo-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE721612383A26600363500 /* Twintelogo-color.png */; };
+		3CE721682383B42B00363500 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE721672383B42B00363500 /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +28,10 @@
 		3C0FC8A2238247CD00055141 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C0FC8A5238247CD00055141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C0FC8A7238247CD00055141 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C829CE02383D5EE008C3475 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3CCF54312382FB6E00149E44 /* sp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sp.js; sourceTree = "<group>"; };
 		3CE721612383A26600363500 /* Twintelogo-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twintelogo-color.png"; sourceTree = "<group>"; };
+		3CE721672383B42B00363500 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +52,7 @@
 				3C0FC898238247CC00055141 /* Twinte */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
+				3C829CDF2383D5EE008C3475 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				3C0FC899238247CC00055141 /* AppDelegate.swift */,
+				3CE721672383B42B00363500 /* SecondViewController.swift */,
 				3C0FC89B238247CC00055141 /* SceneDelegate.swift */,
 				3C0FC89D238247CC00055141 /* ViewController.swift */,
 				3CE721612383A26600363500 /* Twintelogo-color.png */,
@@ -71,6 +78,14 @@
 				3C0FC8A7238247CD00055141 /* Info.plist */,
 			);
 			path = Twinte;
+			sourceTree = "<group>";
+		};
+		3C829CDF2383D5EE008C3475 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C829CE02383D5EE008C3475 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE721682383B42B00363500 /* SecondViewController.swift in Sources */,
 				3C0FC89E238247CC00055141 /* ViewController.swift in Sources */,
 				3C0FC89A238247CC00055141 /* AppDelegate.swift in Sources */,
 				3C0FC89C238247CC00055141 /* SceneDelegate.swift in Sources */,
@@ -295,7 +311,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -314,7 +330,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

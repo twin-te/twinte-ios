@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Twinte" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainView" id="BYZ-38-t0r" customClass="ViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO">
-                                    <dataDetectorTypes key="dataDetectorTypes"/>
+                                    <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
@@ -27,20 +28,67 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="UTV-5f-UaH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="D9N-Kn-zkp"/>
-                            <constraint firstItem="UTV-5f-UaH" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="KPe-eM-jp1"/>
-                            <constraint firstItem="UTV-5f-UaH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KpY-ZK-UF3"/>
-                            <constraint firstItem="UTV-5f-UaH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yZ3-jK-XS4"/>
+                            <constraint firstItem="UTV-5f-UaH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1uo-O6-0MH"/>
+                            <constraint firstItem="UTV-5f-UaH" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="GHj-Fm-ofH"/>
+                            <constraint firstItem="UTV-5f-UaH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H96-DW-bov"/>
+                            <constraint firstItem="UTV-5f-UaH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yEq-uq-8KT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="MainWebView" destination="UTV-5f-UaH" id="xmI-J1-3fY"/>
+                        <segue destination="Xmp-ao-KwE" kind="presentation" identifier="toSecond" id="M5c-bf-j2L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138.40000000000001" y="114.69265367316342"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="nPm-uF-7Cs">
+            <objects>
+                <viewController id="Xmp-ao-KwE" customClass="SecondViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wIc-cU-9X5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1F-CQ-JO3">
+                                <rect key="frame" x="0.0" y="49" width="375" height="598"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-X2-Cyu">
+                                <rect key="frame" x="16" y="11" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="閉じる"/>
+                                <connections>
+                                    <action selector="ExitButton:" destination="Xmp-ao-KwE" eventType="touchUpInside" id="0sc-LX-BtZ"/>
+                                    <segue destination="zSj-X9-77y" kind="unwind" unwindAction="returnToMeWithSegue:" id="5pU-MT-pZj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="centerX" secondItem="wIc-cU-9X5" secondAttribute="centerX" id="7fA-28-CKn"/>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="bottom" secondItem="DmD-pe-qSW" secondAttribute="bottom" id="HAJ-CS-vxx"/>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="leading" secondItem="DmD-pe-qSW" secondAttribute="leading" id="Mtm-Sx-hzD"/>
+                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="leading" secondItem="wIc-cU-9X5" secondAttribute="leadingMargin" id="cA5-gS-5Pp"/>
+                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="top" secondItem="DmD-pe-qSW" secondAttribute="top" constant="11" id="raq-q3-AfC"/>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="top" secondItem="fFI-X2-Cyu" secondAttribute="bottom" constant="8" id="vlJ-R4-fS0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DmD-pe-qSW"/>
+                    </view>
+                    <connections>
+                        <outlet property="SubWebView" destination="Y1F-CQ-JO3" id="oNg-2D-VlE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hA-bW-5Yb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="zSj-X9-77y" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="909.60000000000002" y="115.59220389805098"/>
         </scene>
     </scenes>
 </document>

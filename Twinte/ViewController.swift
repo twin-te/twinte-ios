@@ -13,12 +13,14 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
     
     @IBOutlet var MainWebView: WKWebView!
     
+    let myRequest = URLRequest(url: URL(string: "https://app.twinte.net")!)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // キャッシュ消去
         // WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
-        let myURL = URL(string: "https://app.twinte.net")
-        let myRequest = URLRequest(url: myURL!)
+        
+        
         // これがないとjsのアラートが出ない
         MainWebView.uiDelegate = self
         // これがないとページを読み込んだ後の関数didFinish navigationが実行できない
@@ -28,6 +30,14 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         MainWebView.scrollView.isScrollEnabled = false;
         MainWebView.scrollView.panGestureRecognizer.isEnabled = false;
         MainWebView.scrollView.bounces = false;
+        
+        // iPadはUserAgentがMacになるのでその対策
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // 使用デバイスがiPadの場合 UserAgentを固定
+            MainWebView.customUserAgent = "Twin:teAppforiPad"
+        }else if UIDevice.current.userInterfaceIdiom == .phone{
+            MainWebView.customUserAgent = "Twin:teAppforiPhone"
+        }
         
         MainWebView.load(myRequest)
     }
@@ -71,28 +81,39 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         present(alertController, animated: true, completion: nil)
     }
     
-    // Twinsの履修画面でJSを挿入
-    func webView(_ TwinsWebView: WKWebView, didFinish navigation: WKNavigation!) {
-        // ページのタイトルが履修登録ページのものだった場合に実行
-        if TwinsWebView.title == "履修登録・登録状況照会 [CampusSquare]"{
-            // sp.jsのパスを取得
-            guard let jsFilePath = Bundle.main.path(forResource: "sp", ofType: "js") else{
-                // ファイルがない場合
-                print("jsファイルがありません。")
-                return
+    // リンク先のURLを格納
+    var g_Url:URL?
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        // twinte.netドメイン以外はサブWebViewで開く
+        if let url = navigationAction.request.url?.absoluteString{
+            // グローバル変数に格納
+            g_Url = navigationAction.request.url
+            if(url.contains("twinte.net")){//この部分を処理したいURLにする
+                decisionHandler(WKNavigationActionPolicy.allow)
+            }else{
+                self.performSegue(withIdentifier: "toSecond", sender: nil)
+                decisionHandler(WKNavigationActionPolicy.cancel)
             }
-            // javascriptを格納する
-            let js:String
-            // sp.jsの読み込み
-            do{
-                js = try String(contentsOfFile: jsFilePath, encoding: String.Encoding.utf8)
-                TwinsWebView.evaluateJavaScript(js, completionHandler: nil)
-            }catch let error{
-                print ("失敗しました。:\(error)")
-                return
-            }
-            
         }
+        
+    }
+    
+    // 値を渡す
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        // 次の画面を取り出す
+        let viewController = segue.destination as! SecondViewController
+        // 値を渡す
+        viewController.g_receviedUrl = g_Url
+        
+    }
+    //subWebViewから戻ってきたときはリロードする
+    @IBAction func returnToMe(segue: UIStoryboardSegue) {
+        MainWebView.reload()
+    }
+    func reload(){
+        MainWebView.reload()
     }
     
 }
