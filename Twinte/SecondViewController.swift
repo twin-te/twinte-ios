@@ -103,9 +103,10 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
                 return
             }
         }
+        
         // twinte.netドメインの時はサブWebViewを閉じる
-        if let url:String = TwinsWebView.url?.absoluteString{
-            if(url.contains("twinte.net")){//この部分を処理したいURLにする
+        if let host : String = TwinsWebView.url?.host{
+            if(host.contains("twinte.net")){//この部分を処理したいURLにする
                 // 親のviewcontorollerを取得して関数を実行
                 let parentVC = self.presentingViewController as! ViewController
                 parentVC.reload()
