@@ -317,6 +317,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -338,6 +339,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
