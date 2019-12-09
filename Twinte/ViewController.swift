@@ -19,7 +19,8 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         super.viewDidLoad()
         // キャッシュ消去
         // WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
-        
+        // バージョンが変更されたときに反映されなくなってしまうためきCokkie以外消去
+        //WKWebsiteDataStore.default().removeData(ofTypes: [WKWebsiteDataTypeDiskCache], modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
         
         // これがないとjsのアラートが出ない
         MainWebView.uiDelegate = self
@@ -90,7 +91,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host.contains("twinte.net")){//この部分を処理したいURLにする
+            if(host.contains("twinte.net") && host != "www.twinte.net"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
