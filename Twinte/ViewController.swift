@@ -87,11 +87,11 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        // twinte.netドメイン以外はサブWebViewで開く
+        // app.twinte.netドメイン以外はサブWebViewで開く
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host.contains("twinte.net") && host != "www.twinte.net"){//この部分を処理したいURLにする
+            if(host == "app.twinte.net"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
