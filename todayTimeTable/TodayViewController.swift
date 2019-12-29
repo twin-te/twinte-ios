@@ -16,52 +16,11 @@ struct Lecture: Codable {
     let instructor: String
 }
 
-class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelegate, UITableViewDataSource {
-    let timetable = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timetable.count
-    }
+struct LectureGet {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルを取得する
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
-        // セルに表示する値を設定する
-        cell.textLabel!.text = timetable[indexPath.row]
-        return cell
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-    }
-    
-    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
+    static func fetchArticle(completion: @escaping ([Lecture]) -> Swift.Void) {
         
-        // 今日の時間割を取得する関数
-        let date:String = "2020-1-14"
-        todayget(date: date)
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
-        completionHandler(NCUpdateResult.newData)
-    }
-    
-    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode,
-                                          withMaximumSize maxSize: CGSize) {
-        if (activeDisplayMode == .compact) {
-            self.preferredContentSize = maxSize;
-        } else {
-            self.preferredContentSize = CGSize(width: 0, height: 170);
-        }
-    }
-    
-    func todayget(date: String){
-        let requestUrl = "https://dev.api.twinte.net/v1/timetables/?date="+date
+        let requestUrl = "https://dev.api.twinte.net/v1/timetables/?date=2020-01-15"
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
@@ -77,7 +36,7 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
             // UserDefaultsからCookieを取得
             request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
         }
-        // 商品検索APIをコールして商品検索を行う
+        // APIを殴る
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data:Data?,
             response:URLResponse?, error:Error?) in
@@ -97,29 +56,93 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
                 // データなし
                 return
             }
-            /*
-             let str = String(decoding: data, as: UTF8.self)
-             print(str)
-             // jsonをそのまま表示
-             
-             do {
-             let object = try JSONSerialization.jsonObject(with: data, options: [])
-             print(object)
-             } catch let e {
-             print(e)
-             }
-             */
+            
             do {
                 // パース実施
                 let resultSet = try JSONDecoder().decode([Lecture].self, from: data)
-                print(resultSet)
+                //print(resultSet)
+                completion(resultSet)
             } catch let error {
                 print("## error: \(error)")
             }
         }
         // 通信開始
         task.resume()
+        
+    }
+}
+
+class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelegate {
+    
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    fileprivate var articles: [Lecture] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
     
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        // Perform any setup necessary in order to update the view.
+        
+        LectureGet.fetchArticle(completion: { (articles) in
+            let lectures:[Lecture] = articles
+            // 授業の時間と配列のindexを対応させて格納する
+            for i in 0..<6 {
+                lectures.forEach{
+                    if $0.period == i+1 {
+                        self.articles.append($0)
+                    }
+                }
+                if self.articles.count != i+1{
+                    self.articles.append(Lecture(period: 0,room: "----",lecture_name: "----",instructor: ""))
+                }
+            }
+            
+            print(articles)
+            
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+        
+        // If an error is encountered, use NCUpdateResult.Failed
+        // If there's no update required, use NCUpdateResult.NoData
+        // If there's an update, use NCUpdateResult.NewData
+        
+        completionHandler(NCUpdateResult.newData)
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode,
+                                          withMaximumSize maxSize: CGSize) {
+        if (activeDisplayMode == .compact) {
+            self.preferredContentSize = maxSize;
+        } else {
+            self.preferredContentSize = CGSize(width: 0, height: 430);
+        }
+    }
+    
+    
+}
+
+extension TodayViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // セルを取得する
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
+        // セルに表示する値を設定する
+        let article = articles[indexPath.row]
+        cell.textLabel?.text = article.lecture_name
+        cell.detailTextLabel?.text = article.room
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
 }
