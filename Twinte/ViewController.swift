@@ -40,26 +40,24 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
             MainWebView.customUserAgent = "Twin:teAppforiPhone"
         }
         
-        MainWebView.load(myRequest)
-        
         MainWebView.configuration.websiteDataStore.httpCookieStore.getAllCookies() {(cookies) in
             var stringCookie:String = ""
             for eachcookie in cookies {
                 if eachcookie.domain.contains(".twinte.net"){
                     stringCookie += "\(eachcookie.name)=\(eachcookie.value);"
                 }
+                // UserDefaults のインスタンス
+                let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+                // AppGroupのUserDefaults に特定のドメインのCookieを保存（共有）
+                userDefaults?.set(stringCookie,forKey: "stringCookie")
+                userDefaults?.synchronize()
             }
-            // UserDefaults のインスタンス
-            let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-            // UserDefaults に特定のドメインのCookieを保存
-            userDefaults?.set(stringCookie,forKey: "stringCookie")
-            userDefaults?.synchronize()
             
         }
         
+        MainWebView.load(myRequest)
+        
     }
-    
-    
     
     
     // JSのアラートをネイティブて扱う

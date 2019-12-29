@@ -16,18 +16,32 @@ struct Lecture: Codable {
     let instructor: String
 }
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelegate, UITableViewDataSource {
+    let timetable = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return timetable.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // セルを取得する
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
+        // セルに表示する値を設定する
+        cell.textLabel!.text = timetable[indexPath.row]
+        return cell
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         
         // 今日の時間割を取得する関数
-        let date:String = "2019-12-11"
+        let date:String = "2020-1-14"
         todayget(date: date)
         
         // If an error is encountered, use NCUpdateResult.Failed
@@ -35,6 +49,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.newData)
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode,
+                                          withMaximumSize maxSize: CGSize) {
+        if (activeDisplayMode == .compact) {
+            self.preferredContentSize = maxSize;
+        } else {
+            self.preferredContentSize = CGSize(width: 0, height: 170);
+        }
     }
     
     func todayget(date: String){

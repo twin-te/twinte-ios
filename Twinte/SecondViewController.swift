@@ -107,6 +107,21 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
         // app.twinte.netドメインの時はサブWebViewを閉じる
         if let host : String = TwinsWebView.url?.host{
             if(host == "app.twinte.net"){//この部分を処理したいURLにする
+                // Cookieを格納
+                SubWebView.configuration.websiteDataStore.httpCookieStore.getAllCookies() {(cookies) in
+                    var stringCookie:String = ""
+                    for eachcookie in cookies {
+                        if eachcookie.domain.contains(".twinte.net"){
+                            stringCookie += "\(eachcookie.name)=\(eachcookie.value);"
+                        }
+                        // UserDefaults のインスタンス
+                        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+                        // AppGroupのUserDefaults に特定のドメインのCookieを保存（共有）
+                        userDefaults?.set(stringCookie,forKey: "stringCookie")
+                        userDefaults?.synchronize()
+                    }
+                    
+                }
                 // 親のviewcontorollerを取得して関数を実行
                 let parentVC = self.presentingViewController as! ViewController
                 parentVC.reload()
