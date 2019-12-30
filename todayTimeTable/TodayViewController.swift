@@ -18,9 +18,9 @@ struct Lecture: Codable {
 
 struct LectureGet {
     
-    static func fetchArticle(completion: @escaping ([Lecture]) -> Swift.Void) {
+    static func fetchArticle(date:String,completion: @escaping ([Lecture]) -> Swift.Void) {
         
-        let requestUrl = "https://dev.api.twinte.net/v1/timetables/?date=2020-01-15"
+        let requestUrl = "https://dev.api.twinte.net/v1/timetables/?date="+date
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
@@ -58,7 +58,7 @@ struct LectureGet {
             }
             
             do {
-                // パース実施
+                // jsonのパース実施
                 let resultSet = try JSONDecoder().decode([Lecture].self, from: data)
                 //print(resultSet)
                 completion(resultSet)
@@ -74,38 +74,29 @@ struct LectureGet {
 
 class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelegate {
     
-
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
+    // 日付を格納
+    var modifiedDate:Date = Date()
     
     fileprivate var articles: [Lecture] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        dateLabel.text = getday(format:"MM/dd(EEE)")
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
+    
     
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         
-        LectureGet.fetchArticle(completion: { (articles) in
-            let lectures:[Lecture] = articles
-            // 授業の時間と配列のindexを対応させて格納する
-            for i in 0..<6 {
-                lectures.forEach{
-                    if $0.period == i+1 {
-                        self.articles.append($0)
-                    }
-                }
-                if self.articles.count != i+1{
-                    self.articles.append(Lecture(period: 0,room: "----",lecture_name: "----",instructor: ""))
-                }
-            }
-            
-            print(articles)
-            
-            
+        LectureGet.fetchArticle(date: getday(format:"yyyy-MM-dd"),completion: { (articles) in
+            self.arrayTimetableParse(lectures: articles)
+            //print(articles)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -118,6 +109,22 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
         completionHandler(NCUpdateResult.newData)
     }
     
+    // 授業の時間と配列のindexを対応させて格納する
+    func arrayTimetableParse(lectures:[Lecture]){
+        // 配列の中身を消去しないと無限に配列の要素が増える
+        self.articles.removeAll()
+        for i in 0..<6 {
+            lectures.forEach{
+                if $0.period == i+1 {
+                    self.articles.append($0)
+                }
+            }
+            if self.articles.count != i+1{
+                self.articles.append(Lecture(period: 0,room: "----",lecture_name: "----",instructor: ""))
+            }
+        }
+    }
+    
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode,
                                           withMaximumSize maxSize: CGSize) {
         if (activeDisplayMode == .compact) {
@@ -125,6 +132,43 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
         } else {
             self.preferredContentSize = CGSize(width: 0, height: 430);
         }
+    }
+    
+    
+    
+    @IBAction func leftButton(_ sender: Any) {
+        modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: modifiedDate)!
+        dateLabel.text = getday(format:"MM/dd(EEE)")
+        LectureGet.fetchArticle(date: getday(format:"yyyy-MM-dd"),completion: { (articles) in
+            self.arrayTimetableParse(lectures: articles)
+            //print(articles)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    
+    @IBAction func rightButton(_ sender: Any) {
+        modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: modifiedDate)!
+        dateLabel.text = getday(format:"MM/dd(EEE)")
+        LectureGet.fetchArticle(date: getday(format:"yyyy-MM-dd"),completion: { (articles) in
+            self.arrayTimetableParse(lectures: articles)
+            //print(articles)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    // 日付を引数で指定されたフォーマットに変換
+    func getday(format:String) -> String{
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja")
+        formatter.dateFormat = format
+        
+        return formatter.string(from: modifiedDate as Date)
     }
     
     

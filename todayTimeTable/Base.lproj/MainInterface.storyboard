@@ -41,6 +41,9 @@
                                             <state key="normal" title="&lt;">
                                                 <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             </state>
+                                            <connections>
+                                                <action selector="leftButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="D2u-qX-Oyc"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oin-0Y-k0m">
                                             <rect key="frame" x="282" y="25" width="30" height="30"/>
@@ -48,6 +51,9 @@
                                             <state key="normal" title="&gt;">
                                                 <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             </state>
+                                            <connections>
+                                                <action selector="rightButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="hhh-5e-bsj"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.75294117650000003" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -115,6 +121,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="500"/>
                     <connections>
+                        <outlet property="dateLabel" destination="c61-Ez-Rad" id="pxQ-RT-kZs"/>
                         <outlet property="tableView" destination="h6k-2B-33u" id="ZAb-sD-3Bu"/>
                     </connections>
                 </viewController>
