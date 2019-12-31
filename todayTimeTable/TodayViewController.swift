@@ -72,6 +72,17 @@ struct LectureGet {
     }
 }
 
+
+// カスタムセルの専用クラス
+class CustomTableViewCell:UITableViewCell {
+    
+    @IBOutlet weak var lecturePeriodLabel: UILabel!
+    @IBOutlet weak var lectureNameLabel: UILabel!
+    @IBOutlet weak var lectureRoomLabel: UILabel!
+    
+}
+
+
 class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelegate {
     
     
@@ -120,7 +131,7 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
                 }
             }
             if self.articles.count != i+1{
-                self.articles.append(Lecture(period: 0,room: "----",lecture_name: "----",instructor: ""))
+                self.articles.append(Lecture(period: i+1,room: "----",lecture_name: "----",instructor: ""))
             }
         }
     }
@@ -178,11 +189,16 @@ extension TodayViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
+        guard let cell: CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath) as? CustomTableViewCell else{
+            return UITableViewCell()
+        }
         // セルに表示する値を設定する
         let article = articles[indexPath.row]
-        cell.textLabel?.text = article.lecture_name
-        cell.detailTextLabel?.text = article.room
+        //cell.textLabel?.text = article.lecture_name
+        cell.lectureNameLabel?.text = article.lecture_name
+        cell.lectureRoomLabel?.text = article.room
+        cell.lecturePeriodLabel?.text = article.period.description
+        
         return cell
     }
     

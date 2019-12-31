@@ -76,29 +76,60 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" textLabel="UIV-s0-snU" detailTextLabel="OMv-CE-oY9" style="IBUITableViewCellStyleSubtitle" id="rwv-la-itq">
-                                        <rect key="frame" x="0.0" y="108" width="320" height="55.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" rowHeight="55" id="rwv-la-itq" customClass="CustomTableViewCell" customModule="todayTimeTable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rwv-la-itq" id="DPt-CQ-mto">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UIV-s0-snU">
-                                                    <rect key="frame" x="15" y="10" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OMv-CE-oY9">
-                                                    <rect key="frame" x="15" y="31.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ここに教室名が入ります" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6E-FS-uQM">
+                                                    <rect key="frame" x="72" y="31" width="207" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MvY-7l-Dms">
+                                                    <rect key="frame" x="15" y="15" width="32" height="24"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="gkB-ce-EHH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ここに授業名が入ります" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wh4-V9-rVy">
+                                                    <rect key="frame" x="69" y="0.0" width="224" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="u6E-FS-uQM" firstAttribute="leading" secondItem="MvY-7l-Dms" secondAttribute="trailing" constant="25" id="0xe-H8-yoc"/>
+                                                <constraint firstItem="Wh4-V9-rVy" firstAttribute="leading" secondItem="MvY-7l-Dms" secondAttribute="trailing" constant="22" id="1fM-W2-7Wa"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="u6E-FS-uQM" secondAttribute="trailing" constant="26" id="4Dv-Sg-2hi"/>
+                                                <constraint firstItem="MvY-7l-Dms" firstAttribute="top" secondItem="DPt-CQ-mto" secondAttribute="topMargin" constant="4" id="5RH-Io-bSp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Wh4-V9-rVy" secondAttribute="bottom" constant="11" id="61u-in-d1Q"/>
+                                                <constraint firstItem="MvY-7l-Dms" firstAttribute="centerY" secondItem="DPt-CQ-mto" secondAttribute="centerY" id="Gkl-i0-kAk"/>
+                                                <constraint firstItem="MvY-7l-Dms" firstAttribute="leading" secondItem="DPt-CQ-mto" secondAttribute="leadingMargin" id="W3p-no-831"/>
+                                                <constraint firstItem="Wh4-V9-rVy" firstAttribute="top" secondItem="DPt-CQ-mto" secondAttribute="topMargin" constant="-11" id="Yxy-ig-hCz"/>
+                                                <constraint firstItem="u6E-FS-uQM" firstAttribute="bottom" secondItem="DPt-CQ-mto" secondAttribute="bottomMargin" id="bfu-2D-w9n"/>
+                                                <constraint firstItem="u6E-FS-uQM" firstAttribute="top" secondItem="DPt-CQ-mto" secondAttribute="topMargin" constant="20" id="f8G-S5-H1f"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Wh4-V9-rVy" secondAttribute="trailing" constant="12" id="yTE-20-cyQ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lectureNameLabel" destination="Wh4-V9-rVy" id="7t3-Tc-18c"/>
+                                            <outlet property="lecturePeriodLabel" destination="MvY-7l-Dms" id="tMO-dp-qKC"/>
+                                            <outlet property="lectureRoomLabel" destination="u6E-FS-uQM" id="y7t-74-v7w"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
