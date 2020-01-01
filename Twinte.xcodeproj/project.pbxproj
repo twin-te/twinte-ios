@@ -13,6 +13,7 @@
 		3C0FC8A1238247CC00055141 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC89F238247CC00055141 /* Main.storyboard */; };
 		3C0FC8A3238247CD00055141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C0FC8A6238247CD00055141 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A4238247CD00055141 /* LaunchScreen.storyboard */; };
+		3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C829CE02383D5EE008C3475 /* WebKit.framework */; };
 		3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C88956023B71C79002557E0 /* NotificationCenter.framework */; };
 		3C88956423B71C79002557E0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88956323B71C79002557E0 /* TodayViewController.swift */; };
@@ -239,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */,
 				3C88956723B71C79002557E0 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
