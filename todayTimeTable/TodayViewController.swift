@@ -306,4 +306,9 @@ extension TodayViewController: UITableViewDataSource {
         return articles.count
     }
     
+    // タップされた時
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let url = URL(string: "twinte-app://") else { return }
+        extensionContext?.open(url, completionHandler: { (success: Bool) in })
+    }
 }
