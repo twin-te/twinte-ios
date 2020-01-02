@@ -170,13 +170,13 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
     
     @IBAction func leftButton(_ sender: Any) {
         modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: modifiedDate)!
-        dateLabel.text = getday(format:"MM/dd(EEE)")
-        LectureGet.fetchArticle(date: getday(format:"yyyy-MM-dd"),completion: { (articles) in
+        dateLabel.text = self.getday(format:"MM/dd(EEE)")
+        LectureGet.fetchArticle(date: self.getday(format:"yyyy-MM-dd"),completion: { (articles) in
             self.arrayTimetableParse(lectures: articles)
             //print(articles)
+            self.schoolCalender(date: self.getday(format:"yyyy-MM-dd"))
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.schoolCalender(date: self.getday(format:"yyyy-MM-dd"))
             }
         })
     }
@@ -184,13 +184,13 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
     
     @IBAction func rightButton(_ sender: Any) {
         modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: modifiedDate)!
-        dateLabel.text = getday(format:"MM/dd(EEE)")
-        LectureGet.fetchArticle(date: getday(format:"yyyy-MM-dd"),completion: { (articles) in
+        dateLabel.text = self.getday(format:"MM/dd(EEE)")
+        LectureGet.fetchArticle(date: self.getday(format:"yyyy-MM-dd"),completion: { (articles) in
             self.arrayTimetableParse(lectures: articles)
             //print(articles)
+            self.schoolCalender(date: self.getday(format:"yyyy-MM-dd"))
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.schoolCalender(date: self.getday(format:"yyyy-MM-dd"))
             }
         })
         
@@ -202,7 +202,6 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja")
         formatter.dateFormat = format
-        
         return formatter.string(from: modifiedDate as Date)
     }
     
@@ -243,15 +242,17 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
                 // jsonのパース実施
                 let resultSet = try JSONDecoder().decode(OutputSchoolCalender.self, from: data)
                 
-                // 優先度：substituteDay > event > module
-                if let substituteDay = resultSet.substituteDay{
-                    self.eventLabel.text = "今日は\(substituteDay.change_to)曜日課です"
-                } else if let event = resultSet.event{
-                    self.eventLabel.text = "\(event.event_type) \(event.description)"
-                } else if let module = resultSet.module{
-                    self.eventLabel.text = "\(module)モジュール"
-                }else{
-                    self.eventLabel.text = ""
+                DispatchQueue.main.async {
+                    // 優先度：substituteDay > event > module
+                    if let substituteDay = resultSet.substituteDay{
+                        self.eventLabel.text = "今日は\(substituteDay.change_to)曜日課です"
+                    } else if let event = resultSet.event{
+                        self.eventLabel.text = "\(event.event_type) \(event.description)"
+                    } else if let module = resultSet.module{
+                        self.eventLabel.text = "\(module)"
+                    }else{
+                        self.eventLabel.text = ""
+                    }
                 }
             } catch let error {
                 print("## error: \(error)")
