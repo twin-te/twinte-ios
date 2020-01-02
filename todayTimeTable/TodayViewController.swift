@@ -81,6 +81,9 @@ struct LectureGet {
                 completion(resultSet)
             } catch let error {
                 print("## error: \(error)")
+                // ログインしていない場合にこのエラーが出る（jsonで返ってこないので）
+                let resultSet = [Lecture(period: 1,room: "未認証です",lecture_name: "Twin:teにログインしてください",instructor: ""),Lecture(period: 2,room: "未認証です",lecture_name: "ここに時間割が表示されます！",instructor: "")]
+                completion(resultSet)
             }
         }
         // 通信開始
@@ -107,6 +110,8 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var eventLabel: UILabel!
     
+    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
     
     // 日付を格納
     var modifiedDate:Date = Date()
@@ -172,11 +177,17 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
         modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: modifiedDate)!
         dateLabel.text = self.getday(format:"MM/dd(EEE)")
         LectureGet.fetchArticle(date: self.getday(format:"yyyy-MM-dd"),completion: { (articles) in
+            DispatchQueue.main.async {
+                self.rightButton.isEnabled = false
+                self.leftButton.isEnabled = false
+            }
             self.arrayTimetableParse(lectures: articles)
             //print(articles)
             self.schoolCalender(date: self.getday(format:"yyyy-MM-dd"))
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.rightButton.isEnabled = true
+                self.leftButton.isEnabled = true
             }
         })
     }
@@ -186,12 +197,19 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
         modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: modifiedDate)!
         dateLabel.text = self.getday(format:"MM/dd(EEE)")
         LectureGet.fetchArticle(date: self.getday(format:"yyyy-MM-dd"),completion: { (articles) in
+            DispatchQueue.main.async {
+                self.rightButton.isEnabled = false
+                self.leftButton.isEnabled = false
+            }
             self.arrayTimetableParse(lectures: articles)
             //print(articles)
             self.schoolCalender(date: self.getday(format:"yyyy-MM-dd"))
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.rightButton.isEnabled = true
+                self.leftButton.isEnabled = true
             }
+            
         })
         
     }
@@ -280,7 +298,7 @@ extension TodayViewController: UITableViewDataSource {
         cell.lectureNameLabel?.text = article.lecture_name
         cell.lectureRoomLabel?.text = article.room
         cell.lecturePeriodLabel?.text = article.period.description
-        
+        cell.lecturePeriodLabel?.textColor = UIColor.white
         return cell
     }
     
