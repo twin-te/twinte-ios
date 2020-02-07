@@ -32,6 +32,9 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         MainWebView.scrollView.panGestureRecognizer.isEnabled = false;
         MainWebView.scrollView.bounces = false;
         
+        //プレビューを禁止する
+        MainWebView.allowsLinkPreview = false;
+        
         // iPadはUserAgentがMacになるのでその対策
         if UIDevice.current.userInterfaceIdiom == .pad {
             // 使用デバイスがiPadの場合 UserAgentを固定
