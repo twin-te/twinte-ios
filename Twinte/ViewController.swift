@@ -107,7 +107,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host == "app.twinte.net" || host == "dev.api.twinte.net" || host == "appleid.apple.com"){//この部分を処理したいURLにする
+            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)

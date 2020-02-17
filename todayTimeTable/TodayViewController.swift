@@ -37,7 +37,7 @@ struct LectureGet {
     
     static func fetchArticle(date:String,completion: @escaping ([Lecture]) -> Swift.Void) {
         
-        let requestUrl = "https://dev.api.twinte.net/v1/timetables/?date="+date
+        let requestUrl = "https://api.twinte.net/v1/timetables/?date="+date
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
@@ -225,7 +225,7 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
     
     // イベント情報の取得
     func schoolCalender(date:String){
-        let requestUrl = "https://dev.api.twinte.net/v1/school-calender/"+date
+        let requestUrl = "https://api.twinte.net/v1/school-calender/"+date
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
