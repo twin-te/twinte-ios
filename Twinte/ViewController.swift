@@ -9,11 +9,11 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
+class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler  {
     
     @IBOutlet var MainWebView: WKWebView!
     
-    let myRequest = URLRequest(url: URL(string: "https://app.twinte.net")!)
+    let myRequest = URLRequest(url: URL(string: "http://localhost:5000")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +31,10 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         MainWebView.scrollView.isScrollEnabled = false;
         MainWebView.scrollView.panGestureRecognizer.isEnabled = false;
         MainWebView.scrollView.bounces = false;
-        
+
         //プレビューを禁止する
         MainWebView.allowsLinkPreview = false;
-        
+    
         // iPadはUserAgentがMacになるのでその対策
         if UIDevice.current.userInterfaceIdiom == .pad {
             // 使用デバイスがiPadの場合 UserAgentを固定
@@ -58,11 +58,48 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
             
         }
         
+        MainWebView.configuration.userContentController.add(self, name: "callbackHandler")
+        
         MainWebView.load(myRequest)
         
     }
     
+    // WEBから呼び出される関数
+       func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("よびだされた")
+        // シェアを実行
+        share()
+       }
+       
     
+    // WebViewのスクショを撮って返す
+    // 参考：https://i.fukajun.net/iphone/capture-screen-of-wkwebview_swift3
+    func getScreenShot()-> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.MainWebView.bounds.size, true, 0)
+        self.MainWebView.drawHierarchy(in: self.MainWebView.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    
+    // 時間割をシェアする
+   func share() {
+        // スクリーンショットを取得
+        let shareImage = getScreenShot().pngData()
+        // 共有項目
+        let activityItems: [Any] = [shareImage!, "私の時間割はこんな感じです！    #Twinte"]
+        // 初期化処理
+        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+
+        // iPad用処理
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityVC.popoverPresentationController?.sourceView = self.view
+            activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+        }
+
+        // UIActivityViewControllerを表示
+        self.present(activityVC, animated: true, completion: nil)
+    }
     // JSのアラートをネイティブて扱う
     // 参考：https://qiita.com/furu8ma/items/183f85a106ba827ad0ea
     // alertを表示する
@@ -110,7 +147,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate  {
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com"){//この部分を処理したいURLにする
+            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com" || host == "localhost"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
