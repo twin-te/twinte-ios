@@ -8,6 +8,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--App Settings View Controller-->
+        <scene sceneID="SD6-Va-DeD">
+            <objects>
+                <viewController id="Cjt-wW-Mdi" customClass="AppSettingsViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vyd-fb-LIU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="JEi-yz-tUN"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3tK-8I-I2M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofX-s5-9ZG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-66" y="932"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -38,11 +54,12 @@
                     <connections>
                         <outlet property="MainWebView" destination="UTV-5f-UaH" id="xmI-J1-3fY"/>
                         <segue destination="Xmp-ao-KwE" kind="presentation" identifier="toSecond" id="M5c-bf-j2L"/>
+                        <segue destination="Cjt-wW-Mdi" kind="show" identifier="toSettings" id="u42-IF-tE4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.40000000000001" y="114.69265367316342"/>
+            <point key="canvasLocation" x="-66" y="126"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="nPm-uF-7Cs">
@@ -89,7 +106,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7hA-bW-5Yb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zSj-X9-77y" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="909.60000000000002" y="115.59220389805098"/>
+            <point key="canvasLocation" x="910" y="125"/>
         </scene>
     </scenes>
 </document>

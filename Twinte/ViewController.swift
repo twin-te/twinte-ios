@@ -17,24 +17,19 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // キャッシュ消去
-        // WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
-        // バージョンが変更されたときに反映されなくなってしまうためきCokkie以外消去
-        //WKWebsiteDataStore.default().removeData(ofTypes: [WKWebsiteDataTypeDiskCache], modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
         
         // これがないとjsのアラートが出ない
         MainWebView.uiDelegate = self
         // これがないとページを読み込んだ後の関数didFinish navigationが実行できない
         MainWebView.navigationDelegate = self
-        
         // スクロール禁止
         MainWebView.scrollView.isScrollEnabled = false;
         MainWebView.scrollView.panGestureRecognizer.isEnabled = false;
         MainWebView.scrollView.bounces = false;
-
         //プレビューを禁止する
         MainWebView.allowsLinkPreview = false;
-    
+        // JSから呼び出される関数定義
+        MainWebView.configuration.userContentController.add(self, name: "callbackHandler")
         // iPadはUserAgentがMacになるのでその対策
         if UIDevice.current.userInterfaceIdiom == .pad {
             // 使用デバイスがiPadの場合 UserAgentを固定
@@ -42,7 +37,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         }else if UIDevice.current.userInterfaceIdiom == .phone{
             MainWebView.customUserAgent = "Twin:teAppforiPhone"
         }
-        
+        // Cookieを保存
         MainWebView.configuration.websiteDataStore.httpCookieStore.getAllCookies() {(cookies) in
             var stringCookie:String = ""
             for eachcookie in cookies {
@@ -58,48 +53,10 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
             
         }
         
-        MainWebView.configuration.userContentController.add(self, name: "callbackHandler")
-        
         MainWebView.load(myRequest)
         
     }
     
-    // WEBから呼び出される関数
-       func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("よびだされた")
-        // シェアを実行
-        share()
-       }
-       
-    
-    // WebViewのスクショを撮って返す
-    // 参考：https://i.fukajun.net/iphone/capture-screen-of-wkwebview_swift3
-    func getScreenShot()-> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.MainWebView.bounds.size, true, 0)
-        self.MainWebView.drawHierarchy(in: self.MainWebView.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
-    
-    // 時間割をシェアする
-   func share() {
-        // スクリーンショットを取得
-        let shareImage = getScreenShot().pngData()
-        // 共有項目
-        let activityItems: [Any] = [shareImage!, "私の時間割はこんな感じです！    #Twinte"]
-        // 初期化処理
-        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-
-        // iPad用処理
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            activityVC.popoverPresentationController?.sourceView = self.view
-            activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
-        }
-
-        // UIActivityViewControllerを表示
-        self.present(activityVC, animated: true, completion: nil)
-    }
     // JSのアラートをネイティブて扱う
     // 参考：https://qiita.com/furu8ma/items/183f85a106ba827ad0ea
     // alertを表示する
@@ -139,6 +96,43 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         present(alertController, animated: true, completion: nil)
     }
     
+    // WEBから呼び出される関数
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        self.performSegue(withIdentifier: "toSettings", sender: nil)
+        // シェアを実行
+        //share()
+    }
+    
+    
+    // WebViewのスクショを撮って返す
+    // 参考：https://i.fukajun.net/iphone/capture-screen-of-wkwebview_swift3
+    func getScreenShot()-> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.MainWebView.bounds.size, true, 0)
+        self.MainWebView.drawHierarchy(in: self.MainWebView.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    
+    // 時間割をシェアする
+    func share() {
+        // スクリーンショットを取得
+        let shareImage = getScreenShot().pngData()
+        // 共有項目
+        let activityItems: [Any] = [shareImage!, "私の時間割はこんな感じです！    #Twinte"]
+        // 初期化処理
+        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        
+        // iPad用処理
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityVC.popoverPresentationController?.sourceView = self.view
+            activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y: self.view.bounds.size.height / 2.0, width: 1.0, height: 1.0)
+        }
+        
+        // UIActivityViewControllerを表示
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
     // リンク先のURLを格納
     var g_Url:URL?
     
@@ -159,12 +153,15 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     
     // 値を渡す
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        // 次の画面を取り出す
-        let viewController = segue.destination as! SecondViewController
-        // 値を渡す
-        viewController.g_receviedUrl = g_Url
-        
+        // toSecondに行くSegueを実行する時のみ処理
+        if segue.identifier == "toSecond" {
+            // 次の画面を取り出す
+            let viewController = segue.destination as! SecondViewController
+            // 値を渡す
+            viewController.g_receviedUrl = g_Url
+        }
     }
+    
     //subWebViewから戻ってきたときはリロードする
     @IBAction func returnToMe(segue: UIStoryboardSegue) {
         MainWebView.reload()
