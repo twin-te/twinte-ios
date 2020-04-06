@@ -8,6 +8,8 @@
 
 import UIKit
 import WebKit
+import UserNotifications
+
 
 class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler  {
     
@@ -23,11 +25,12 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         // これがないとページを読み込んだ後の関数didFinish navigationが実行できない
         MainWebView.navigationDelegate = self
         // スクロール禁止
-        MainWebView.scrollView.isScrollEnabled = false;
-        MainWebView.scrollView.panGestureRecognizer.isEnabled = false;
-        MainWebView.scrollView.bounces = false;
-        //プレビューを禁止する
-        MainWebView.allowsLinkPreview = false;
+        MainWebView.scrollView.isScrollEnabled = false
+        MainWebView.scrollView.panGestureRecognizer.isEnabled = false
+        MainWebView.scrollView.bounces = false
+        // プレビューを禁止する
+        MainWebView.allowsLinkPreview = false
+    
         // JSから呼び出される関数定義
         MainWebView.configuration.userContentController.add(self, name: "callbackHandler")
         // iPadはUserAgentがMacになるのでその対策
@@ -96,13 +99,13 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         present(alertController, animated: true, completion: nil)
     }
     
+    
     // WEBから呼び出される関数
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         self.performSegue(withIdentifier: "toSettings", sender: nil)
         // シェアを実行
         //share()
     }
-    
     
     // WebViewのスクショを撮って返す
     // 参考：https://i.fukajun.net/iphone/capture-screen-of-wkwebview_swift3

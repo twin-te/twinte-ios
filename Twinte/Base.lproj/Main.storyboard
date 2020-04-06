@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,17 +13,133 @@
         <scene sceneID="SD6-Va-DeD">
             <objects>
                 <viewController id="Cjt-wW-Mdi" customClass="AppSettingsViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vyd-fb-LIU">
+                    <view key="view" contentMode="scaleToFill" id="GYA-g7-Jwc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="GZU-bZ-po5">
+                                <rect key="frame" x="20" y="140" width="335" height="109.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="ihS-I2-xlg">
+                                        <rect key="frame" x="0.5" y="0.0" width="334.5" height="31"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bell.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZE-Yvj">
+                                                <rect key="frame" x="0.0" y="0.5" width="20" height="30.5"/>
+                                                <color key="tintColor" name="TwinteColor"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="特殊日程の通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-zu-Jcr">
+                                                <rect key="frame" x="92" y="0.0" width="121.5" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTq-Zd-yF6">
+                                                <rect key="frame" x="285.5" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="notificationSwitch:" destination="Cjt-wW-Mdi" eventType="valueChanged" id="SUw-mT-sja"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の日の時間割が通常と異なる場合、前日に通知をします。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-t1-qNu">
+                                        <rect key="frame" x="2" y="48" width="331" height="14.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="h6P-BQ-pDF">
+                                        <rect key="frame" x="28.5" y="79.5" width="278" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在の通知時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLI-5x-vmB">
+                                                <rect key="frame" x="0.0" y="0.0" width="139" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igq-lw-2jX">
+                                                <rect key="frame" x="156" y="0.0" width="43" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
+                                                <rect key="frame" x="216" y="0.0" width="62" height="30"/>
+                                                <state key="normal" title="変更する"/>
+                                                <connections>
+                                                    <action selector="changeDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="329-Z2-FXc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-sC-dWT">
+                                        <rect key="frame" x="7.5" y="109.5" width="320" height="0.0"/>
+                                        <locale key="locale" localeIdentifier="ja_JP"/>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-Gg-1oe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="lXN-iD-FIP"/>
+                                </constraints>
+                                <color key="barTintColor" name="TwinteColor"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="iPhoneアプリの設定" id="SRl-IJ-1Vg">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="iID-ua-dr4">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EXL-Cm-dRC">
+                                                <rect key="frame" x="16" y="6" width="83" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <state key="normal" title="←">
+                                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="ArI-lW-TNb" kind="unwind" unwindAction="returnToMeWithSegue:" id="K0h-NS-xNP"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lh-7c-TbY">
+                                <rect key="frame" x="149" y="251.5" width="77" height="30"/>
+                                <state key="normal" title="時間を確定"/>
+                                <connections>
+                                    <action selector="confirmDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="x8M-k9-mfN"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="JEi-yz-tUN"/>
+                        <constraints>
+                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" id="9O4-qz-W7d"/>
+                            <constraint firstItem="GZU-bZ-po5" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" constant="20" id="G0Q-z5-LEa"/>
+                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="centerX" secondItem="GZU-bZ-po5" secondAttribute="centerX" id="TAc-b6-gmC"/>
+                            <constraint firstItem="8lh-7c-TbY" firstAttribute="top" secondItem="GZU-bZ-po5" secondAttribute="bottom" constant="2" id="Uh1-bB-Swn"/>
+                            <constraint firstItem="GZU-bZ-po5" firstAttribute="top" secondItem="cEq-Gg-1oe" secondAttribute="bottom" constant="96" id="Vts-bf-BT0"/>
+                            <constraint firstItem="8lh-7c-TbY" firstAttribute="centerX" secondItem="GZU-bZ-po5" secondAttribute="centerX" id="cp8-iS-J1m"/>
+                            <constraint firstItem="GZU-bZ-po5" firstAttribute="centerX" secondItem="GYA-g7-Jwc" secondAttribute="centerX" id="vHa-6w-IHt"/>
+                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="top" secondItem="ALX-4v-Kc9" secondAttribute="top" id="y4O-cX-AI5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ALX-4v-Kc9"/>
                     </view>
                     <navigationItem key="navigationItem" id="3tK-8I-I2M"/>
+                    <connections>
+                        <outlet property="changeDateButton" destination="i8L-tK-RHR" id="v1E-aj-tar"/>
+                        <outlet property="confirmDateButton" destination="8lh-7c-TbY" id="ZZz-1s-eDA"/>
+                        <outlet property="datePicker" destination="RLr-sC-dWT" id="6Jl-mb-wHr"/>
+                        <outlet property="notificationDateLabel" destination="Igq-lw-2jX" id="aF4-dz-Jom"/>
+                        <outlet property="notificationLabel1" destination="mLI-5x-vmB" id="HIE-H4-9XX"/>
+                        <outlet property="notificationSwitchObject" destination="BTq-Zd-yF6" id="LYI-O4-36p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofX-s5-9ZG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ArI-lW-TNb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-66" y="932"/>
+            <point key="canvasLocation" x="-66.400000000000006" y="931.48425787106453"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -109,4 +226,10 @@
             <point key="canvasLocation" x="910" y="125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bell.fill" catalog="system" width="64" height="62"/>
+        <namedColor name="TwinteColor">
+            <color red="0.0" green="0.75300002098083496" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
