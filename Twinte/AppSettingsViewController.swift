@@ -38,10 +38,26 @@ class AppSettingsViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        notificationSwitchObject.isOn = false
+        // UserDefaults のインスタンス
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        
+        notificationSwitchObject.isOn = userDefaults!.bool(forKey: "notificationSwitch")
+        if !notificationSwitchObject.isOn{
+            notificationLabel1.isEnabled=false
+            notificationDateLabel.isEnabled=false
+            changeDateButton.isEnabled=false
+        }
         // ユーザーが設定した時刻がない場合は初期設定の時間を反映
-        datePicker.date = todayInitialTime()
-        notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
+        if userDefaults?.object(forKey: "notificationHour") == nil{
+            datePicker.date = todayInitialTime()
+            notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
+            userDefaults?.set(getday(format:"HH",modifiedDate: datePicker.date),forKey: "notificationHour")
+            userDefaults?.set(getday(format:"mm",modifiedDate: datePicker.date),forKey: "notificationMinute")
+            userDefaults?.synchronize()
+        }else{
+            notificationDateLabel.text = (userDefaults?.string(forKey: "notificationHour"))!+":"+(userDefaults?.string(forKey: "notificationMinute"))!
+        }
+        
     }
     
     @IBAction func changeDate(_ sender: Any) {
@@ -89,6 +105,7 @@ class AppSettingsViewController: UIViewController {
             changeDateButton.isEnabled=true
             notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
             createFirstnotification()
+            periodicExecution()
         }else{
             notificationLabel1.isEnabled=false
             notificationDateLabel.isEnabled=false
@@ -129,47 +146,52 @@ class AppSettingsViewController: UIViewController {
     
     /// 定期実行する関数
     func periodicExecution(){
+        print("呼ばれた")
         // UserDefaults のインスタンス
         let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-
+        
         // 通知がOFFの場合は終了
         if !userDefaults!.bool(forKey: "notificationSwitch") {
             return
         }
         
-        // 明日の通知がスケジューリングされているか
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { requests in
-            // 明日の日付を格納する変数
-            let tommorowString:String = self.getday(format:"yyyy-MM-dd",modifiedDate: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
-            // identifierに明日のyyyy-MM-ddと一致するものが格納されていた場合終了
-            for element in requests {
-                if(element.identifier.contains(tommorowString)){
-                    return
+        // 1週間分を1回で取得
+        for addDay in 1...7{
+            
+            // 明日の通知がスケジューリングされているか
+            let center = UNUserNotificationCenter.current()
+            center.getPendingNotificationRequests { requests in
+                // 明日の日付を格納する変数
+                let tommorowString:String = self.getday(format:"yyyy-MM-dd",modifiedDate: Calendar.current.date(byAdding: .day, value: addDay, to: Date())!)
+                // identifierに明日のyyyy-MM-ddと一致するものが格納されていた場合終了
+                for element in requests {
+                    if(element.identifier.contains(tommorowString)){
+                        return
+                    }
                 }
+                
+                // なかった場合
+                // セマフォを0で初期化
+                let semaphore = DispatchSemaphore(value: 0)
+                // 明後日の予定を取得する
+                self.schoolCalender(date: Calendar.current.date(byAdding: .day, value: addDay+1, to: Date())!,completion: {
+                    semaphore.signal()
+                })
+                // セマフォをデクリメント（-1）、ただしセマフォが0の場合はsignal()の実行を待つ
+                semaphore.wait()
+                // 明日の日付を格納
+                let tommorowDate:Date = Calendar.current.date(byAdding: .day, value: addDay, to: Date())!
+                // 明日の指定時間(datePickerの値)に通知を予約
+                let year = Int(self.getday(format:"yyyy",modifiedDate: tommorowDate))!
+                let month = Int(self.getday(format:"MM",modifiedDate: tommorowDate))!
+                let day = Int(self.getday(format:"dd",modifiedDate: tommorowDate))!
+                
+                // 指定された時分
+                let hour = userDefaults?.integer(forKey: "notificationHour")
+                let minute = userDefaults?.integer(forKey: "notificationMinute")
+                let date = DateComponents(year:year,month:month,day:day,hour:hour, minute:minute)
+                self.createNotification(body:"明日は\(self.g_Calender)です。",notificationTime:date)
             }
-            
-            // なかった場合
-            // セマフォを0で初期化
-            let semaphore = DispatchSemaphore(value: 0)
-            // 明後日の予定を取得する
-            self.schoolCalender(date: Calendar.current.date(byAdding: .day, value: 2, to: Date())!,completion: {
-                semaphore.signal()
-            })
-            // セマフォをデクリメント（-1）、ただしセマフォが0の場合はsignal()の実行を待つ
-            semaphore.wait()
-            // 明日の日付を格納
-            let tommorowDate:Date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-            // 明日の指定時間(datePickerの値)に通知を予約
-            let year = Int(self.getday(format:"yyyy",modifiedDate: tommorowDate))!
-            let month = Int(self.getday(format:"MM",modifiedDate: tommorowDate))!
-            let day = Int(self.getday(format:"dd",modifiedDate: tommorowDate))!
-            
-            // 指定された時分
-            let hour = userDefaults?.integer(forKey: "notificationHour")
-            let minute = userDefaults?.integer(forKey: "notificationMinute")
-            let date = DateComponents(year:year,month:month,day:day,hour:hour, minute:minute)
-            self.createNotification(body:"明日は\(self.g_Calender)です。",notificationTime:date)
         }
     }
     
@@ -193,6 +215,8 @@ class AppSettingsViewController: UIViewController {
         notification.sound = UNNotificationSound.default
         //通知タイミングを指定
         let trigger = UNCalendarNotificationTrigger.init(dateMatching: notificationTime, repeats: false)
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 50, repeats: false)
+        
         //DateComponentsからDate形式に変換
         let date = Calendar.current.date(from: notificationTime)!
         //通知のリクエスト

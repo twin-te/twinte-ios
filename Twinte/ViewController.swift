@@ -58,6 +58,9 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         
         MainWebView.load(myRequest)
         
+        let notification = AppSettingsViewController()
+        notification.periodicExecution()
+        
     }
     
     // JSのアラートをネイティブて扱う

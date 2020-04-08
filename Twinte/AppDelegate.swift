@@ -21,7 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().requestAuthorization(options:
         [.alert,.sound,.badge]) { (granted, error) in
         }
+        // background fetch
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         return true
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    // background fetchの処理
+    print("background fetch is called!")
+        let notification = AppSettingsViewController()
+        notification.periodicExecution()
+    // 最後に呼ぶ必要がある
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     // MARK: UISceneSession Lifecycle
