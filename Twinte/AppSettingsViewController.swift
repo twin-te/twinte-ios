@@ -66,18 +66,29 @@ class AppSettingsViewController: UIViewController {
         datePicker.isHidden = true
         confirmDateButton.isHidden = true
         notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
+        // 設定時刻をUserDefaultsに保存
+        // UserDefaults のインスタンス
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        // AppGroupのUserDefaultsに通知時間を保存
+        userDefaults?.set(getday(format:"HH",modifiedDate: datePicker.date),forKey: "notificationHour")
+        userDefaults?.set(getday(format:"mm",modifiedDate: datePicker.date),forKey: "notificationMinute")
+        userDefaults?.synchronize()
+        
         createFirstnotification()
     }
     
     @IBAction func notificationSwitch(_ sender: UISwitch) {
+        // UserDefaults のインスタンス
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        // AppGroupのUserDefaultsに通知するかどうか保存
+        userDefaults?.set(sender.isOn,forKey: "notificationSwitch")
+        
         if sender.isOn {
             notificationLabel1.isEnabled=true
             notificationDateLabel.isEnabled=true
             changeDateButton.isEnabled=true
             notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
             createFirstnotification()
-            periodicExecution()
-            
         }else{
             notificationLabel1.isEnabled=false
             notificationDateLabel.isEnabled=false
@@ -95,12 +106,8 @@ class AppSettingsViewController: UIViewController {
         // 現在登録されている全ての通知を消去
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
-        print("現在時刻:\(Date())")
-        print("通知時刻:\(datePicker.date)")
-        
         // 設定された時間を過ぎているか確認
         if Date() < datePicker.date{
-            print("通知時刻は未来")
             // セマフォを0で初期化
             let semaphore = DispatchSemaphore(value: 0)
             // 明日の予定を取得する
@@ -117,15 +124,16 @@ class AppSettingsViewController: UIViewController {
             let minute = Int(self.getday(format:"mm",modifiedDate: self.datePicker.date))!
             let date = DateComponents(year:year,month:month,day:day,hour:hour, minute:minute)
             createNotification(body:"明日は\(self.g_Calender)です。",notificationTime: date)
-        }else{
-            print("通知時刻は過去")
         }
     }
     
     /// 定期実行する関数
     func periodicExecution(){
+        // UserDefaults のインスタンス
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+
         // 通知がOFFの場合は終了
-        if !notificationSwitchObject.isOn {
+        if !userDefaults!.bool(forKey: "notificationSwitch") {
             return
         }
         
@@ -156,9 +164,10 @@ class AppSettingsViewController: UIViewController {
             let year = Int(self.getday(format:"yyyy",modifiedDate: tommorowDate))!
             let month = Int(self.getday(format:"MM",modifiedDate: tommorowDate))!
             let day = Int(self.getday(format:"dd",modifiedDate: tommorowDate))!
+            
             // 指定された時分
-            let hour = 21
-            let minute = 0
+            let hour = userDefaults?.integer(forKey: "notificationHour")
+            let minute = userDefaults?.integer(forKey: "notificationMinute")
             let date = DateComponents(year:year,month:month,day:day,hour:hour, minute:minute)
             self.createNotification(body:"明日は\(self.g_Calender)です。",notificationTime:date)
         }
