@@ -8,21 +8,12 @@
 
 import UIKit
 
-// イベント情報格納
-struct OutputSchoolCalender: Codable {
-    let module:String?
-    let event:event?
-    let substituteDay:substituteDay?
-    
-    struct event: Codable{
-        let description:String
-        let event_type:String
-    }
-    
-    struct substituteDay: Codable{
-        let change_to:String
-    }
+// 授業振替情報を格納
+struct substitute: Codable {
+    let date: String
+    let change_to: String
 }
+
 
 class AppSettingsViewController: UIViewController {
     
@@ -37,24 +28,33 @@ class AppSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scheduleAllNotification()
         // Do any additional setup after loading the view.
-        notificationSwitchObject.isOn = false
+        
         let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
         
-        notificationSwitchObject.isOn = userDefaults!.bool(forKey: "notificationSwitch")
+        // ユーザーが通知ONOFFを設定していない場合はOFFに
+        if userDefaults?.object(forKey: "notificationSwitch") == nil{
+            notificationSwitchObject.isOn = false
+        }else{
+            notificationSwitchObject.isOn = userDefaults!.bool(forKey: "notificationSwitch")
+        }
+        
         if !notificationSwitchObject.isOn{
             notificationLabel1.isEnabled=false
             notificationDateLabel.isEnabled=false
             changeDateButton.isEnabled=false
         }
+        
         // ユーザーが設定した時刻がない場合は初期設定の時間を反映
         if userDefaults?.object(forKey: "notificationHour") == nil{
-            userDefaults?.set(getday(format:"HH",modifiedDate: datePicker.date),forKey: "notificationHour")
-            userDefaults?.set(getday(format:"mm",modifiedDate: datePicker.date),forKey: "notificationMinute")
+            userDefaults?.set(getday(format:"HH",modifiedDate: todayInitialTime()),forKey: "notificationHour")
+            userDefaults?.set(getday(format:"mm",modifiedDate: todayInitialTime()),forKey: "notificationMinute")
             userDefaults?.synchronize()
         }else{
             notificationDateLabel.text = (userDefaults?.string(forKey: "notificationHour"))!+":"+(userDefaults?.string(forKey: "notificationMinute"))!
         }
+        datePicker.date = todayInitialTime()
     }
     
     @IBAction func changeDate(_ sender: Any) {
@@ -67,10 +67,11 @@ class AppSettingsViewController: UIViewController {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests { requests in
             print(requests.count)
-            
+            /*
             for element in requests {
                 print(element)
             }
+ */
         }
         /// ここまで
     }
@@ -87,7 +88,7 @@ class AppSettingsViewController: UIViewController {
         userDefaults?.set(getday(format:"mm",modifiedDate: datePicker.date),forKey: "notificationMinute")
         userDefaults?.synchronize()
         
-        createFirstnotification()
+        scheduleAllNotification()
     }
     
     @IBAction func notificationSwitch(_ sender: UISwitch) {
@@ -101,7 +102,7 @@ class AppSettingsViewController: UIViewController {
             notificationDateLabel.isEnabled=true
             changeDateButton.isEnabled=true
             notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
-            createFirstnotification()
+            scheduleAllNotification()
         }else{
             notificationLabel1.isEnabled=false
             notificationDateLabel.isEnabled=false
@@ -113,87 +114,35 @@ class AppSettingsViewController: UIViewController {
         }
     }
     
-    /// 初回の通知の登録処理する関数
-    func createFirstnotification(){
-        
+    /// 全ての通知をスケジューリング
+    func scheduleAllNotification(){
         // 現在登録されている全ての通知を消去
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
-        // 設定された時間を過ぎているか確認
-        if Date() < datePicker.date{
-            // セマフォを0で初期化
-            let semaphore = DispatchSemaphore(value: 0)
-            // 明日の予定を取得する
-            self.schoolCalender(date: Calendar.current.date(byAdding: .day, value: 1, to: Date())!,completion: {
-                semaphore.signal()
-            })
-            // セマフォをデクリメント（-1）、ただしセマフォが0の場合はsignal()の実行を待つ
-            semaphore.wait()
-            // 今日の指定時間(datePickerの値)に通知を予約
-            let year = Int(self.getday(format:"yyyy",modifiedDate: self.datePicker.date))!
-            let month = Int(self.getday(format:"MM",modifiedDate: self.datePicker.date))!
-            let day = Int(self.getday(format:"dd",modifiedDate: self.datePicker.date))!
-            let hour = Int(self.getday(format:"HH",modifiedDate: self.datePicker.date))!
-            let minute = Int(self.getday(format:"mm",modifiedDate: self.datePicker.date))!
-            let date = DateComponents(year:year,month:month,day:day,hour:hour, minute:minute)
-            createNotification(body:"明日は\(self.g_Calender)です。",notificationTime: date)
-        }
-    }
-    
-    /// 定期実行する関数
-    func periodicExecution(){
-        // UserDefaults のインスタンス
-        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-        
-        // 通知がOFFの場合は終了
-        if !userDefaults!.bool(forKey: "notificationSwitch") {
-            return
-        }
-        
-        // 明日の通知がスケジューリングされているか
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { requests in
-            // 明日の日付を格納する変数
-            let tommorowString:String = self.getday(format:"yyyy-MM-dd",modifiedDate: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
-            // identifierに明日のyyyy-MM-ddと一致するものが格納されていた場合終了
-            for element in requests {
-                if(element.identifier.contains(tommorowString)){
-                    return
+        schoolCalender { (substitutes) in
+            // UserDefaults のインスタンス
+            let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+            
+            for element in substitutes{
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.locale = Locale(identifier: "ja")
+                let notificationDate = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: element.date)!)
+                var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: notificationDate!)
+                dateComponents.hour = userDefaults?.integer(forKey: "notificationHour")
+                dateComponents.minute = userDefaults?.integer(forKey: "notificationMinute")
+                // 過去のものに関してはスケジュールしない
+                if(Date() < Calendar.current.date(from: dateComponents)!){
+                    self.createNotification(body: "明日は\(element.change_to)曜日日程です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
                 }
             }
-            
-            // なかった場合
-            // セマフォを0で初期化
-            let semaphore = DispatchSemaphore(value: 0)
-            // 明後日の予定を取得する
-            self.schoolCalender(date: Calendar.current.date(byAdding: .day, value: 2, to: Date())!,completion: {
-                semaphore.signal()
-            })
-            // セマフォをデクリメント（-1）、ただしセマフォが0の場合はsignal()の実行を待つ
-            semaphore.wait()
-            // 明日の日付を格納
-            let tommorowDate:Date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-            // 明日の指定時間(datePickerの値)に通知を予約
-            let year = Int(self.getday(format:"yyyy",modifiedDate: tommorowDate))!
-            let month = Int(self.getday(format:"MM",modifiedDate: tommorowDate))!
-            let day = Int(self.getday(format:"dd",modifiedDate: tommorowDate))!
-            
-            // 指定された時分
-            let hour = userDefaults?.integer(forKey: "notificationHour")
-            let minute = userDefaults?.integer(forKey: "notificationMinute")
-            let date = DateComponents(year:year,month:month,day:day,hour:hour, minute:minute)
-            self.createNotification(body:"明日は\(self.g_Calender)です。",notificationTime:date)
         }
+        
     }
-    
-    
-    // 通知に渡す予定
-    var g_Calender:String = "初期設定のまま"
     
     /// 通知をしてくれる関数
     /// - Parameters:
     ///   - body: 通知文の本文
-    ///   - notificationTime: 通知したい時刻(UTC)
+    ///   - notificationTime: 通知したい時刻
     func createNotification(body:String,notificationTime:DateComponents){
         // 通知の登録
         //プッシュ通知のインスタンス
@@ -245,8 +194,8 @@ class AppSettingsViewController: UIViewController {
     /// - Parameters:
     ///   - date: 取得したいイベントの日付をDate形式で渡す
     ///   - completion: 場合に応じてsemaphore.signal()を実行するとよい
-    func schoolCalender(date:Date,completion: @escaping () -> Void){
-        let requestUrl = "https://api.twinte.net/v1/school-calender/"+getday(format:"yyyy-MM-dd",modifiedDate: date)
+    func schoolCalender(completion: @escaping ([substitute]) -> Void){
+        let requestUrl = "https://scripts.twinte.net/notification.json"
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
@@ -279,21 +228,13 @@ class AppSettingsViewController: UIViewController {
             
             do {
                 // jsonのパース実施
-                let resultSet = try JSONDecoder().decode(OutputSchoolCalender.self, from: data)
-                // 優先度：substituteDay > event > module
-                if let substituteDay = resultSet.substituteDay{
-                    self.g_Calender = "\(substituteDay.change_to)曜日課"
-                } else if let event = resultSet.event{
-                    self.g_Calender = "\(event.event_type) \(event.description)"
-                } else if let module = resultSet.module{
-                    self.g_Calender = module
-                }else{
-                    print("")
-                }
+                let resultSet = try JSONDecoder().decode([substitute].self, from: data)
+                completion(resultSet)
             } catch let error {
                 print("## error: \(error)")
+                let resultSet = [substitute]()
+                completion(resultSet)
             }
-            completion()
         }
         // 通信開始
         task.resume()

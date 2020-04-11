@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -14,27 +14,27 @@
             <objects>
                 <viewController id="Cjt-wW-Mdi" customClass="AppSettingsViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GYA-g7-Jwc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="GZU-bZ-po5">
-                                <rect key="frame" x="20" y="140" width="335" height="109.5"/>
+                                <rect key="frame" x="20" y="140" width="374" height="109.33333333333331"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="ihS-I2-xlg">
-                                        <rect key="frame" x="0.5" y="0.0" width="334.5" height="31"/>
+                                        <rect key="frame" x="20.333333333333343" y="0.0" width="333.33333333333326" height="31"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bell.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZE-Yvj">
-                                                <rect key="frame" x="0.0" y="0.5" width="20" height="30.5"/>
+                                                <rect key="frame" x="0.0" y="0.6666666666666643" width="19" height="30.333333333333336"/>
                                                 <color key="tintColor" name="TwinteColor"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="特殊日程の通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-zu-Jcr">
-                                                <rect key="frame" x="92" y="0.0" width="121.5" height="31"/>
+                                                <rect key="frame" x="91" y="0.0" width="121.33333333333331" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTq-Zd-yF6">
-                                                <rect key="frame" x="285.5" y="0.0" width="51" height="31"/>
+                                                <rect key="frame" x="284.33333333333337" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="notificationSwitch:" destination="Cjt-wW-Mdi" eventType="valueChanged" id="SUw-mT-sja"/>
                                                 </connections>
@@ -42,28 +42,28 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の日の時間割が通常と異なる場合、前日に通知をします。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-t1-qNu">
-                                        <rect key="frame" x="2" y="48" width="331" height="14.5"/>
+                                        <rect key="frame" x="21.666666666666657" y="48" width="331" height="14.333333333333336"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="h6P-BQ-pDF">
-                                        <rect key="frame" x="28.5" y="79.5" width="278" height="30"/>
+                                        <rect key="frame" x="48.333333333333343" y="79.333333333333343" width="277.66666666666663" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在の通知時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLI-5x-vmB">
-                                                <rect key="frame" x="0.0" y="0.0" width="139" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138.66666666666666" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igq-lw-2jX">
-                                                <rect key="frame" x="156" y="0.0" width="43" height="30"/>
+                                                <rect key="frame" x="155.66666666666669" y="0.0" width="43" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
-                                                <rect key="frame" x="216" y="0.0" width="62" height="30"/>
+                                                <rect key="frame" x="215.66666666666669" y="0.0" width="62" height="30"/>
                                                 <state key="normal" title="変更する"/>
                                                 <connections>
                                                     <action selector="changeDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="329-Z2-FXc"/>
@@ -72,13 +72,13 @@
                                         </subviews>
                                     </stackView>
                                     <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-sC-dWT">
-                                        <rect key="frame" x="7.5" y="109.5" width="320" height="0.0"/>
+                                        <rect key="frame" x="27" y="109.33333333333334" width="320" height="0.0"/>
                                         <locale key="locale" localeIdentifier="ja_JP"/>
                                     </datePicker>
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-Gg-1oe">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="lXN-iD-FIP"/>
                                 </constraints>
@@ -89,9 +89,9 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="iPhoneアプリの設定" id="SRl-IJ-1Vg">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="iID-ua-dr4">
+                                        <barButtonItem key="leftBarButtonItem" id="iID-ua-dr4">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EXL-Cm-dRC">
-                                                <rect key="frame" x="16" y="6" width="83" height="44"/>
+                                                <rect key="frame" x="20" y="6" width="83" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="←">
@@ -106,7 +106,7 @@
                                 </items>
                             </navigationBar>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lh-7c-TbY">
-                                <rect key="frame" x="149" y="251.5" width="77" height="30"/>
+                                <rect key="frame" x="168.66666666666666" y="251.33333333333337" width="77" height="30"/>
                                 <state key="normal" title="時間を確定"/>
                                 <connections>
                                     <action selector="confirmDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="x8M-k9-mfN"/>
@@ -146,11 +146,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainView" id="BYZ-38-t0r" customClass="ViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTV-5f-UaH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO">
                                     <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
@@ -183,11 +183,11 @@
             <objects>
                 <viewController id="Xmp-ao-KwE" customClass="SecondViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIc-cU-9X5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1F-CQ-JO3">
-                                <rect key="frame" x="0.0" y="49" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="49" width="414" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -196,7 +196,7 @@
                                 <string key="customUserAgent">Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1</string>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-X2-Cyu">
-                                <rect key="frame" x="16" y="11" width="46" height="30"/>
+                                <rect key="frame" x="20" y="11" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="閉じる"/>
                                 <connections>
@@ -208,11 +208,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="centerX" secondItem="wIc-cU-9X5" secondAttribute="centerX" id="7fA-28-CKn"/>
+                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="leading" secondItem="wIc-cU-9X5" secondAttribute="leadingMargin" id="DD2-QY-Rp7"/>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="bottom" secondItem="DmD-pe-qSW" secondAttribute="bottom" id="HAJ-CS-vxx"/>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="leading" secondItem="DmD-pe-qSW" secondAttribute="leading" id="Mtm-Sx-hzD"/>
-                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="leading" secondItem="wIc-cU-9X5" secondAttribute="leadingMargin" id="cA5-gS-5Pp"/>
-                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="top" secondItem="DmD-pe-qSW" secondAttribute="top" constant="11" id="raq-q3-AfC"/>
-                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="top" secondItem="fFI-X2-Cyu" secondAttribute="bottom" constant="8" id="vlJ-R4-fS0"/>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="top" secondItem="fFI-X2-Cyu" secondAttribute="bottom" constant="8" id="gxr-13-LGY"/>
+                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="top" secondItem="DmD-pe-qSW" secondAttribute="top" constant="11" id="rpv-Yo-hI0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DmD-pe-qSW"/>
                     </view>
@@ -223,7 +223,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7hA-bW-5Yb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zSj-X9-77y" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="910" y="125"/>
+            <point key="canvasLocation" x="909.60000000000002" y="124.58770614692655"/>
         </scene>
     </scenes>
     <resources>
