@@ -39,9 +39,22 @@ class AppSettingsViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         notificationSwitchObject.isOn = false
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        
+        notificationSwitchObject.isOn = userDefaults!.bool(forKey: "notificationSwitch")
+        if !notificationSwitchObject.isOn{
+            notificationLabel1.isEnabled=false
+            notificationDateLabel.isEnabled=false
+            changeDateButton.isEnabled=false
+        }
         // ユーザーが設定した時刻がない場合は初期設定の時間を反映
-        datePicker.date = todayInitialTime()
-        notificationDateLabel.text = getday(format:"HH:mm",modifiedDate: datePicker.date)
+        if userDefaults?.object(forKey: "notificationHour") == nil{
+            userDefaults?.set(getday(format:"HH",modifiedDate: datePicker.date),forKey: "notificationHour")
+            userDefaults?.set(getday(format:"mm",modifiedDate: datePicker.date),forKey: "notificationMinute")
+            userDefaults?.synchronize()
+        }else{
+            notificationDateLabel.text = (userDefaults?.string(forKey: "notificationHour"))!+":"+(userDefaults?.string(forKey: "notificationMinute"))!
+        }
     }
     
     @IBAction func changeDate(_ sender: Any) {
@@ -131,7 +144,7 @@ class AppSettingsViewController: UIViewController {
     func periodicExecution(){
         // UserDefaults のインスタンス
         let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-
+        
         // 通知がOFFの場合は終了
         if !userDefaults!.bool(forKey: "notificationSwitch") {
             return

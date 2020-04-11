@@ -15,7 +15,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     
     @IBOutlet var MainWebView: WKWebView!
     
-    let myRequest = URLRequest(url: URL(string: "http://localhost:5000")!)
+    let myRequest = URLRequest(url: URL(string: "https://dev.twinte.net")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,7 +144,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com" || host == "localhost"){//この部分を処理したいURLにする
+            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com" || host == "dev.twinte.net"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
