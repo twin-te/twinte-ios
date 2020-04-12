@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController id="Cjt-wW-Mdi" customClass="AppSettingsViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GYA-g7-Jwc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-Gg-1oe">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                                 <color key="barTintColor" name="TwinteColor"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
@@ -28,7 +28,7 @@
                                     <navigationItem title="iPhoneアプリの設定" id="SRl-IJ-1Vg">
                                         <barButtonItem key="leftBarButtonItem" id="iID-ua-dr4">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EXL-Cm-dRC">
-                                                <rect key="frame" x="16" y="6" width="83" height="44"/>
+                                                <rect key="frame" x="20" y="6" width="83" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="←">
@@ -43,19 +43,19 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="特殊日程の通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-zu-Jcr">
-                                <rect key="frame" x="61.000000000000007" y="101" width="121.66666666666669" height="31"/>
+                                <rect key="frame" x="66" y="101" width="121.5" height="31"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTq-Zd-yF6">
-                                <rect key="frame" x="292" y="101" width="51" height="31"/>
+                                <rect key="frame" x="629" y="101" width="51" height="31"/>
                                 <connections>
                                     <action selector="notificationSwitch:" destination="Cjt-wW-Mdi" eventType="valueChanged" id="SUw-mT-sja"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の日の時間割が通常と異なる場合、前日に通知をします。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-t1-qNu">
-                                <rect key="frame" x="66" y="132" width="296" height="41"/>
+                                <rect key="frame" x="66" y="132" width="633" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Q4I-kE-VUQ"/>
                                 </constraints>
@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bell.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZE-Yvj">
-                                <rect key="frame" x="16" y="107" width="19" height="19.666666666666671"/>
+                                <rect key="frame" x="20" y="107" width="20" height="19.5"/>
                                 <color key="tintColor" name="TwinteColor"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在の通知時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLI-5x-vmB">
@@ -80,18 +80,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
-                                <rect key="frame" x="279" y="170" width="62" height="30"/>
+                                <rect key="frame" x="616" y="170" width="62" height="30"/>
                                 <state key="normal" title="変更する"/>
                                 <connections>
                                     <action selector="changeDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="329-Z2-FXc"/>
                                 </connections>
                             </button>
                             <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-sC-dWT">
-                                <rect key="frame" x="0.0" y="208" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="208" width="712" height="216"/>
                                 <locale key="locale" localeIdentifier="ja_JP"/>
                             </datePicker>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lh-7c-TbY">
-                                <rect key="frame" x="149" y="419" width="77" height="30"/>
+                                <rect key="frame" x="317.5" y="419" width="77" height="30"/>
                                 <state key="normal" title="時間を確定"/>
                                 <connections>
                                     <action selector="confirmDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="x8M-k9-mfN"/>
@@ -106,8 +106,11 @@
                             <constraint firstItem="mLI-5x-vmB" firstAttribute="baseline" secondItem="Igq-lw-2jX" secondAttribute="baseline" id="3dh-1M-gsj"/>
                             <constraint firstItem="Igq-lw-2jX" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" constant="200" id="6Gr-3p-prY"/>
                             <constraint firstItem="cEq-Gg-1oe" firstAttribute="top" secondItem="ALX-4v-Kc9" secondAttribute="top" id="DtG-zs-sad"/>
+                            <constraint firstItem="i8L-tK-RHR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mLI-5x-vmB" secondAttribute="trailing" constant="8" symbolic="YES" id="FZQ-p4-qCb"/>
                             <constraint firstItem="mfq-zu-Jcr" firstAttribute="leading" secondItem="o9W-ZE-Yvj" secondAttribute="trailing" constant="26" id="HOD-kv-Ibn"/>
+                            <constraint firstItem="BTq-Zd-yF6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mfq-zu-Jcr" secondAttribute="trailing" constant="8" symbolic="YES" id="JHd-Rv-Rx0"/>
                             <constraint firstItem="cEq-Gg-1oe" firstAttribute="centerX" secondItem="GYA-g7-Jwc" secondAttribute="centerX" id="L1C-nF-jOd"/>
+                            <constraint firstItem="i8L-tK-RHR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Igq-lw-2jX" secondAttribute="trailing" constant="8" symbolic="YES" id="LQV-Gd-MPp"/>
                             <constraint firstItem="RLr-sC-dWT" firstAttribute="top" secondItem="mLI-5x-vmB" secondAttribute="bottom" constant="8" id="Mw4-4N-Kp0"/>
                             <constraint firstItem="Igq-lw-2jX" firstAttribute="bottom" secondItem="i8L-tK-RHR" secondAttribute="bottom" id="OJV-2i-KyX"/>
                             <constraint firstItem="RLr-sC-dWT" firstAttribute="leading" secondItem="cEq-Gg-1oe" secondAttribute="leading" id="RFs-Ce-zGE"/>
@@ -149,11 +152,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainView" id="BYZ-38-t0r" customClass="ViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTV-5f-UaH">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1346"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO">
                                     <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
@@ -186,11 +189,11 @@
             <objects>
                 <viewController id="Xmp-ao-KwE" customClass="SecondViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIc-cU-9X5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1F-CQ-JO3">
-                                <rect key="frame" x="0.0" y="49" width="375" height="675"/>
+                                <rect key="frame" x="0.0" y="49" width="712" height="958"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>

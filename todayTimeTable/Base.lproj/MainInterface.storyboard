@@ -25,7 +25,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="モジュール" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhk-Rl-z71">
-                                            <rect key="frame" x="64" y="40" width="192" height="21"/>
+                                            <rect key="frame" x="116.5" y="40" width="87" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oin-0Y-k0m">
-                                            <rect key="frame" x="264" y="19" width="41" height="42"/>
+                                            <rect key="frame" x="275" y="19" width="30" height="42"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <state key="normal" title="&gt;">
                                                 <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -54,7 +54,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/1(日)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c61-Ez-Rad">
-                                            <rect key="frame" x="133" y="11" width="54.5" height="21"/>
+                                            <rect key="frame" x="132.5" y="11" width="55" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -62,10 +62,8 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="c61-Ez-Rad" firstAttribute="centerX" secondItem="La3-uE-WbP" secondAttribute="centerX" id="2DN-lN-Sg7"/>
-                                        <constraint firstItem="yhk-Rl-z71" firstAttribute="leading" secondItem="jUk-5p-yyD" secondAttribute="trailing" constant="8" id="3xk-Ch-uLe"/>
                                         <constraint firstItem="jUk-5p-yyD" firstAttribute="centerY" secondItem="La3-uE-WbP" secondAttribute="centerY" id="E4E-v3-xQx"/>
                                         <constraint firstItem="yhk-Rl-z71" firstAttribute="centerX" secondItem="c61-Ez-Rad" secondAttribute="centerX" id="L7v-oO-xdd"/>
-                                        <constraint firstItem="oin-0Y-k0m" firstAttribute="leading" secondItem="yhk-Rl-z71" secondAttribute="trailing" constant="8" id="Npc-Kn-eUd"/>
                                         <constraint firstItem="jUk-5p-yyD" firstAttribute="baseline" secondItem="oin-0Y-k0m" secondAttribute="firstBaseline" id="XLY-JG-Wsr"/>
                                         <constraint firstItem="jUk-5p-yyD" firstAttribute="top" secondItem="La3-uE-WbP" secondAttribute="top" constant="19" id="alA-W0-Q7h"/>
                                         <constraint firstItem="jUk-5p-yyD" firstAttribute="leading" secondItem="La3-uE-WbP" secondAttribute="leading" constant="16" id="alm-jT-6HE"/>
