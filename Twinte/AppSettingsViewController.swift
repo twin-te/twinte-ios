@@ -17,7 +17,6 @@ struct substitute: Codable {
 
 class AppSettingsViewController: UIViewController {
     
-    
     @IBOutlet weak var notificationLabel1: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var notificationDateLabel: UILabel!
@@ -25,11 +24,23 @@ class AppSettingsViewController: UIViewController {
     @IBOutlet weak var confirmDateButton: UIButton!
     @IBOutlet weak var notificationSwitchObject: UISwitch!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scheduleAllNotification()
         // Do any additional setup after loading the view.
+        
+        if #available(iOS 13.0, *) {
+            let coloredAppearance = UINavigationBarAppearance()
+            coloredAppearance.configureWithOpaqueBackground()
+            coloredAppearance.backgroundColor = UIColor(red: 0, green: 192/255, blue: 192/255, alpha: 1)
+            coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            UINavigationBar.appearance().standardAppearance = coloredAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+        }
         
         let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
         
@@ -68,10 +79,10 @@ class AppSettingsViewController: UIViewController {
         center.getPendingNotificationRequests { requests in
             print(requests.count)
             /*
-            for element in requests {
-                print(element)
-            }
- */
+             for element in requests {
+             print(element)
+             }
+             */
         }
         /// ここまで
     }
