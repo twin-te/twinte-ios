@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -14,74 +14,11 @@
             <objects>
                 <viewController id="Cjt-wW-Mdi" customClass="AppSettingsViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GYA-g7-Jwc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="GZU-bZ-po5">
-                                <rect key="frame" x="20" y="140" width="374" height="109.33333333333331"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="ihS-I2-xlg">
-                                        <rect key="frame" x="20.333333333333343" y="0.0" width="333.33333333333326" height="31"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bell.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZE-Yvj">
-                                                <rect key="frame" x="0.0" y="0.6666666666666643" width="19" height="30.333333333333336"/>
-                                                <color key="tintColor" name="TwinteColor"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="特殊日程の通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-zu-Jcr">
-                                                <rect key="frame" x="91" y="0.0" width="121.33333333333331" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTq-Zd-yF6">
-                                                <rect key="frame" x="284.33333333333337" y="0.0" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="notificationSwitch:" destination="Cjt-wW-Mdi" eventType="valueChanged" id="SUw-mT-sja"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の日の時間割が通常と異なる場合、前日に通知をします。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-t1-qNu">
-                                        <rect key="frame" x="21.666666666666657" y="48" width="331" height="14.333333333333336"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="h6P-BQ-pDF">
-                                        <rect key="frame" x="48.333333333333343" y="79.333333333333343" width="277.66666666666663" height="30"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在の通知時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLI-5x-vmB">
-                                                <rect key="frame" x="0.0" y="0.0" width="138.66666666666666" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igq-lw-2jX">
-                                                <rect key="frame" x="155.66666666666669" y="0.0" width="43" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
-                                                <rect key="frame" x="215.66666666666669" y="0.0" width="62" height="30"/>
-                                                <state key="normal" title="変更する"/>
-                                                <connections>
-                                                    <action selector="changeDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="329-Z2-FXc"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-sC-dWT">
-                                        <rect key="frame" x="27" y="109.33333333333334" width="320" height="0.0"/>
-                                        <locale key="locale" localeIdentifier="ja_JP"/>
-                                    </datePicker>
-                                </subviews>
-                            </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-Gg-1oe">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="lXN-iD-FIP"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                 <color key="barTintColor" name="TwinteColor"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
@@ -91,7 +28,7 @@
                                     <navigationItem title="iPhoneアプリの設定" id="SRl-IJ-1Vg">
                                         <barButtonItem key="leftBarButtonItem" id="iID-ua-dr4">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EXL-Cm-dRC">
-                                                <rect key="frame" x="20" y="6" width="83" height="44"/>
+                                                <rect key="frame" x="16" y="6" width="83" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="←">
@@ -105,8 +42,56 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="特殊日程の通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-zu-Jcr">
+                                <rect key="frame" x="61.000000000000007" y="101" width="121.66666666666669" height="31"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTq-Zd-yF6">
+                                <rect key="frame" x="292" y="101" width="51" height="31"/>
+                                <connections>
+                                    <action selector="notificationSwitch:" destination="Cjt-wW-Mdi" eventType="valueChanged" id="SUw-mT-sja"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の日の時間割が通常と異なる場合、前日に通知をします。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-t1-qNu">
+                                <rect key="frame" x="66" y="132" width="296" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="Q4I-kE-VUQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bell.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZE-Yvj">
+                                <rect key="frame" x="16" y="107" width="19" height="19.666666666666671"/>
+                                <color key="tintColor" name="TwinteColor"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在の通知時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLI-5x-vmB">
+                                <rect key="frame" x="65" y="170" width="139" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igq-lw-2jX">
+                                <rect key="frame" x="200" y="170" width="43" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
+                                <rect key="frame" x="279" y="170" width="62" height="30"/>
+                                <state key="normal" title="変更する"/>
+                                <connections>
+                                    <action selector="changeDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="329-Z2-FXc"/>
+                                </connections>
+                            </button>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-sC-dWT">
+                                <rect key="frame" x="0.0" y="208" width="375" height="216"/>
+                                <locale key="locale" localeIdentifier="ja_JP"/>
+                            </datePicker>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lh-7c-TbY">
-                                <rect key="frame" x="168.66666666666666" y="251.33333333333337" width="77" height="30"/>
+                                <rect key="frame" x="149" y="419" width="77" height="30"/>
                                 <state key="normal" title="時間を確定"/>
                                 <connections>
                                     <action selector="confirmDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="x8M-k9-mfN"/>
@@ -115,14 +100,32 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" id="9O4-qz-W7d"/>
-                            <constraint firstItem="GZU-bZ-po5" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" constant="20" id="G0Q-z5-LEa"/>
-                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="centerX" secondItem="GZU-bZ-po5" secondAttribute="centerX" id="TAc-b6-gmC"/>
-                            <constraint firstItem="8lh-7c-TbY" firstAttribute="top" secondItem="GZU-bZ-po5" secondAttribute="bottom" constant="2" id="Uh1-bB-Swn"/>
-                            <constraint firstItem="GZU-bZ-po5" firstAttribute="top" secondItem="cEq-Gg-1oe" secondAttribute="bottom" constant="96" id="Vts-bf-BT0"/>
-                            <constraint firstItem="8lh-7c-TbY" firstAttribute="centerX" secondItem="GZU-bZ-po5" secondAttribute="centerX" id="cp8-iS-J1m"/>
-                            <constraint firstItem="GZU-bZ-po5" firstAttribute="centerX" secondItem="GYA-g7-Jwc" secondAttribute="centerX" id="vHa-6w-IHt"/>
-                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="top" secondItem="ALX-4v-Kc9" secondAttribute="top" id="y4O-cX-AI5"/>
+                            <constraint firstItem="Igq-lw-2jX" firstAttribute="top" secondItem="i8L-tK-RHR" secondAttribute="top" id="04o-gA-NUL"/>
+                            <constraint firstItem="mLI-5x-vmB" firstAttribute="top" secondItem="mfq-zu-Jcr" secondAttribute="bottom" constant="38" id="1gm-Qt-NJG"/>
+                            <constraint firstItem="mfq-zu-Jcr" firstAttribute="top" secondItem="cEq-Gg-1oe" secondAttribute="bottom" constant="45" id="3Vm-DW-oZt"/>
+                            <constraint firstItem="mLI-5x-vmB" firstAttribute="baseline" secondItem="Igq-lw-2jX" secondAttribute="baseline" id="3dh-1M-gsj"/>
+                            <constraint firstItem="Igq-lw-2jX" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" constant="200" id="6Gr-3p-prY"/>
+                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="top" secondItem="ALX-4v-Kc9" secondAttribute="top" id="DtG-zs-sad"/>
+                            <constraint firstItem="mfq-zu-Jcr" firstAttribute="leading" secondItem="o9W-ZE-Yvj" secondAttribute="trailing" constant="26" id="HOD-kv-Ibn"/>
+                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="centerX" secondItem="GYA-g7-Jwc" secondAttribute="centerX" id="L1C-nF-jOd"/>
+                            <constraint firstItem="RLr-sC-dWT" firstAttribute="top" secondItem="mLI-5x-vmB" secondAttribute="bottom" constant="8" id="Mw4-4N-Kp0"/>
+                            <constraint firstItem="Igq-lw-2jX" firstAttribute="bottom" secondItem="i8L-tK-RHR" secondAttribute="bottom" id="OJV-2i-KyX"/>
+                            <constraint firstItem="RLr-sC-dWT" firstAttribute="leading" secondItem="cEq-Gg-1oe" secondAttribute="leading" id="RFs-Ce-zGE"/>
+                            <constraint firstItem="ALX-4v-Kc9" firstAttribute="trailing" secondItem="BTq-Zd-yF6" secondAttribute="trailing" constant="34" id="ULg-Al-6kU"/>
+                            <constraint firstItem="kC5-t1-qNu" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" constant="66" id="Wvg-hV-BWO"/>
+                            <constraint firstItem="ALX-4v-Kc9" firstAttribute="trailing" secondItem="kC5-t1-qNu" secondAttribute="trailing" constant="13" id="fsH-4V-cr0"/>
+                            <constraint firstItem="mfq-zu-Jcr" firstAttribute="bottom" secondItem="BTq-Zd-yF6" secondAttribute="bottom" id="git-Z9-LSz"/>
+                            <constraint firstItem="kC5-t1-qNu" firstAttribute="top" secondItem="mfq-zu-Jcr" secondAttribute="bottom" id="lE2-UE-6tw"/>
+                            <constraint firstItem="mLI-5x-vmB" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" constant="64.999999999999986" id="p5h-hL-VS4"/>
+                            <constraint firstItem="8lh-7c-TbY" firstAttribute="centerX" secondItem="GYA-g7-Jwc" secondAttribute="centerX" id="qNW-lO-dHz"/>
+                            <constraint firstItem="RLr-sC-dWT" firstAttribute="centerX" secondItem="GYA-g7-Jwc" secondAttribute="centerX" id="r6r-2l-DbL"/>
+                            <constraint firstItem="cEq-Gg-1oe" firstAttribute="leading" secondItem="ALX-4v-Kc9" secondAttribute="leading" id="teB-6c-5oz"/>
+                            <constraint firstItem="8lh-7c-TbY" firstAttribute="top" secondItem="mLI-5x-vmB" secondAttribute="bottom" constant="219" id="tmn-J0-n7I"/>
+                            <constraint firstItem="o9W-ZE-Yvj" firstAttribute="centerY" secondItem="mfq-zu-Jcr" secondAttribute="centerY" id="vxy-vm-c11"/>
+                            <constraint firstItem="mfq-zu-Jcr" firstAttribute="top" secondItem="BTq-Zd-yF6" secondAttribute="top" id="wUj-ak-mKh"/>
+                            <constraint firstItem="mLI-5x-vmB" firstAttribute="firstBaseline" secondItem="Igq-lw-2jX" secondAttribute="firstBaseline" id="xLx-JJ-9ht"/>
+                            <constraint firstItem="o9W-ZE-Yvj" firstAttribute="leading" secondItem="GYA-g7-Jwc" secondAttribute="leadingMargin" id="xbT-Y0-dAN"/>
+                            <constraint firstItem="i8L-tK-RHR" firstAttribute="trailing" secondItem="BTq-Zd-yF6" secondAttribute="trailing" id="xd6-lX-dlw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ALX-4v-Kc9"/>
                     </view>
@@ -139,18 +142,18 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofX-s5-9ZG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ArI-lW-TNb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-66.400000000000006" y="931.48425787106453"/>
+            <point key="canvasLocation" x="-66.666666666666671" y="931.47321428571422"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="MainView" id="BYZ-38-t0r" customClass="ViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTV-5f-UaH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO">
                                     <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
@@ -183,11 +186,11 @@
             <objects>
                 <viewController id="Xmp-ao-KwE" customClass="SecondViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIc-cU-9X5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1F-CQ-JO3">
-                                <rect key="frame" x="0.0" y="49" width="414" height="667"/>
+                                <rect key="frame" x="0.0" y="49" width="375" height="675"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -196,7 +199,7 @@
                                 <string key="customUserAgent">Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1</string>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-X2-Cyu">
-                                <rect key="frame" x="20" y="11" width="46" height="30"/>
+                                <rect key="frame" x="20" y="10" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="閉じる"/>
                                 <connections>
@@ -207,12 +210,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="top" secondItem="DmD-pe-qSW" secondAttribute="top" constant="10" id="1bX-NN-MA5"/>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="centerX" secondItem="wIc-cU-9X5" secondAttribute="centerX" id="7fA-28-CKn"/>
-                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="leading" secondItem="wIc-cU-9X5" secondAttribute="leadingMargin" id="DD2-QY-Rp7"/>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="top" secondItem="fFI-X2-Cyu" secondAttribute="bottom" constant="9" id="9ce-Wv-Mn8"/>
+                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="bottom" secondItem="DmD-pe-qSW" secondAttribute="bottom" id="ALw-d0-hNt"/>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="bottom" secondItem="DmD-pe-qSW" secondAttribute="bottom" id="HAJ-CS-vxx"/>
+                            <constraint firstItem="DmD-pe-qSW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fFI-X2-Cyu" secondAttribute="trailing" symbolic="YES" id="MDp-bv-DGZ"/>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="leading" secondItem="DmD-pe-qSW" secondAttribute="leading" id="Mtm-Sx-hzD"/>
-                            <constraint firstItem="Y1F-CQ-JO3" firstAttribute="top" secondItem="fFI-X2-Cyu" secondAttribute="bottom" constant="8" id="gxr-13-LGY"/>
-                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="top" secondItem="DmD-pe-qSW" secondAttribute="top" constant="11" id="rpv-Yo-hI0"/>
+                            <constraint firstItem="fFI-X2-Cyu" firstAttribute="leading" secondItem="DmD-pe-qSW" secondAttribute="leading" constant="20" id="hmA-rA-YQS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DmD-pe-qSW"/>
                     </view>
