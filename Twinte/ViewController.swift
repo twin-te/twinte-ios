@@ -15,7 +15,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     
     @IBOutlet var MainWebView: WKWebView!
     
-    let myRequest = URLRequest(url: URL(string: "https://dev.twinte.net")!)
+    let myRequest = URLRequest(url: URL(string: "http://localhost:5000")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +30,10 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         MainWebView.scrollView.bounces = false
         // プレビューを禁止する
         MainWebView.allowsLinkPreview = false
-    
+        
         // JSから呼び出される関数定義
-        MainWebView.configuration.userContentController.add(self, name: "callbackHandler")
+        MainWebView.configuration.userContentController.add(self, name: "iPhoneSettings")
+        MainWebView.configuration.userContentController.add(self, name: "share")
         // iPadはUserAgentがMacになるのでその対策
         if UIDevice.current.userInterfaceIdiom == .pad {
             // 使用デバイスがiPadの場合 UserAgentを固定
@@ -102,9 +103,14 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     
     // WEBから呼び出される関数
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        self.performSegue(withIdentifier: "toSettings", sender: nil)
-        // シェアを実行
-        //share()
+        switch message.name {
+        case "share":
+            share(body: message.body as! String)
+        case "iPhoneSettings":
+            self.performSegue(withIdentifier: "toSettings", sender: nil)
+        default:
+            break
+        }
     }
     
     // WebViewのスクショを撮って返す
@@ -118,11 +124,11 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     }
     
     // 時間割をシェアする
-    func share() {
+    func share(body:String) {
         // スクリーンショットを取得
         let shareImage = getScreenShot().pngData()
         // 共有項目
-        let activityItems: [Any] = [shareImage!, "私の時間割はこんな感じです！    #Twinte"]
+        let activityItems: [Any] = [shareImage!, body]
         // 初期化処理
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
@@ -144,7 +150,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com" || host == "dev.twinte.net"){//この部分を処理したいURLにする
+            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com" || host == "localhost"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
