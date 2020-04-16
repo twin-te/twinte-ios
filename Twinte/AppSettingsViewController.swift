@@ -75,15 +75,17 @@ class AppSettingsViewController: UIViewController {
         ///
         /// デバッグ用
         ///
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { requests in
-            print(requests.count)
-            /*
-             for element in requests {
-             print(element)
-             }
-             */
-        }
+        /*
+         let center = UNUserNotificationCenter.current()
+         center.getPendingNotificationRequests { requests in
+         print(requests.count)
+         
+         for element in requests {
+         print(element)
+         }
+         
+         }
+         */
         /// ここまで
     }
     
@@ -206,7 +208,7 @@ class AppSettingsViewController: UIViewController {
     ///   - date: 取得したいイベントの日付をDate形式で渡す
     ///   - completion: 場合に応じてsemaphore.signal()を実行するとよい
     func schoolCalender(completion: @escaping ([substitute]) -> Void){
-        let requestUrl = "https://scripts.twinte.net/notification.json"
+        let requestUrl = "https://api.twinte.net/v1/school-calender/substitutes/list?year="+getday(format:"yyyy",modifiedDate: Date())
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
