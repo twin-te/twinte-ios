@@ -15,6 +15,7 @@ struct Lecture: Codable {
     let room: String
     let lecture_name: String
     let instructor: String
+    let formats: [String]
 }
 
 // イベント情報格納
@@ -82,7 +83,7 @@ struct LectureGet {
             } catch let error {
                 print("## error: \(error)")
                 // ログインしていない場合にこのエラーが出る（jsonで返ってこないので）
-                let resultSet = [Lecture(period: 1,room: "未認証です",lecture_name: "Twin:teにログインしてください",instructor: ""),Lecture(period: 2,room: "未認証です",lecture_name: "ここに時間割が表示されます！",instructor: "")]
+                let resultSet = [Lecture(period: 1,room: "未認証です",lecture_name: "Twin:teにログインしてください",instructor: "",formats: []),Lecture(period: 2,room: "未認証です",lecture_name: "ここに時間割が表示されます！",instructor: "",formats: [])]
                 completion(resultSet)
             }
         }
@@ -99,6 +100,9 @@ class CustomTableViewCell:UITableViewCell {
     @IBOutlet weak var lecturePeriodLabel: UILabel!
     @IBOutlet weak var lectureNameLabel: UILabel!
     @IBOutlet weak var lectureRoomLabel: UILabel!
+    @IBOutlet weak var onlineAsynchronous: UIImageView!
+    @IBOutlet weak var onlineSynchronous: UIImageView!
+    @IBOutlet weak var faceToFace: UIImageView!
     
 }
 
@@ -157,7 +161,7 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
                 }
             }
             if self.articles.count != i{
-                self.articles.append(Lecture(period: i,room: "----",lecture_name: "----",instructor: ""))
+                self.articles.append(Lecture(period: i,room: "----",lecture_name: "----",instructor: "",formats: []))
             }
         }
     }
@@ -282,7 +286,17 @@ class TodayViewController: UIViewController, NCWidgetProviding,UITableViewDelega
     }
 }
 
-
+// ダークモード判定
+extension UITraitCollection {
+    
+    public static var isDarkMode: Bool {
+        if #available(iOS 13, *), current.userInterfaceStyle == .dark {
+            return true
+        }
+        return false
+    }
+    
+}
 
 
 extension TodayViewController: UITableViewDataSource {
@@ -299,6 +313,46 @@ extension TodayViewController: UITableViewDataSource {
         cell.lectureRoomLabel?.text = article.room
         cell.lecturePeriodLabel?.text = article.period.description
         cell.lecturePeriodLabel?.textColor = UIColor.white
+        
+        // 全てdisableアイコンにする
+        if (UITraitCollection.isDarkMode){
+            cell.onlineAsynchronous.image = UIImage(named: "disable-dark-online-asynchronous")
+            cell.onlineSynchronous.image = UIImage(named: "disable-dark-online-synchronous")
+            cell.faceToFace.image = UIImage(named: "disable-dark-face-to-face")
+        }else{
+            cell.onlineAsynchronous.image = UIImage(named: "disable-light-online-asynchronous")
+            cell.onlineSynchronous.image = UIImage(named: "disable-light-online-synchronous")
+            cell.faceToFace.image = UIImage(named: "disable-light-face-to-face")
+        }
+        // 授業フォーマットに記載がある場合
+        if(article.formats.count != 0){
+            article.formats.forEach{
+                // ダークモード判定
+                if (UITraitCollection.isDarkMode){
+                    switch $0 {
+                    case "Asynchronous":
+                        cell.onlineAsynchronous.image = UIImage(named: "dark-online-asynchronous")
+                    case "Synchronous":
+                        cell.onlineSynchronous.image = UIImage(named: "dark-online-synchronous")
+                    case "FaceToFace":
+                        cell.faceToFace.image = UIImage(named: "dark-face-to-face")
+                    default:
+                        break
+                    }
+                }else{
+                    switch $0 {
+                    case "Asynchronous":
+                        cell.onlineAsynchronous.image = UIImage(named: "light-online-asynchronous")
+                    case "Synchronous":
+                        cell.onlineSynchronous.image = UIImage(named: "light-online-synchronous")
+                    case "FaceToFace":
+                        cell.faceToFace.image = UIImage(named: "light-face-to-face")
+                    default:
+                        break
+                    }
+                }
+            }
+        }
         return cell
     }
     
