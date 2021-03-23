@@ -14,6 +14,7 @@
 		3C0FC8A3238247CD00055141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C0FC8A6238247CD00055141 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A4238247CD00055141 /* LaunchScreen.storyboard */; };
 		3C1C731B243259A900A6C494 /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1C731A243259A900A6C494 /* AppSettingsViewController.swift */; };
+		3C5851C62609E16F00F53835 /* ScheduleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5851C52609E16F00F53835 /* ScheduleNotification.swift */; };
 		3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C829CE02383D5EE008C3475 /* WebKit.framework */; };
 		3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C88956023B71C79002557E0 /* NotificationCenter.framework */; };
@@ -59,6 +60,7 @@
 		3C0FC8A5238247CD00055141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C0FC8A7238247CD00055141 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C1C731A243259A900A6C494 /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
+		3C5851C52609E16F00F53835 /* ScheduleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotification.swift; sourceTree = "<group>"; };
 		3C829CE02383D5EE008C3475 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C88955F23B71C79002557E0 /* todayTimeTable.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayTimeTable.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C88956023B71C79002557E0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -117,6 +119,7 @@
 			children = (
 				3C88957023B72039002557E0 /* Twin:te.entitlements */,
 				3C0FC899238247CC00055141 /* AppDelegate.swift */,
+				3C5851C52609E16F00F53835 /* ScheduleNotification.swift */,
 				3CE721672383B42B00363500 /* SecondViewController.swift */,
 				3C0FC89B238247CC00055141 /* SceneDelegate.swift */,
 				3C0FC89D238247CC00055141 /* ViewController.swift */,
@@ -258,6 +261,7 @@
 				3CE721682383B42B00363500 /* SecondViewController.swift in Sources */,
 				3C0FC89E238247CC00055141 /* ViewController.swift in Sources */,
 				3C1C731B243259A900A6C494 /* AppSettingsViewController.swift in Sources */,
+				3C5851C62609E16F00F53835 /* ScheduleNotification.swift in Sources */,
 				3C0FC89A238247CC00055141 /* AppDelegate.swift in Sources */,
 				3C0FC89C238247CC00055141 /* SceneDelegate.swift in Sources */,
 			);

@@ -14,12 +14,16 @@ import UserNotifications
 class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler  {
     
     @IBOutlet var MainWebView: WKWebView!
+    // 通知作成のためのクラス
+    let Notification = ScheduleNotification()
     
     let myRequest = URLRequest(url: URL(string: "https://app.twinte.net")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // アプリを起動するたびに通知を再設定する
+        Notification.scheduleAllNotification()
         // これがないとjsのアラートが出ない
         MainWebView.uiDelegate = self
         // これがないとページを読み込んだ後の関数didFinish navigationが実行できない
