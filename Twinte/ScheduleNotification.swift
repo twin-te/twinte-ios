@@ -11,7 +11,9 @@ import UIKit
 // 授業振替情報を格納
 struct substitute: Codable {
     let date: String
-    let change_to: String
+    let changeTo: String
+    let eventType: String
+    let description: String
 }
 
 class ScheduleNotification {
@@ -29,19 +31,23 @@ class ScheduleNotification {
                     let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
                     
                     for element in substitutes{
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd"
-                        dateFormatter.locale = Locale(identifier: "ja")
-                        let notificationDate = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: element.date)!)
-                        var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: notificationDate!)
-                        dateComponents.hour = userDefaults?.integer(forKey: "notificationHour")
-                        dateComponents.minute = userDefaults?.integer(forKey: "notificationMinute")
-                        
-                        print(element)
-                        
-                        // 過去のものに関してはスケジュールしない
-                        if(Date() < Calendar.current.date(from: dateComponents)!){
-                            self.createNotification(body: "明日は\(element.change_to)曜日日程です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
+                        // イベントタイプが授業変更の時のみ通知
+                        if element.eventType == "SubstituteDay" || element.eventType == "Holiday"{
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd"
+                            dateFormatter.locale = Locale(identifier: "ja")
+                            let notificationDate = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: String(element.date.prefix(10)))!) // 2021-04-06T00:00:00.000Zという文字列形式なので、先頭から10文字切り取って扱う
+                            var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: notificationDate!)
+                            dateComponents.hour = userDefaults?.integer(forKey: "notificationHour")
+                            dateComponents.minute = userDefaults?.integer(forKey: "notificationMinute")
+                            
+                            //print(element)
+                            
+                            if element.eventType == "SubstituteDay"{
+                                self.createNotification(title: "特別日程のお知らせ",body: "明日は\(self.convertDayEnglishToJapanese(en: element.changeTo))日課です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
+                            }else{
+                                self.createNotification(title: "臨時休講のお知らせ",body: "明日は\(element.description)のため休講です。詳細は学年歴をご覧ください。", notificationTime: dateComponents)
+                            }
                         }
                     }
                 }
@@ -51,14 +57,15 @@ class ScheduleNotification {
     
     /// 通知をしてくれる関数
     /// - Parameters:
+    ///   - title: 通知のタイトル
     ///   - body: 通知文の本文
     ///   - notificationTime: 通知したい時刻
-    func createNotification(body:String,notificationTime:DateComponents){
+    func createNotification(title:String,body:String,notificationTime:DateComponents){
         // 通知の登録
         //プッシュ通知のインスタンス
         let notification = UNMutableNotificationContent()
         //通知のタイトル
-        notification.title = "特別日程のお知らせ"
+        notification.title = title
         //通知の本文
         notification.body = body
         //通知の音
@@ -86,13 +93,34 @@ class ScheduleNotification {
         return formatter.string(from: modifiedDate)
     }
     
+    func convertDayEnglishToJapanese(en:String)->String{
+        switch en {
+        case "Sun":
+            return "日曜"
+        case "Mon":
+            return "月曜"
+        case "Tue":
+            return "火曜"
+        case "Wed":
+            return "水曜"
+        case "Thu":
+            return "木曜"
+        case "Fri":
+            return "金曜"
+        case "Sat":
+            return "土曜"
+        default:
+            return "特殊"
+        }
+    }
+    
     /// イベント情報の取得
     /// - Parameters:
     ///   - date: 取得したいイベントの日付をDate形式で渡す
     ///   - completion: 場合に応じてsemaphore.signal()を実行するとよい
     func schoolCalender(completion: @escaping ([substitute]) -> Void){
-        //        let requestUrl = "https://api.twinte.net/v1/school-calender/substitutes/list?year="+getday(format:"yyyy",modifiedDate: Date())
-        let requestUrl = "https://api.twinte.net/v1/school-calender/substitutes/list?year=2020"
+        let requestUrl = "https://api.dev.twinte.net/v3/school-calendar/events?year=2021"
+        //        let requestUrl = "https://api.twinte.net/v1/school-calender/substitutes/list?year=2020"
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
@@ -101,7 +129,9 @@ class ScheduleNotification {
         }
         
         // リクエスト生成
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        // Cookieをセット
+        request.setValue("connect.sid=test", forHTTPHeaderField: "Cookie")
         // APIを殴る
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data:Data?,
