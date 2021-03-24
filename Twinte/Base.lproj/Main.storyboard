@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,12 +15,12 @@
             <objects>
                 <viewController id="Cjt-wW-Mdi" customClass="AppSettingsViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GYA-g7-Jwc">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-Gg-1oe">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
-                                <color key="barTintColor" name="TwinteColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                                <color key="barTintColor" name="V3Color"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -27,12 +28,12 @@
                                 <items>
                                     <navigationItem title="iPhoneアプリの設定" id="SRl-IJ-1Vg">
                                         <barButtonItem key="leftBarButtonItem" id="iID-ua-dr4">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EXL-Cm-dRC">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="EXL-Cm-dRC">
                                                 <rect key="frame" x="20" y="6" width="83" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <state key="normal" title="←">
-                                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <color key="titleColor" systemColor="groupTableViewBackgroundColor"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="ArI-lW-TNb" kind="unwind" unwindAction="returnToMeWithSegue:" id="K0h-NS-xNP"/>
@@ -43,19 +44,19 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="特殊日程の通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-zu-Jcr">
-                                <rect key="frame" x="66" y="101" width="121.5" height="31"/>
+                                <rect key="frame" x="65" y="101" width="121.66666666666669" height="31"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTq-Zd-yF6">
-                                <rect key="frame" x="629" y="101" width="51" height="31"/>
+                                <rect key="frame" x="345" y="101" width="51" height="31"/>
                                 <connections>
                                     <action selector="notificationSwitch:" destination="Cjt-wW-Mdi" eventType="valueChanged" id="SUw-mT-sja"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の日の時間割が通常と異なる場合、前日に通知をします。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-t1-qNu">
-                                <rect key="frame" x="66" y="132" width="633" height="41"/>
+                                <rect key="frame" x="66" y="132" width="349" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Q4I-kE-VUQ"/>
                                 </constraints>
@@ -64,7 +65,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bell.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZE-Yvj">
-                                <rect key="frame" x="20" y="107" width="20" height="19.5"/>
+                                <rect key="frame" x="20" y="107" width="19" height="19.666666666666671"/>
                                 <color key="tintColor" name="TwinteColor"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在の通知時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLI-5x-vmB">
@@ -79,26 +80,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
-                                <rect key="frame" x="616" y="170" width="62" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8L-tK-RHR">
+                                <rect key="frame" x="332" y="170" width="62" height="30"/>
                                 <state key="normal" title="変更する"/>
                                 <connections>
                                     <action selector="changeDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="329-Z2-FXc"/>
                                 </connections>
                             </button>
                             <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-sC-dWT">
-                                <rect key="frame" x="0.0" y="208" width="712" height="216"/>
+                                <rect key="frame" x="0.0" y="208" width="428" height="216"/>
                                 <locale key="locale" localeIdentifier="ja_JP"/>
                             </datePicker>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lh-7c-TbY">
-                                <rect key="frame" x="317.5" y="419" width="77" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lh-7c-TbY">
+                                <rect key="frame" x="175.66666666666666" y="419" width="77" height="30"/>
                                 <state key="normal" title="時間を確定"/>
                                 <connections>
                                     <action selector="confirmDate:" destination="Cjt-wW-Mdi" eventType="touchUpInside" id="x8M-k9-mfN"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ALX-4v-Kc9"/>
+                        <color key="backgroundColor" name="V3Color"/>
                         <constraints>
                             <constraint firstItem="Igq-lw-2jX" firstAttribute="top" secondItem="i8L-tK-RHR" secondAttribute="top" id="04o-gA-NUL"/>
                             <constraint firstItem="mLI-5x-vmB" firstAttribute="top" secondItem="mfq-zu-Jcr" secondAttribute="bottom" constant="38" id="1gm-Qt-NJG"/>
@@ -130,7 +132,6 @@
                             <constraint firstItem="o9W-ZE-Yvj" firstAttribute="leading" secondItem="GYA-g7-Jwc" secondAttribute="leadingMargin" id="xbT-Y0-dAN"/>
                             <constraint firstItem="i8L-tK-RHR" firstAttribute="trailing" secondItem="BTq-Zd-yF6" secondAttribute="trailing" id="xd6-lX-dlw"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ALX-4v-Kc9"/>
                     </view>
                     <navigationItem key="navigationItem" id="3tK-8I-I2M"/>
                     <connections>
@@ -152,11 +153,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainView" id="BYZ-38-t0r" customClass="ViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTV-5f-UaH">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1346"/>
+                                <rect key="frame" x="0.0" y="44" width="428" height="848"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO">
                                     <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
@@ -165,14 +166,14 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UTV-5f-UaH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1uo-O6-0MH"/>
                             <constraint firstItem="UTV-5f-UaH" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="GHj-Fm-ofH"/>
                             <constraint firstItem="UTV-5f-UaH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H96-DW-bov"/>
                             <constraint firstItem="UTV-5f-UaH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yEq-uq-8KT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="MainWebView" destination="UTV-5f-UaH" id="xmI-J1-3fY"/>
@@ -189,11 +190,11 @@
             <objects>
                 <viewController id="Xmp-ao-KwE" customClass="SecondViewController" customModule="Twin_te" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIc-cU-9X5">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1F-CQ-JO3">
-                                <rect key="frame" x="0.0" y="49" width="712" height="958"/>
+                                <rect key="frame" x="0.0" y="49" width="428" height="789"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -201,7 +202,7 @@
                                 </wkWebViewConfiguration>
                                 <string key="customUserAgent">Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1</string>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-X2-Cyu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-X2-Cyu">
                                 <rect key="frame" x="20" y="10" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="閉じる"/>
@@ -211,7 +212,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="DmD-pe-qSW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fFI-X2-Cyu" firstAttribute="top" secondItem="DmD-pe-qSW" secondAttribute="top" constant="10" id="1bX-NN-MA5"/>
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="centerX" secondItem="wIc-cU-9X5" secondAttribute="centerX" id="7fA-28-CKn"/>
@@ -222,7 +224,6 @@
                             <constraint firstItem="Y1F-CQ-JO3" firstAttribute="leading" secondItem="DmD-pe-qSW" secondAttribute="leading" id="Mtm-Sx-hzD"/>
                             <constraint firstItem="fFI-X2-Cyu" firstAttribute="leading" secondItem="DmD-pe-qSW" secondAttribute="leading" constant="20" id="hmA-rA-YQS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="DmD-pe-qSW"/>
                     </view>
                     <connections>
                         <outlet property="SubWebView" destination="Y1F-CQ-JO3" id="oNg-2D-VlE"/>
@@ -239,5 +240,14 @@
         <namedColor name="TwinteColor">
             <color red="0.0" green="0.75300002098083496" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="V3Color">
+            <color red="0.93725490196078431" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

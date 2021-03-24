@@ -26,15 +26,17 @@ class AppSettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         if #available(iOS 13.0, *) {
-            let coloredAppearance = UINavigationBarAppearance()
-            coloredAppearance.configureWithOpaqueBackground()
-            coloredAppearance.backgroundColor = UIColor(red: 0, green: 192/255, blue: 192/255, alpha: 1)
-            coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            
-            UINavigationBar.appearance().standardAppearance = coloredAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
-        }
+            // ダークモード時ヘッダの背景色がおかしくなる問題に対処
+            if UITraitCollection.current.userInterfaceStyle == .dark {
+                let coloredAppearance = UINavigationBarAppearance()
+                coloredAppearance.configureWithOpaqueBackground()
+                coloredAppearance.backgroundColor = UIColor(red: 27/255, green: 32/255, blue: 44/255, alpha: 1)
+                coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+                
+                UINavigationBar.appearance().standardAppearance = coloredAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+            }}
         
         let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
         
