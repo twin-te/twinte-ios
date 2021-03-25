@@ -435,7 +435,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Twinte/Twin:te.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -443,7 +443,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 3;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -460,7 +460,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Twinte/Twin:te.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -468,7 +468,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 3;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -483,7 +483,7 @@
 				CODE_SIGN_ENTITLEMENTS = todayTimeTable/todayTimeTable.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -492,7 +492,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 3;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -507,7 +507,7 @@
 				CODE_SIGN_ENTITLEMENTS = todayTimeTable/todayTimeTable.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -516,7 +516,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 3;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
