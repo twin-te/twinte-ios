@@ -177,7 +177,10 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
     
     //subWebViewから戻ってきたときはリロードする
     @IBAction func returnToMe(segue: UIStoryboardSegue) {
-        MainWebView.reload()
+        // Twinsから帰ってきたときのみリロード
+        if(g_Url!.absoluteString == "https://twins.tsukuba.ac.jp/"){
+            MainWebView.reload()
+        }
     }
     func reload(){
         MainWebView.reload()
