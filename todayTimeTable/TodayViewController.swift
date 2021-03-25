@@ -70,7 +70,7 @@ func fetchAPI(date:String,completion: @escaping (ReturnObject) -> Void) {
     var todayLectureListWithoutDuplicate:[Lecture] = []
     
     /// URLの生成
-    guard let url = URL(string: "https://api.dev.twinte.net/v3/timetable/"+date) else {
+    guard let url = URL(string: "https://api.twinte.net/v3/timetable/"+date) else {
         /// 文字列が有効なURLでない場合の処理
         return
     }
