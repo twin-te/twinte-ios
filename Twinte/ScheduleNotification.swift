@@ -19,6 +19,21 @@ struct substitute: Codable {
 class ScheduleNotification {
     /// 全ての通知をスケジューリング
     func scheduleAllNotification(){
+        ///
+        /// デバッグ用
+        ///
+        /*
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests { requests in
+            print(requests.count)
+            
+            for element in requests {
+                print(element.content.body)
+            }
+            
+        }
+        */
+        /// ここまで
         // 現在登録されている全ての通知を消去
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         // UserDefaults のインスタンス
@@ -119,8 +134,7 @@ class ScheduleNotification {
     ///   - date: 取得したいイベントの日付をDate形式で渡す
     ///   - completion: 場合に応じてsemaphore.signal()を実行するとよい
     func schoolCalender(completion: @escaping ([substitute]) -> Void){
-        let requestUrl = "https://api.dev.twinte.net/v3/school-calendar/events?year=2021"
-        //        let requestUrl = "https://api.twinte.net/v1/school-calender/substitutes/list?year=2020"
+        let requestUrl = "https://app.twinte.net/api/v3/school-calendar/events?year=2021"
         
         // URL生成
         guard let url = URL(string: requestUrl) else {
@@ -131,7 +145,12 @@ class ScheduleNotification {
         // リクエスト生成
         var request = URLRequest(url: url)
         // Cookieをセット
-        request.setValue("connect.sid=test", forHTTPHeaderField: "Cookie")
+        //UserDefaults のインスタンス
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        if let stringCookie = userDefaults?.string(forKey: "stringCookie"){
+            // UserDefaultsからCookieを取得
+            request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
+        }
         // APIを殴る
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data:Data?,

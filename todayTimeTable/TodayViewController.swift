@@ -70,7 +70,7 @@ func fetchAPI(date:String,completion: @escaping (ReturnObject) -> Void) {
     var todayLectureListWithoutDuplicate:[Lecture] = []
     
     /// URLの生成
-    guard let url = URL(string: "https://api.twinte.net/v3/timetable/"+date) else {
+    guard let url = URL(string: "https://app.twinte.net/api/v3/timetable/"+date) else {
         /// 文字列が有効なURLでない場合の処理
         return
     }
@@ -121,8 +121,8 @@ func fetchAPI(date:String,completion: @escaping (ReturnObject) -> Void) {
             }
             // モジュールが記載されない時（冬休み）があるのでその対処
             if(decodedResponse.module != nil){
+                displayModule = convertModuleEnglishToJapanese(module: decodedResponse.module!.module)
                 for element in decodedResponse.courses{
-                    displayModule = convertModuleEnglishToJapanese(module: decodedResponse.module!.module)
                     // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
                     let newScheduleArray = element.course.schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
                     
