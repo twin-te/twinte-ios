@@ -20,6 +20,7 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
         
         // Do any additional setup after loading the view.
         let myURL = g_receviedUrl
+//        let myURL = URL(string: "https://app.twinte.net")
         let myRequest = URLRequest(url: myURL!)
         
         // これがないとjsのアラートが出ない
@@ -53,7 +54,7 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
         let okAction =
             UIAlertAction(title: "OK", style: .default) { action in
                 completionHandler()
-        }
+            }
         
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
@@ -68,12 +69,12 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
         let cancelAction =
             UIAlertAction(title: "Cancel", style: .cancel) { action in
                 completionHandler(false)
-        }
+            }
         
         let okAction =
             UIAlertAction(title: "OK", style: .default) {
                 action in completionHandler(true)
-        }
+            }
         
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
@@ -104,30 +105,19 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
             }
         }
         
-        // app.twinte.netドメインの時はサブWebViewを閉じる
+        // アクセスするapp.twinte.netドメインの時はサブWebViewを閉じる
+        
         if let host : String = TwinsWebView.url?.host{
+            if let absoluteURL = TwinsWebView.url?.absoluteString{
             if(host == "app.twinte.net"){//この部分を処理したいURLにする
-                // Cookieを格納
-                SubWebView.configuration.websiteDataStore.httpCookieStore.getAllCookies() {(cookies) in
-                    var stringCookie:String = ""
-                    for eachcookie in cookies {
-                        if eachcookie.domain.contains(".twinte.net"){
-                            stringCookie += "\(eachcookie.name)=\(eachcookie.value);"
-                        }
-                        // UserDefaults のインスタンス
-                        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-                        // AppGroupのUserDefaults に特定のドメインのCookieを保存（共有）
-                        userDefaults?.set(stringCookie,forKey: "stringCookie")
-                        userDefaults?.synchronize()
-                    }
-                    
-                }
                 // 親のviewcontorollerを取得して関数を実行
                 let parentVC = self.presentingViewController as! ViewController
-                parentVC.reload()
+                // アクセスしようとした画面をメインWebViewで開かせる
+                    parentVC.afterLogin(url: absoluteURL)
                 // 自分を閉じる
                 self.dismiss(animated: true, completion: nil)
             }
+        }
         }
     }
     

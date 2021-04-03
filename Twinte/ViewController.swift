@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 import UserNotifications
 
-
 class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler  {
     
     @IBOutlet var MainWebView: WKWebView!
@@ -26,6 +25,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         Notification.scheduleAllNotification()
         // これがないとjsのアラートが出ない
         MainWebView.uiDelegate = self
+        
         // これがないとページを読み込んだ後の関数didFinish navigationが実行できない
         MainWebView.navigationDelegate = self
         // スクロール禁止
@@ -76,7 +76,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         let okAction =
             UIAlertAction(title: "OK", style: .default) { action in
                 completionHandler()
-        }
+            }
         
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
@@ -91,12 +91,12 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         let cancelAction =
             UIAlertAction(title: "Cancel", style: .cancel) { action in
                 completionHandler(false)
-        }
+            }
         
         let okAction =
             UIAlertAction(title: "OK", style: .default) {
                 action in completionHandler(true)
-        }
+            }
         
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
@@ -154,7 +154,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         if let host : String = navigationAction.request.url?.host{
             // グローバル変数に格納
             g_Url = navigationAction.request.url
-            if(host == "app.twinte.net" || host == "api.twinte.net" || host == "appleid.apple.com"){//この部分を処理したいURLにする
+            if(host == "app.twinte.net" || host == "appleid.apple.com"){//この部分を処理したいURLにする
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
@@ -186,5 +186,10 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
         MainWebView.reload()
     }
     
+    // コールバックURL
+    func afterLogin(url:String){
+        let myRequest = URLRequest(url: URL(string: url)!)
+        MainWebView.load(myRequest)
+    }
 }
 
