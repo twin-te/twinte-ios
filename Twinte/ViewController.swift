@@ -46,6 +46,14 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
             MainWebView.customUserAgent = "Twin:teAppforiPhone"
         }
         // Cookieを保存
+        saveCookie()
+        
+        MainWebView.load(myRequest)
+        
+    }
+    
+    // Cookieを保存する
+    func saveCookie(){
         MainWebView.configuration.websiteDataStore.httpCookieStore.getAllCookies() {(cookies) in
             var stringCookie:String = ""
             for eachcookie in cookies {
@@ -60,9 +68,6 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
             }
             
         }
-        
-        MainWebView.load(myRequest)
-        
     }
     
     // JSのアラートをネイティブて扱う
@@ -155,6 +160,7 @@ class ViewController: UIViewController, WKUIDelegate,WKNavigationDelegate,WKScri
             // グローバル変数に格納
             g_Url = navigationAction.request.url
             if(host == "app.twinte.net" || host == "appleid.apple.com"){//この部分を処理したいURLにする
+                saveCookie()
                 decisionHandler(WKNavigationActionPolicy.allow)
             }else{
                 self.performSegue(withIdentifier: "toSecond", sender: nil)

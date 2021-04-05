@@ -166,6 +166,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ySR-NW-QOS"/>
                         <color key="backgroundColor" name="WidgetBackground"/>
                         <constraints>
                             <constraint firstItem="UTV-5f-UaH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1uo-O6-0MH"/>

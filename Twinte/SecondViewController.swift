@@ -9,7 +9,103 @@
 import UIKit
 import WebKit
 
-class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate {
+// Twin:teにインポート機能用
+struct TwinsLecture: Codable {
+    let code, year: String
+}
+
+typealias TwinsLectures = [TwinsLecture]
+
+class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate, WKScriptMessageHandler {
+    // WKScriptMessageHandlerプロトコル
+    // JSから授業番号のみを取得してTwin:teサーバーに授業番号を送る
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if(message.name == "returnFromTwins") {
+            let messageBody:String = message.body as! String
+            let decoder: JSONDecoder = JSONDecoder()
+            do {
+                let Lectures = try decoder.decode(TwinsLectures.self, from: messageBody.data(using: .utf8)!)
+                /// URLの生成
+                guard let url = URL(string: "https://app.twinte.net/api/v3/registered-courses") else {
+                    /// 文字列が有効なURLでない場合の処理
+                    return
+                }
+                
+                //UserDefaults のインスタンス
+                let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+                // ログインされているかの確認
+                if let stringCookie = userDefaults?.string(forKey: "stringCookie"){
+                    print(stringCookie)
+                    // UserDefaultsからCookieを取得
+                    if !stringCookie.contains("twinte_session"){
+                        alert(title: "エラー", message: "Twin:teでログインしてください。")
+                        return
+                    }
+                }else{
+                    alert(title: "エラー", message: "Twin:teでログインしてください。")
+                    return
+                }
+                
+                var successCount = 0
+                let dispatchGroup = DispatchGroup()
+                let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
+                
+                Lectures.forEach{
+                    let year = $0.year
+                    let code = $0.code
+                    dispatchGroup.enter()
+                    dispatchQueue.async(group: dispatchGroup) {
+                        /// URLリクエストの生成
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                        request.httpBody = "{\"year\":\(year), \"code\": \"\(code)\"}".data(using: .utf8)
+                        
+                        if let stringCookie = userDefaults?.string(forKey: "stringCookie"){
+                            // UserDefaultsからCookieを取得
+                            request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
+                        }
+                        
+                        URLSession.shared.dataTask(with: request) { data, response, error in
+                            if error == nil, let response = response as? HTTPURLResponse {
+                                if response.statusCode == 200{
+                                    successCount = successCount + 1
+                                }
+                            }
+                            dispatchGroup.leave()
+                        }.resume()
+                        
+                    }
+                }
+                dispatchGroup.notify(queue: .main) {
+                    self.alert(title: "完了", message: "\(successCount)件の授業をインポートしました。")
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
+    
+    func alert(title:String,message:String)->Void{
+        DispatchQueue.main.async {
+            //アラート生成
+            //UIAlertControllerのスタイルがalert
+            let alert: UIAlertController = UIAlertController(title: title, message:  message, preferredStyle:  UIAlertController.Style.alert)
+            // 確定ボタンの処理
+            let confirmAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                // 確定ボタンが押された時の処理をクロージャ実装する
+                (action: UIAlertAction!) -> Void in
+                //実際の処理
+                
+            })
+            
+            alert.addAction(confirmAction)
+            
+            //実際にAlertを表示する
+            self.present(alert, animated: true, completion: nil)
+        }}
     
     // 画面推移の親から値を格納するグローバル変数
     var g_receviedUrl:URL?
@@ -20,8 +116,10 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
         
         // Do any additional setup after loading the view.
         let myURL = g_receviedUrl
-//        let myURL = URL(string: "https://app.twinte.net")
+        //        let myURL = URL(string: "https://api.twinte.net")
         let myRequest = URLRequest(url: myURL!)
+        
+        SubWebView.configuration.userContentController.add(self, name: "returnFromTwins")
         
         // これがないとjsのアラートが出ない
         SubWebView.uiDelegate = self
@@ -109,15 +207,15 @@ class SecondViewController: UIViewController, WKUIDelegate,WKNavigationDelegate 
         
         if let host : String = TwinsWebView.url?.host{
             if let absoluteURL = TwinsWebView.url?.absoluteString{
-            if(host == "app.twinte.net"){//この部分を処理したいURLにする
-                // 親のviewcontorollerを取得して関数を実行
-                let parentVC = self.presentingViewController as! ViewController
-                // アクセスしようとした画面をメインWebViewで開かせる
+                if(host == "app.twinte.net"){//この部分を処理したいURLにする
+                    // 親のviewcontorollerを取得して関数を実行
+                    let parentVC = self.presentingViewController as! ViewController
+                    // アクセスしようとした画面をメインWebViewで開かせる
                     parentVC.afterLogin(url: absoluteURL)
-                // 自分を閉じる
-                self.dismiss(animated: true, completion: nil)
+                    // 自分を閉じる
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
-        }
         }
     }
     

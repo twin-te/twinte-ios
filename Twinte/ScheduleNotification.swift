@@ -61,7 +61,7 @@ class ScheduleNotification {
                             if element.eventType == "SubstituteDay"{
                                 self.createNotification(title: "特別日程のお知らせ",body: "明日は\(self.convertDayEnglishToJapanese(en: element.changeTo!))日課です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
                             }else{
-                                self.createNotification(title: "臨時休講のお知らせ",body: "明日は\(element.description)のため休講です。詳細は学年歴をご覧ください。", notificationTime: dateComponents)
+                                self.createNotification(title: "臨時休講のお知らせ",body: "明日は\(element.description)のため休講です。詳細は学年暦をご覧ください。", notificationTime: dateComponents)
                             }
                         }
                     }
