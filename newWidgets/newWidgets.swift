@@ -17,7 +17,6 @@ struct todayList: Codable {
     
     struct module: Codable{
         let module:String
-        let year:Int
     }
     
     struct event: Codable{
@@ -28,20 +27,20 @@ struct todayList: Codable {
     }
     
     struct eachCourse: Codable{
-        let year:Int
-        let course:course
+        let name:String?
+        let course:course?  // カスタム講義の場合は存在しない
+        let schedules: [schedule]?  // ユーザーが変更した場合に追加される
         
         struct course: Codable {
             let name:String
-            let methods: [String]
             let schedules: [schedule]
-            
-            struct schedule: Codable {
-                let module:String
-                let day:String
-                let period:Int
-                let room:String
-            }
+        }
+        
+        struct schedule: Codable {
+            let module:String
+            let day:String
+            let period:Int
+            let room:String
         }
     }
 }
@@ -139,7 +138,6 @@ func fetchAPI(date:String,completion: @escaping (FinalInformationList) -> Void) 
     }
     /// URLリクエストの生成
     var request = URLRequest(url: url)
-    //request.setValue("connect.sid=test", forHTTPHeaderField: "Cookie")
     //UserDefaults のインスタンス
     let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
     if let stringCookie = userDefaults?.string(forKey: "stringCookie"){
@@ -157,6 +155,7 @@ func fetchAPI(date:String,completion: @escaping (FinalInformationList) -> Void) 
             completion(FinalInformationList(Lectures:todayLectureListWithoutDuplicate,description:"",changeTo:"",module: "",lectureCounter: 0))
         }
     }
+    
     
     /// URLにアクセス
     URLSession.shared.dataTask(with: request) { data, response, error in
@@ -198,11 +197,40 @@ func fetchAPI(date:String,completion: @escaping (FinalInformationList) -> Void) 
             if(decodedResponse.module != nil){
                 displayModule = convertModuleEnglishToJapanese(module: decodedResponse.module!.module)
                 for element in decodedResponse.courses{
-                    // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
-                    let newScheduleArray = element.course.schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
                     
-                    newScheduleArray.forEach{
-                        todayLectureList.append(Lecture(period:$0.period,name:element.course.name,room:$0.room))
+                    var lectureName:String
+                    if let name = element.name{
+                        // 授業名を変更されている場合 or カスタム講義の場合
+                        lectureName = name
+                    }else{
+                        // 授業名を変更されていない場合
+                        if let course = element.course{
+                            lectureName = course.name
+                        }else{
+                            // 授業名を変更していない授業は必ずcourseが存在するので発生し得ない。
+                            lectureName = "不明な授業（エラー）"
+                        }
+                        
+                    }
+                    
+                    // スケジュール変更されている場合
+                    if let schedules = element.schedules{
+                        // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
+                        let newScheduleArray = schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
+                        newScheduleArray.forEach{
+                            todayLectureList.append(Lecture(period:$0.period,name:lectureName,room:$0.room))
+                        }
+                    }else{
+                        // スケジュール変更されていない場合
+                        if let course = element.course{
+                            // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
+                            let newScheduleArray = course.schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
+                            newScheduleArray.forEach{
+                                todayLectureList.append(Lecture(period:$0.period,name:lectureName,room:$0.room))
+                            }
+                        }else{
+                            // スケジュール変更していない授業&カスタムじゃない授業は必ずcourseが存在するので発生し得ない。
+                        }
                     }
                 }
             }

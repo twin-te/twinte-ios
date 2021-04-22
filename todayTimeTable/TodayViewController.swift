@@ -9,7 +9,6 @@
 import UIKit
 import NotificationCenter
 
-
 // 新ウィジェットAPI用
 struct todayList: Codable {
     let module:module?
@@ -18,7 +17,6 @@ struct todayList: Codable {
     
     struct module: Codable{
         let module:String
-        let year:Int
     }
     
     struct event: Codable{
@@ -29,23 +27,26 @@ struct todayList: Codable {
     }
     
     struct eachCourse: Codable{
-        let year:Int
-        let course:course
+        let name:String?
+        let course:course?  // カスタム講義の場合は存在しない
+        let schedules: [schedule]?  // ユーザーが変更した場合に追加される
+        let methods: [String]?  // ユーザーが変更した場合に追加される
         
         struct course: Codable {
             let name:String
-            let methods: [String]
             let schedules: [schedule]
-            
-            struct schedule: Codable {
-                let module:String
-                let day:String
-                let period:Int
-                let room:String
-            }
+            let methods: [String]
+        }
+        
+        struct schedule: Codable {
+            let module:String
+            let day:String
+            let period:Int
+            let room:String
         }
     }
 }
+
 
 // 最終的にウィジェットで使う授業情報
 struct ReturnObject{
@@ -123,11 +124,54 @@ func fetchAPI(date:String,completion: @escaping (ReturnObject) -> Void) {
             if(decodedResponse.module != nil){
                 displayModule = convertModuleEnglishToJapanese(module: decodedResponse.module!.module)
                 for element in decodedResponse.courses{
-                    // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
-                    let newScheduleArray = element.course.schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
                     
-                    newScheduleArray.forEach{
-                        todayLectureList.append(Lecture(name:element.course.name,room:$0.room,methods:element.course.methods,period:$0.period))
+                    var lectureName:String
+                    if let name = element.name{
+                        // 授業名を変更されている場合 or カスタム講義の場合
+                        lectureName = name
+                    }else{
+                        // 授業名を変更されていない場合
+                        if let course = element.course{
+                            lectureName = course.name
+                        }else{
+                            // 授業名を変更していない授業は必ずcourseが存在するので発生し得ない。
+                            lectureName = "不明な授業（エラー）"
+                        }
+                        
+                    }
+                    
+                    var methods:[String] = []
+                    if let changedMethods = element.methods{
+                        // 授業方法を変更されている場合 or カスタム講義の場合
+                        methods = changedMethods
+                    }else{
+                        // 授業名を変更されていない場合
+                        if let course = element.course{
+                            methods = course.methods
+                        }else{
+                            // 授業方法を変更していない授業は必ずcourseが存在するので発生し得ない。
+                        }
+                        
+                    }
+                    
+                    // スケジュール変更されている場合
+                    if let schedules = element.schedules{
+                        // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
+                        let newScheduleArray = schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
+                        newScheduleArray.forEach{
+                            todayLectureList.append(Lecture(name:lectureName,room:$0.room,methods:methods,period:$0.period))
+                        }
+                    }else{
+                        // スケジュール変更されていない場合
+                        if let course = element.course{
+                            // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
+                            let newScheduleArray = course.schedules.filter{$0.day == changeTo && $0.module == decodedResponse.module!.module }
+                            newScheduleArray.forEach{
+                                todayLectureList.append(Lecture(name:lectureName,room:$0.room,methods:methods,period:$0.period))
+                            }
+                        }else{
+                            // スケジュール変更していない授業&カスタムじゃない授業は必ずcourseが存在するので発生し得ない。
+                        }
                     }
                 }
             }
