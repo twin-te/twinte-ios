@@ -86,27 +86,42 @@ struct Provider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        // 明日の0:00の定義
+        // 今日の19:00の定義（今日の更新タイミング）
         var components = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
-        components.hour = 0;
+        components.hour = 19;
         components.minute = 0;
         components.second = 0;
-        let date = Calendar(identifier: .gregorian).date(from: components)
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
-        
-        var entries: [SimpleEntry] = []
-        fetchAPI(date: getday(format:"yyyy-MM-dd"),completion: {(todayInformationList) in
-            // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-            let currentDate = Date()
-            
-            let entryDate = Calendar.current.date(byAdding: .hour, value: 12, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, FinalInformationList: todayInformationList)
-            entries.append(entry)
-            
-            // 配列
-            let timeline = Timeline(entries: entries, policy: .after(tomorrow))
-            completion(timeline)
-        })
+        let todayUpdateTime = Calendar(identifier: .gregorian).date(from: components)!
+        dump(todayUpdateTime)
+        if(Date() < todayUpdateTime){
+            print("今日の更新時間以前")
+            // 今が19時以前の場合。今日の予定を表示&次表示を更新するのは今日の19時以降
+            modifiedDate = Date()
+            fetchAPI(date: getday(format:"yyyy-MM-dd"),completion: {(todayInformationList) in
+                var entries: [SimpleEntry] = []
+                // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+                let entry = SimpleEntry(date: Date(), FinalInformationList: todayInformationList)
+                entries.append(entry)
+                // 配列
+                let timeline = Timeline(entries: entries, policy: .after(todayUpdateTime))
+                completion(timeline)
+            })
+        }else{
+            print("今日の更新時間以降")
+            // 今が19時以降の場合。明日の予定を表示&次表示を更新するのは明日の19時以降
+            // 明日の更新時間の定義。（前述の更新時間に一日を加えたもの）
+            let tomorrowUpdateTime = Calendar.current.date(byAdding: .day, value: 1, to: todayUpdateTime)!
+            modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+            fetchAPI(date: getday(format:"yyyy-MM-dd"),completion: {(todayInformationList) in
+                var entries: [SimpleEntry] = []
+                // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+                let entry = SimpleEntry(date: Date(), FinalInformationList: todayInformationList)
+                entries.append(entry)
+                // 配列
+                let timeline = Timeline(entries: entries, policy: .after(tomorrowUpdateTime))
+                completion(timeline)
+            })
+        }
     }
 }
 
@@ -128,9 +143,19 @@ func fetchAPI(date:String,completion: @escaping (FinalInformationList) -> Void) 
     //UserDefaults のインスタンス
     let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
     if let stringCookie = userDefaults?.string(forKey: "stringCookie"){
-        // UserDefaultsからCookieを取得
+        // UserDefaultsからCookieを取得して付与
         request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
-        dump(stringCookie)
+        // もしCookieがなかったらエラー表示
+        if(!stringCookie.contains("twinte_session")){
+            todayLectureListWithoutDuplicate.append(Lecture(period:1,name:"未認証です。",room:"-"))
+            todayLectureListWithoutDuplicate.append(Lecture(period:2,name:"Twin:teに",room:"-"))
+            todayLectureListWithoutDuplicate.append(Lecture(period:3,name:"ログインしてください。",room:"-"))
+            todayLectureListWithoutDuplicate.append(Lecture(period:4,name:"ログイン済みの場合は",room:"-"))
+            todayLectureListWithoutDuplicate.append(Lecture(period:5,name:"アプリを再起動して",room:"-"))
+            todayLectureListWithoutDuplicate.append(Lecture(period:6,name:"やり直してください。",room:"-"))
+            
+            completion(FinalInformationList(Lectures:todayLectureListWithoutDuplicate,description:"",changeTo:"",module: "",lectureCounter: 0))
+        }
     }
     
     /// URLにアクセス
@@ -139,9 +164,9 @@ func fetchAPI(date:String,completion: @escaping (FinalInformationList) -> Void) 
             let decorder = JSONDecoder()
             guard let decodedResponse = try? decorder.decode(todayList.self, from: data) else {
                 print("Json decode エラー")
-                todayLectureListWithoutDuplicate.append(Lecture(period:1,name:"未認証です",room:"-"))
-                todayLectureListWithoutDuplicate.append(Lecture(period:2,name:"Twin:teに",room:"-"))
-                todayLectureListWithoutDuplicate.append(Lecture(period:3,name:"ログインしてください",room:"-"))
+                todayLectureListWithoutDuplicate.append(Lecture(period:1,name:"不明なエラー",room:"-"))
+                todayLectureListWithoutDuplicate.append(Lecture(period:2,name:"授業情報取得に",room:"-"))
+                todayLectureListWithoutDuplicate.append(Lecture(period:3,name:"失敗しました。",room:"-"))
                 todayLectureListWithoutDuplicate.append(Lecture(period:4,name:"---",room:"-"))
                 for i in 5...6 {
                     todayLectureListWithoutDuplicate.append(Lecture(period:i,name:"---",room:"-"))
@@ -209,7 +234,7 @@ func fetchAPI(date:String,completion: @escaping (FinalInformationList) -> Void) 
 
 // ここに格納される日付がAPIから取得する対象の日付
 var modifiedDate:Date = Date()
-//var modifiedDate:Date = Calendar.current.date(byAdding: .day, value: -60, to: Date())!
+
 // modifiedDateの曜日をSun,Mon... 形式の文字列で返す
 func getWeekDate()->String{
     let formatter = DateFormatter()
