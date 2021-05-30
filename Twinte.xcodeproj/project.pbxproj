@@ -19,6 +19,11 @@
 		3C2B9CAD2610DFB6006D306E /* newWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B9CAC2610DFB6006D306E /* newWidgets.swift */; };
 		3C2B9CAF2610DFBA006D306E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2B9CAE2610DFBA006D306E /* Assets.xcassets */; };
 		3C2B9CB32610DFBA006D306E /* newWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C2B9CA62610DFB6006D306E /* newWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C55FFAF266375E50071F448 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA72610DFB6006D306E /* WidgetKit.framework */; };
+		3C55FFB0266375E50071F448 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA92610DFB6006D306E /* SwiftUI.framework */; };
+		3C55FFB3266375E50071F448 /* newWidgetMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C55FFB2266375E50071F448 /* newWidgetMedium.swift */; };
+		3C55FFB5266375E80071F448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C55FFB4266375E80071F448 /* Assets.xcassets */; };
+		3C55FFB9266375E80071F448 /* newWidgetMediumExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C55FFAE266375E50071F448 /* newWidgetMediumExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C5851C62609E16F00F53835 /* ScheduleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5851C52609E16F00F53835 /* ScheduleNotification.swift */; };
 		3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C829CE02383D5EE008C3475 /* WebKit.framework */; };
@@ -39,6 +44,13 @@
 			remoteGlobalIDString = 3C2B9CA52610DFB6006D306E;
 			remoteInfo = newWidgetsExtension;
 		};
+		3C55FFB7266375E80071F448 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C55FFAD266375E50071F448;
+			remoteInfo = newWidgetMediumExtension;
+		};
 		3C88956923B71C79002557E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
@@ -57,6 +69,7 @@
 			files = (
 				3C88956B23B71C79002557E0 /* todayTimeTable.appex in Embed App Extensions */,
 				3C2B9CB32610DFBA006D306E /* newWidgetsExtension.appex in Embed App Extensions */,
+				3C55FFB9266375E80071F448 /* newWidgetMediumExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +93,11 @@
 		3C2B9CAE2610DFBA006D306E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C2B9CB02610DFBA006D306E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C2B9CBA2610E7FD006D306E /* newWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = newWidgetsExtension.entitlements; sourceTree = "<group>"; };
+		3C55FFAE266375E50071F448 /* newWidgetMediumExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = newWidgetMediumExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C55FFB2266375E50071F448 /* newWidgetMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newWidgetMedium.swift; sourceTree = "<group>"; };
+		3C55FFB4266375E80071F448 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C55FFB6266375E80071F448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C55FFBD266376260071F448 /* newWidgetMediumExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = newWidgetMediumExtension.entitlements; sourceTree = "<group>"; };
 		3C5851C52609E16F00F53835 /* ScheduleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotification.swift; sourceTree = "<group>"; };
 		3C829CE02383D5EE008C3475 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C88955F23B71C79002557E0 /* todayTimeTable.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayTimeTable.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +130,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C55FFAB266375E50071F448 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C55FFB0266375E50071F448 /* SwiftUI.framework in Frameworks */,
+				3C55FFAF266375E50071F448 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C88955C23B71C79002557E0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,10 +153,12 @@
 		3C0FC88D238247CC00055141 = {
 			isa = PBXGroup;
 			children = (
+				3C55FFBD266376260071F448 /* newWidgetMediumExtension.entitlements */,
 				3C2B9CBA2610E7FD006D306E /* newWidgetsExtension.entitlements */,
 				3C0FC898238247CC00055141 /* Twinte */,
 				3C88956223B71C79002557E0 /* todayTimeTable */,
 				3C2B9CAB2610DFB6006D306E /* newWidgets */,
+				3C55FFB1266375E50071F448 /* newWidgetMedium */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
 				3C829CDF2383D5EE008C3475 /* Frameworks */,
@@ -142,6 +171,7 @@
 				3C0FC896238247CC00055141 /* Twin:te.app */,
 				3C88955F23B71C79002557E0 /* todayTimeTable.appex */,
 				3C2B9CA62610DFB6006D306E /* newWidgetsExtension.appex */,
+				3C55FFAE266375E50071F448 /* newWidgetMediumExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,6 +203,16 @@
 				3C2B9CB02610DFBA006D306E /* Info.plist */,
 			);
 			path = newWidgets;
+			sourceTree = "<group>";
+		};
+		3C55FFB1266375E50071F448 /* newWidgetMedium */ = {
+			isa = PBXGroup;
+			children = (
+				3C55FFB2266375E50071F448 /* newWidgetMedium.swift */,
+				3C55FFB4266375E80071F448 /* Assets.xcassets */,
+				3C55FFB6266375E80071F448 /* Info.plist */,
+			);
+			path = newWidgetMedium;
 			sourceTree = "<group>";
 		};
 		3C829CDF2383D5EE008C3475 /* Frameworks */ = {
@@ -214,6 +254,7 @@
 			dependencies = (
 				3C88956A23B71C79002557E0 /* PBXTargetDependency */,
 				3C2B9CB22610DFBA006D306E /* PBXTargetDependency */,
+				3C55FFB8266375E80071F448 /* PBXTargetDependency */,
 			);
 			name = Twinte;
 			productName = Twinte;
@@ -235,6 +276,23 @@
 			name = newWidgetsExtension;
 			productName = newWidgetsExtension;
 			productReference = 3C2B9CA62610DFB6006D306E /* newWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		3C55FFAD266375E50071F448 /* newWidgetMediumExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C55FFBA266375E80071F448 /* Build configuration list for PBXNativeTarget "newWidgetMediumExtension" */;
+			buildPhases = (
+				3C55FFAA266375E50071F448 /* Sources */,
+				3C55FFAB266375E50071F448 /* Frameworks */,
+				3C55FFAC266375E50071F448 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = newWidgetMediumExtension;
+			productName = newWidgetMediumExtension;
+			productReference = 3C55FFAE266375E50071F448 /* newWidgetMediumExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		3C88955E23B71C79002557E0 /* todayTimeTable */ = {
@@ -260,8 +318,8 @@
 		3C0FC88E238247CC00055141 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1120;
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = tako;
 				TargetAttributes = {
 					3C0FC895238247CC00055141 = {
@@ -269,6 +327,9 @@
 					};
 					3C2B9CA52610DFB6006D306E = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					3C55FFAD266375E50071F448 = {
+						CreatedOnToolsVersion = 12.5;
 					};
 					3C88955E23B71C79002557E0 = {
 						CreatedOnToolsVersion = 11.3;
@@ -291,6 +352,7 @@
 				3C0FC895238247CC00055141 /* Twinte */,
 				3C88955E23B71C79002557E0 /* todayTimeTable */,
 				3C2B9CA52610DFB6006D306E /* newWidgetsExtension */,
+				3C55FFAD266375E50071F448 /* newWidgetMediumExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -313,6 +375,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C2B9CAF2610DFBA006D306E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C55FFAC266375E50071F448 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C55FFB5266375E80071F448 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +419,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C55FFAA266375E50071F448 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C55FFB3266375E50071F448 /* newWidgetMedium.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C88955B23B71C79002557E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,6 +442,11 @@
 			isa = PBXTargetDependency;
 			target = 3C2B9CA52610DFB6006D306E /* newWidgetsExtension */;
 			targetProxy = 3C2B9CB12610DFBA006D306E /* PBXContainerItemProxy */;
+		};
+		3C55FFB8266375E80071F448 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C55FFAD266375E50071F448 /* newWidgetMediumExtension */;
+			targetProxy = 3C55FFB7266375E80071F448 /* PBXContainerItemProxy */;
 		};
 		3C88956A23B71C79002557E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -426,6 +509,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -486,6 +570,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -525,7 +610,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -550,7 +635,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -582,7 +667,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.8;
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -609,8 +694,56 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.8;
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3C55FFBB266375E80071F448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = newWidgetMediumExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				INFOPLIST_FILE = newWidgetMedium/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgetMedium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C55FFBC266375E80071F448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = newWidgetMediumExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				INFOPLIST_FILE = newWidgetMedium/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgetMedium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -627,13 +760,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.8;
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -651,13 +784,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.8;
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -692,6 +825,15 @@
 			buildConfigurations = (
 				3C2B9CB42610DFBA006D306E /* Debug */,
 				3C2B9CB52610DFBA006D306E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C55FFBA266375E80071F448 /* Build configuration list for PBXNativeTarget "newWidgetMediumExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C55FFBB266375E80071F448 /* Debug */,
+				3C55FFBC266375E80071F448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

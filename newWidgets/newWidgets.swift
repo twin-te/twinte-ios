@@ -360,9 +360,6 @@ struct newWidgetsEntryView : View {
     var body: some View {
         
         switch family {
-        //        case .systemSmall:
-        //
-        //        case .systemMedium:
         
         case .systemLarge:
             // 「全てのコマに授業が入っている場合」のライトモードのデザインデータ
@@ -392,12 +389,19 @@ struct newWidgetsEntryView : View {
                             .lineLimit(1)
                     }
                     else{
-                        Text("\(entry.FinalInformationList.changeTo)日課")
-                            .font(.caption)
-                            .foregroundColor(textDefaultColor)
-                            .lineSpacing(16.80)
-                            .frame(width: 105,alignment:.leading)
-                            .lineLimit(1)
+                        HStack(alignment: .top, spacing: 0) {
+                            Text(entry.FinalInformationList.changeTo)
+                                .fontWeight(.bold)
+                                .font(.caption)
+                                .foregroundColor(Color(red: 232/256, green: 127/256, blue: 147/256))
+                                .lineSpacing(16.80)
+                                .lineLimit(1)
+                            Text("日課")
+                                .font(.caption)
+                                .foregroundColor(Color(red: 232/256, green: 127/256, blue: 147/256))
+                                .lineSpacing(16.80)
+                                .lineLimit(1)
+                        }
                     }
                     
                     Text("\(String(entry.FinalInformationList.lectureCounter))コマの授業")
@@ -560,7 +564,6 @@ struct newWidgets: Widget {
         .configurationDisplayName("Twin:te")
         .description("今日の時間割を表示します")
         .supportedFamilies([.systemLarge])
-        //            .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
