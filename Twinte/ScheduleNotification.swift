@@ -22,17 +22,19 @@ class ScheduleNotification {
         ///
         /// デバッグ用
         ///
-        /*
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { requests in
-            print(requests.count)
-            
-            for element in requests {
-                print(element.content.body)
-            }
-            
-        }
-        */
+        
+        //        let center = UNUserNotificationCenter.current()
+        //        center.getPendingNotificationRequests { requests in
+        //            print(requests.count)
+        //
+        //            for element in requests {
+        //                dump(element)
+        //                print(element.content.body)
+        //                print("****************************")
+        //            }
+        //
+        //        }
+        
         /// ここまで
         // 現在登録されている全ての通知を消去
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -57,11 +59,12 @@ class ScheduleNotification {
                             dateComponents.minute = userDefaults?.integer(forKey: "notificationMinute")
                             
                             //print(element)
-                            
-                            if element.eventType == "SubstituteDay"{
-                                self.createNotification(title: "特別日程のお知らせ",body: "明日は\(self.convertDayEnglishToJapanese(en: element.changeTo!))日課です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
-                            }else{
-                                self.createNotification(title: "臨時休講のお知らせ",body: "明日は\(element.description)のため休講です。詳細は学年暦をご覧ください。", notificationTime: dateComponents)
+                            if(Date() < Calendar(identifier: .gregorian).date(from: dateComponents)!){
+                                if element.eventType == "SubstituteDay"{
+                                    self.createNotification(title: "特別日程のお知らせ",body: "明日は\(self.convertDayEnglishToJapanese(en: element.changeTo!))日課です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
+                                }else{
+                                    self.createNotification(title: "臨時休講のお知らせ",body: "明日は\(element.description)のため休講です。詳細は学年暦をご覧ください。", notificationTime: dateComponents)
+                                }
                             }
                         }
                     }
