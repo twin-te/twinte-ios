@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C042BB42663DE55006B5B4D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA72610DFB6006D306E /* WidgetKit.framework */; };
+		3C042BB52663DE55006B5B4D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA92610DFB6006D306E /* SwiftUI.framework */; };
+		3C042BB82663DE55006B5B4D /* newWidgetSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C042BB72663DE55006B5B4D /* newWidgetSmall.swift */; };
+		3C042BBA2663DE58006B5B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C042BB92663DE58006B5B4D /* Assets.xcassets */; };
+		3C042BBE2663DE58006B5B4D /* newWidgetSmallExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C042BB32663DE55006B5B4D /* newWidgetSmallExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C0FC89A238247CC00055141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC899238247CC00055141 /* AppDelegate.swift */; };
 		3C0FC89C238247CC00055141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC89B238247CC00055141 /* SceneDelegate.swift */; };
 		3C0FC89E238247CC00055141 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC89D238247CC00055141 /* ViewController.swift */; };
@@ -37,6 +42,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3C042BBC2663DE58006B5B4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C042BB22663DE55006B5B4D;
+			remoteInfo = newWidgetSmallExtension;
+		};
 		3C2B9CB12610DFBA006D306E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
@@ -68,6 +80,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				3C88956B23B71C79002557E0 /* todayTimeTable.appex in Embed App Extensions */,
+				3C042BBE2663DE58006B5B4D /* newWidgetSmallExtension.appex in Embed App Extensions */,
 				3C2B9CB32610DFBA006D306E /* newWidgetsExtension.appex in Embed App Extensions */,
 				3C55FFB9266375E80071F448 /* newWidgetMediumExtension.appex in Embed App Extensions */,
 			);
@@ -77,6 +90,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C042BB32663DE55006B5B4D /* newWidgetSmallExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = newWidgetSmallExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C042BB72663DE55006B5B4D /* newWidgetSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newWidgetSmall.swift; sourceTree = "<group>"; };
+		3C042BB92663DE58006B5B4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C042BBB2663DE58006B5B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C042BC22663DF0B006B5B4D /* newWidgetSmallExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = newWidgetSmallExtension.entitlements; sourceTree = "<group>"; };
 		3C0FC896238247CC00055141 /* Twin:te.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twin:te.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0FC899238247CC00055141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C0FC89B238247CC00055141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +131,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C042BB02663DE55006B5B4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C042BB52663DE55006B5B4D /* SwiftUI.framework in Frameworks */,
+				3C042BB42663DE55006B5B4D /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C0FC893238247CC00055141 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -150,15 +177,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C042BB62663DE55006B5B4D /* newWidgetSmall */ = {
+			isa = PBXGroup;
+			children = (
+				3C042BB72663DE55006B5B4D /* newWidgetSmall.swift */,
+				3C042BB92663DE58006B5B4D /* Assets.xcassets */,
+				3C042BBB2663DE58006B5B4D /* Info.plist */,
+			);
+			path = newWidgetSmall;
+			sourceTree = "<group>";
+		};
 		3C0FC88D238247CC00055141 = {
 			isa = PBXGroup;
 			children = (
+				3C042BC22663DF0B006B5B4D /* newWidgetSmallExtension.entitlements */,
 				3C55FFBD266376260071F448 /* newWidgetMediumExtension.entitlements */,
 				3C2B9CBA2610E7FD006D306E /* newWidgetsExtension.entitlements */,
 				3C0FC898238247CC00055141 /* Twinte */,
 				3C88956223B71C79002557E0 /* todayTimeTable */,
 				3C2B9CAB2610DFB6006D306E /* newWidgets */,
 				3C55FFB1266375E50071F448 /* newWidgetMedium */,
+				3C042BB62663DE55006B5B4D /* newWidgetSmall */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
 				3C829CDF2383D5EE008C3475 /* Frameworks */,
@@ -172,6 +211,7 @@
 				3C88955F23B71C79002557E0 /* todayTimeTable.appex */,
 				3C2B9CA62610DFB6006D306E /* newWidgetsExtension.appex */,
 				3C55FFAE266375E50071F448 /* newWidgetMediumExtension.appex */,
+				3C042BB32663DE55006B5B4D /* newWidgetSmallExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,6 +280,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3C042BB22663DE55006B5B4D /* newWidgetSmallExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C042BBF2663DE58006B5B4D /* Build configuration list for PBXNativeTarget "newWidgetSmallExtension" */;
+			buildPhases = (
+				3C042BAF2663DE55006B5B4D /* Sources */,
+				3C042BB02663DE55006B5B4D /* Frameworks */,
+				3C042BB12663DE55006B5B4D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = newWidgetSmallExtension;
+			productName = newWidgetSmallExtension;
+			productReference = 3C042BB32663DE55006B5B4D /* newWidgetSmallExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		3C0FC895238247CC00055141 /* Twinte */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C0FC8AA238247CD00055141 /* Build configuration list for PBXNativeTarget "Twinte" */;
@@ -255,6 +312,7 @@
 				3C88956A23B71C79002557E0 /* PBXTargetDependency */,
 				3C2B9CB22610DFBA006D306E /* PBXTargetDependency */,
 				3C55FFB8266375E80071F448 /* PBXTargetDependency */,
+				3C042BBD2663DE58006B5B4D /* PBXTargetDependency */,
 			);
 			name = Twinte;
 			productName = Twinte;
@@ -322,6 +380,9 @@
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = tako;
 				TargetAttributes = {
+					3C042BB22663DE55006B5B4D = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					3C0FC895238247CC00055141 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -353,11 +414,20 @@
 				3C88955E23B71C79002557E0 /* todayTimeTable */,
 				3C2B9CA52610DFB6006D306E /* newWidgetsExtension */,
 				3C55FFAD266375E50071F448 /* newWidgetMediumExtension */,
+				3C042BB22663DE55006B5B4D /* newWidgetSmallExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C042BB12663DE55006B5B4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C042BBA2663DE58006B5B4D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C0FC894238247CC00055141 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -398,6 +468,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C042BAF2663DE55006B5B4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C042BB82663DE55006B5B4D /* newWidgetSmall.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C0FC892238247CC00055141 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -438,6 +516,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3C042BBD2663DE58006B5B4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C042BB22663DE55006B5B4D /* newWidgetSmallExtension */;
+			targetProxy = 3C042BBC2663DE58006B5B4D /* PBXContainerItemProxy */;
+		};
 		3C2B9CB22610DFBA006D306E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C2B9CA52610DFB6006D306E /* newWidgetsExtension */;
@@ -483,6 +566,56 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3C042BC02663DE58006B5B4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = newWidgetSmallExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				INFOPLIST_FILE = newWidgetSmall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.2.9;
+				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgetSmall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C042BC12663DE58006B5B4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = newWidgetSmallExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				INFOPLIST_FILE = newWidgetSmall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.2.9;
+				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgetSmall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3C0FC8A8238247CD00055141 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -615,7 +748,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.8;
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -640,7 +773,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.8;
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -719,6 +852,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgetMedium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -743,6 +877,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 3.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.newWidgetMedium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -802,6 +937,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C042BBF2663DE58006B5B4D /* Build configuration list for PBXNativeTarget "newWidgetSmallExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C042BC02663DE58006B5B4D /* Debug */,
+				3C042BC12663DE58006B5B4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3C0FC891238247CC00055141 /* Build configuration list for PBXProject "Twinte" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,14 +1,13 @@
 //
-//  newWidgetMedium.swift
-//  newWidgetMedium
+//  newWidgetSmall.swift
+//  newWidgetSmall
 //
-//  Created by tako on 2021/05/03.
+//  Created by tako on 2021/05/30.
 //  Copyright © 2021 tako. All rights reserved.
 //
 
 import WidgetKit
 import SwiftUI
-
 
 // 新ウィジェットAPI用
 struct todayList: Codable {
@@ -86,30 +85,30 @@ struct Provider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        // 各授業時間開始時刻の定義
+        // 各授業時間開始時刻+30分の定義（ウィジェットの更新時間）
         var firstClassTimeComponent = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
-        firstClassTimeComponent.hour = 8;
-        firstClassTimeComponent.minute = 40;
+        firstClassTimeComponent.hour = 9;
+        firstClassTimeComponent.minute = 10;
         firstClassTimeComponent.second = 0;
         var secondClassTimeComponent = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
         secondClassTimeComponent.hour = 10;
-        secondClassTimeComponent.minute = 10;
+        secondClassTimeComponent.minute = 40;
         secondClassTimeComponent.second = 0;
         var thirdClassTimeComponent = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
         thirdClassTimeComponent.hour = 12;
-        thirdClassTimeComponent.minute = 15;
+        thirdClassTimeComponent.minute = 45;
         thirdClassTimeComponent.second = 0;
         var fourthClassTimeComponent = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
-        fourthClassTimeComponent.hour = 13;
-        fourthClassTimeComponent.minute = 45;
+        fourthClassTimeComponent.hour = 14;
+        fourthClassTimeComponent.minute = 15;
         fourthClassTimeComponent.second = 0;
         var fifthClassTimeComponent = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
         fifthClassTimeComponent.hour = 15;
-        fifthClassTimeComponent.minute = 15;
+        fifthClassTimeComponent.minute = 45;
         fifthClassTimeComponent.second = 0;
         var sixthClassTimeComponent = Calendar.current.dateComponents(in: TimeZone.current, from: Date())
-        sixthClassTimeComponent.hour = 16;
-        sixthClassTimeComponent.minute = 45;
+        sixthClassTimeComponent.hour = 17;
+        sixthClassTimeComponent.minute = 15;
         sixthClassTimeComponent.second = 0;
         
         // 今日の19:00の定義（今日の更新タイミング）
@@ -179,23 +178,18 @@ func nowAndNextClass(arg:FinalInformationList,period:Int) -> FinalInformationLis
     let LecturesList:[Lecture] = arg.Lectures;
     var returnLecturesList:[Lecture] = [];
     
-    if period == 0 {
-        returnLecturesList.insert(Lecture(period: 0, name: "授業がありません", room: "-"), at: 0);
-        returnLecturesList.insert(LecturesList[0], at: 1);
-    }else{
-        returnLecturesList.insert(LecturesList[period-1], at: 0);
-        for i in period ... arg.Lectures.count{
-            if i >= arg.Lectures.count {
-                returnLecturesList.insert(Lecture(period: 0, name: "授業がありません", room: "-"), at: 1);
+    for i in period ... arg.Lectures.count{
+        if i >= arg.Lectures.count {
+            returnLecturesList.insert(Lecture(period: 0, name: "授業がありません", room: "-"), at: 0);
+            break;
+        }else{
+            if arg.Lectures[i].name != "授業がありません" {
+                returnLecturesList.insert(LecturesList[i], at: 0);
                 break;
-            }else{
-                if arg.Lectures[i].name != "授業がありません" {
-                    returnLecturesList.insert(LecturesList[i], at: 1);
-                    break;
-                }
             }
         }
     }
+    
     
     return FinalInformationList(Lectures: returnLecturesList, description: arg.description, changeTo: arg.changeTo, module: arg.module,lectureCounter: arg.lectureCounter);
 }
@@ -422,379 +416,219 @@ func getday(format:String) -> String{
     return formatter.string(from: modifiedDate as Date)
 }
 
-
-struct newWidgetMediumEntryView : View {
+struct newWidgetSmallEntryView : View {
     let twintePrimaryColor = Color("PrimaryColor");
     let textDefaultColor = Color("WidgetMainText");
     let widgetBaseColor = Color("WidgetBackground");
     let noneLectureColor = Color("WidgetNoneText");
     let widgetRoomScheduleColor = Color("WidgetSubText");
-    @Environment(\.widgetFamily) var family: WidgetFamily
     @Environment(\.colorScheme) var colorScheme
-    
     var entry: Provider.Entry
     
     var body: some View {
-        switch family {
-        case .systemMedium:
-            HStack(alignment: .top, spacing: 10) {
-                VStack(alignment: .leading, spacing: 4) {
-                    
-                    Text("\(entry.FinalInformationList.module) \(getday(format:"MM/dd(EEE)"))")
-                        .fontWeight(.bold)
-                        .font(.subheadline)
-                        .foregroundColor(textDefaultColor)
-                        .lineSpacing(19.60)
-                        .frame(width: 130,alignment:.leading)
-                        .lineLimit(1)
-                    
-                    if entry.FinalInformationList.description != "" {
-                        Text(entry.FinalInformationList.description)
-                            .font(.caption)
-                            .foregroundColor(textDefaultColor)
-                            .lineSpacing(16.80)
-                            .frame(width: 105,alignment:.leading)
-                            .lineLimit(1)
-                    }else if entry.FinalInformationList.changeTo == "" {
-                        Text("通常日課")
-                            .font(.caption)
-                            .foregroundColor(textDefaultColor)
-                            .lineSpacing(16.80)
-                            .frame(width: 105,alignment:.leading)
-                            .lineLimit(1)
-                    }
-                    else{
-                        HStack(alignment: .top, spacing: 0) {
-                            Text(entry.FinalInformationList.changeTo)
-                                .fontWeight(.bold)
-                                .font(.caption)
-                                .foregroundColor(Color(red: 232/256, green: 127/256, blue: 147/256))
-                                .lineSpacing(16.80)
-                                //.frame(width: 105,alignment:.leading)
-                                .lineLimit(1)
-                            Text("日課")
-                                .font(.caption)
-                                .foregroundColor(Color(red: 232/256, green: 127/256, blue: 147/256))
-                                .lineSpacing(16.80)
-                                .lineLimit(1)
-                        }
-                    }
-                    
-                    Text("\(String(entry.FinalInformationList.lectureCounter))コマの授業")
+        // 「現在の時限: 授業がある, 現在以降の時限: 授業がある」のライトモードのデザインデータ
+        
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("\(entry.FinalInformationList.module) \(getday(format:"MM/dd(EEE)"))")
+                    .fontWeight(.bold)
+                    .font(.subheadline)
+                    .foregroundColor(textDefaultColor)
+                    .lineSpacing(19.60)
+                    //                    .frame(width: .infinity,alignment:.leading)
+                    .lineLimit(1)
+                
+                if entry.FinalInformationList.description != "" {
+                    Text(entry.FinalInformationList.description)
                         .font(.caption)
+                        .foregroundColor(textDefaultColor)
                         .lineSpacing(16.80)
-                        .foregroundColor(twintePrimaryColor)
-                    
+                        .frame(width: .infinity,alignment:.leading)
+                        .lineLimit(1)
+                }else if entry.FinalInformationList.changeTo == "" {
+                    Text("通常日課")
+                        .font(.caption)
+                        .foregroundColor(textDefaultColor)
+                        .lineSpacing(16.80)
+                        //                        .frame(width: .infinity,alignment:.leading)
+                        .lineLimit(1)
                 }
-                .padding(.leading, 25)
-                .padding(.top, 20)
-                
-                VStack(alignment: .leading, spacing: 25) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        HStack(spacing: 8) {
-                            Text("現在の授業")
-                                .fontWeight(.medium)
-                                .font(.caption2)
-                                .lineSpacing(14)
-                                .foregroundColor(textDefaultColor)
-                            if colorScheme == .dark {
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.black)
-                                    .frame(maxWidth: 100, maxHeight: 5, alignment:.leading)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .stroke(widgetBaseColor,lineWidth: 1)
-                                            .shadow(color: Color.white, radius: 2, x: 0, y: 5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                            .shadow(color: Color(red: 31/256, green: 45/256, blue: 58/256), radius: 2, x: -2, y: -2.5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                    )
-                            }else{
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.white)
-                                    .frame(maxWidth: 100, maxHeight: 5, alignment:.leading)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .stroke(widgetBaseColor,lineWidth: 1)
-                                            .shadow(color: Color.white, radius: 2, x: 5, y: 5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                            .shadow(color: Color(red: 132/256, green: 167/256, blue: 188/256), radius: 2, x: -2, y: -2.5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                    )
-                            }
-                        }
-                        
-                        
-                        VStack(alignment: .leading, spacing: 3) {
-                            if entry.FinalInformationList.Lectures[0].name == "授業がありません"{
-                                Text(entry.FinalInformationList.Lectures[0].name)
-                                    .fontWeight(.medium)
-                                    .font(.caption)
-                                    .foregroundColor(noneLectureColor)
-                                    .lineSpacing(16.80)
-                                    .lineLimit(1)
-                                    .frame(width: 150, alignment: .leading)
-                            }else{
-                                Text(entry.FinalInformationList.Lectures[0].name)
-                                    .fontWeight(.medium)
-                                    .font(.caption)
-                                    .foregroundColor(textDefaultColor)
-                                    .lineSpacing(16.80)
-                                    .lineLimit(1)
-                                    .frame(width: 150, alignment: .leading)
-                            }
-                            
-                            HStack(alignment: .top, spacing: 8) {
-                                HStack(alignment: .top, spacing: 2) {
-                                    if entry.FinalInformationList.Lectures[0].name == "授業がありません"{
-                                        if colorScheme == .dark {
-                                            Image("room-dark-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("room-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        Text(entry.FinalInformationList.Lectures[0].room)
-                                            .font(.caption2)
-                                            .foregroundColor(noneLectureColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 60,alignment:.leading)
-                                    }else{
-                                        if colorScheme == .dark {
-                                            Image("room-dark")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("room")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        Text(entry.FinalInformationList.Lectures[0].room)
-                                            .font(.caption2)
-                                            .foregroundColor(widgetRoomScheduleColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 60,alignment:.leading)
-                                    }
-                                }
-                                
-                                HStack(alignment: .top, spacing: 2) {
-                                    if entry.FinalInformationList.Lectures[0].name == "授業がありません"{
-                                        if colorScheme == .dark {
-                                            Image("schedule-dark-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("schedule-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        
-                                        Text("-")
-                                            .font(.caption2)
-                                            .foregroundColor(noneLectureColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 30,alignment:.leading)
-                                    }else{
-                                        if colorScheme == .dark {
-                                            Image("schedule-dark")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("schedule")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        Text(LectureStartTime(number: entry.FinalInformationList.Lectures[0].period))
-                                            .font(.caption2)
-                                            .foregroundColor(widgetRoomScheduleColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 40,alignment:.leading)
-                                    }
-                                }
-                            }
-                        }
+                else{
+                    HStack(alignment: .top, spacing: 0) {
+                        Text(entry.FinalInformationList.changeTo)
+                            .fontWeight(.bold)
+                            .font(.caption)
+                            .foregroundColor(Color(red: 232/256, green: 127/256, blue: 147/256))
+                            .lineSpacing(16.80)
+                            //.frame(width: 105,alignment:.leading)
+                            .lineLimit(1)
+                        Text("日課")
+                            .font(.caption)
+                            .foregroundColor(Color(red: 232/256, green: 127/256, blue: 147/256))
+                            .lineSpacing(16.80)
+                            .lineLimit(1)
                     }
-                    
-                    
-                    VStack(alignment: .leading, spacing: 2) {
-                        HStack(spacing: 8) {
-                            Text("次の授業")
-                                .fontWeight(.medium)
-                                .font(.caption2)
-                                .lineSpacing(14)
-                                .foregroundColor(textDefaultColor)
-                            
-                            if colorScheme == .dark {
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.black)
-                                    .frame(maxWidth: 110, maxHeight: 5, alignment:.leading)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .stroke(widgetBaseColor,lineWidth: 1)
-                                            .shadow(color: Color.white, radius: 2, x: 0, y: 5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                            .shadow(color: Color(red: 31/256, green: 45/256, blue: 58/256), radius: 2, x: -2, y: -2.5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                    )
-                            }else{
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.white)
-                                    .frame(maxWidth: 110, maxHeight: 5, alignment:.leading)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .stroke(widgetBaseColor,lineWidth: 1)
-                                            .shadow(color: Color.white, radius: 2, x: 5, y: 5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                            .shadow(color: Color(red: 132/256, green: 167/256, blue: 188/256), radius: 2, x: -2, y: -2.5)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                                    )
-                            }
-                        }
-                        
-                        
-                        VStack(alignment: .leading, spacing: 3) {
-                            if entry.FinalInformationList.Lectures[1].name == "授業がありません"{
-                                Text(entry.FinalInformationList.Lectures[0].name)
-                                    .fontWeight(.medium)
-                                    .font(.caption)
-                                    .foregroundColor(noneLectureColor)
-                                    .lineSpacing(16.80)
-                                    .lineLimit(1)
-                                    .frame(width: 150, alignment: .leading)
-                            }else{
-                                Text(entry.FinalInformationList.Lectures[1].name)
-                                    .fontWeight(.medium)
-                                    .font(.caption)
-                                    .foregroundColor(textDefaultColor)
-                                    .lineSpacing(16.80)
-                                    .lineLimit(1)
-                                    .frame(width: 150, alignment: .leading)
-                            }
-                            
-                            HStack(alignment: .top, spacing: 8) {
-                                HStack(alignment: .top, spacing: 2) {
-                                    if entry.FinalInformationList.Lectures[1].name == "授業がありません"{
-                                        if colorScheme == .dark {
-                                            Image("room-dark-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("room-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        Text(entry.FinalInformationList.Lectures[1].room)
-                                            .font(.caption2)
-                                            .foregroundColor(noneLectureColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 60,alignment:.leading)
-                                    }else{
-                                        if colorScheme == .dark {
-                                            Image("room-dark")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("room")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        Text(entry.FinalInformationList.Lectures[1].room)
-                                            .font(.caption2)
-                                            .foregroundColor(widgetRoomScheduleColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 60,alignment:.leading)
-                                    }
-                                }
-                                
-                                HStack(alignment: .top, spacing: 2) {
-                                    if entry.FinalInformationList.Lectures[1].name == "授業がありません"{
-                                        if colorScheme == .dark {
-                                            Image("schedule-dark-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("schedule-disabled")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        
-                                        Text("-")
-                                            .font(.caption2)
-                                            .foregroundColor(noneLectureColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 30,alignment:.leading)
-                                    }else{
-                                        if colorScheme == .dark {
-                                            Image("schedule-dark")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }else{
-                                            Image("schedule")
-                                                .resizable()
-                                                .frame(width: 14, height: 14)
-                                        }
-                                        Text(LectureStartTime(number: entry.FinalInformationList.Lectures[1].period))
-                                            .font(.caption2)
-                                            .foregroundColor(widgetRoomScheduleColor)
-                                            .lineSpacing(14)
-                                            .lineLimit(1)
-                                            .frame(width: 40,alignment:.leading)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
                 }
-                .padding(20)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: Color("BorderShadowRight"), location: 0.0),
-                    .init(color: widgetBaseColor, location: 0.03),
-                    
-                ]), startPoint: .leading, endPoint: .trailing))
-                
-                .cornerRadius(20)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color("BorderColor"), lineWidth: 1.2))
-                .compositingGroup()
-                .shadow(radius: 10, x: 13, y: 0)
+                Spacer()
+                Spacer()
             }
             
-            .background(widgetBaseColor)
-            .cornerRadius(21.67)
-            
-            
-            
-        default:
-            Text("不明なエラー")
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 8) {
+                    Text("次の授業")
+                        .fontWeight(.medium)
+                        .font(.caption2)
+                        .lineSpacing(14)
+                        .foregroundColor(textDefaultColor)
+                    
+                    if colorScheme == .dark {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.black)
+                            .frame(maxWidth: 110, maxHeight: 5, alignment:.leading)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(widgetBaseColor,lineWidth: 1)
+                                    .shadow(color: Color.white, radius: 2, x: 0, y: 5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 2))
+                                    .shadow(color: Color(red: 31/256, green: 45/256, blue: 58/256), radius: 2, x: -2, y: -2.5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 2))
+                            )
+                    }else{
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.white)
+                            .frame(maxWidth: 110, maxHeight: 5, alignment:.leading)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(widgetBaseColor,lineWidth: 1)
+                                    .shadow(color: Color.white, radius: 2, x: 5, y: 5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 2))
+                                    .shadow(color: Color(red: 132/256, green: 167/256, blue: 188/256), radius: 2, x: -2, y: -2.5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 2))
+                            )
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                
+                VStack(alignment: .leading, spacing: 3) {
+                    if entry.FinalInformationList.Lectures[0].name == "授業がありません"{
+                        Text(entry.FinalInformationList.Lectures[0].name)
+                            .fontWeight(.medium)
+                            .font(.caption)
+                            .foregroundColor(noneLectureColor)
+                            .lineSpacing(16.80)
+                            .lineLimit(1)
+                            .frame(width: 150, alignment: .leading)
+                    }else{
+                        Text(entry.FinalInformationList.Lectures[0].name)
+                            .fontWeight(.medium)
+                            .font(.caption)
+                            .foregroundColor(textDefaultColor)
+                            .lineSpacing(16.80)
+                            .lineLimit(1)
+                            .frame(width: 150, alignment: .leading)
+                    }
+                    
+                    HStack(alignment: .top, spacing: 4) {
+                        HStack(alignment: .top, spacing: 2) {
+                            if entry.FinalInformationList.Lectures[0].name == "授業がありません"{
+                                if colorScheme == .dark {
+                                    Image("room-dark-disabled")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }else{
+                                    Image("room-disabled")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }
+                                Text(entry.FinalInformationList.Lectures[0].room)
+                                    .font(.caption2)
+                                    .foregroundColor(noneLectureColor)
+                                    .lineSpacing(14)
+                                    .lineLimit(1)
+                                    .frame(width: 60,alignment:.leading)
+                            }else{
+                                if colorScheme == .dark {
+                                    Image("room-dark")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }else{
+                                    Image("room")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }
+                                Text(entry.FinalInformationList.Lectures[0].room)
+                                    .font(.caption2)
+                                    .foregroundColor(widgetRoomScheduleColor)
+                                    .lineSpacing(14)
+                                    .lineLimit(1)
+                                    .frame(width: 60,alignment:.leading)
+                            }
+                            
+                        }
+                        
+                        HStack(alignment: .top, spacing: 2) {
+                            if entry.FinalInformationList.Lectures[0].name == "授業がありません"{
+                                if colorScheme == .dark {
+                                    Image("schedule-dark-disabled")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }else{
+                                    Image("schedule-disabled")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }
+                                
+                                Text("-")
+                                    .font(.caption2)
+                                    .foregroundColor(noneLectureColor)
+                                    .lineSpacing(14)
+                                    .lineLimit(1)
+                                    .frame(width: 30,alignment:.leading)
+                            }else{
+                                if colorScheme == .dark {
+                                    Image("schedule-dark")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }else{
+                                    Image("schedule")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }
+                                Text(LectureStartTime(number: entry.FinalInformationList.Lectures[0].period))
+                                    .font(.caption2)
+                                    .foregroundColor(widgetRoomScheduleColor)
+                                    .lineSpacing(14)
+                                    .lineLimit(1)
+                                    .frame(width: 40,alignment:.leading)
+                            }
+                        }
+                    }
+                }
+            }
         }
+        .padding()
+        .padding(.leading, 10)
+        //        .frame(width: .infinity, height: .infinity)
+        .background(widgetBaseColor)
+        .cornerRadius(21.67)
     }
 }
 
 @main
-struct newWidgetMedium: Widget {
-    let kind: String = "Twin:te"
+struct newWidgetSmall: Widget {
+    let kind: String = "newWidgetSmall"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            newWidgetMediumEntryView(entry: entry)
+            newWidgetSmallEntryView(entry: entry)
         }
         .configurationDisplayName("Twin:te")
-        .description("現在の授業と次の授業を表示します")
-        .supportedFamilies([.systemMedium])
+        .description("今日の日課と次の授業を表示します")
+        .supportedFamilies([.systemSmall])
     }
 }
 
-struct newWidgetMedium_Previews: PreviewProvider {
+struct newWidgetSmall_Previews: PreviewProvider {
     static var previews: some View {
         let sampleFinalInformationList:FinalInformationList = FinalInformationList(Lectures: [
             Lecture(period:1,name:"授業がありません",room: "-"),
@@ -805,8 +639,8 @@ struct newWidgetMedium_Previews: PreviewProvider {
             Lecture(period:6,name:"寺子屋実習",room: "東京あ江戸あいうえお博物館"),
         ], description: "", changeTo: "水曜", module: "春AB",lectureCounter:0)
         
-        newWidgetMediumEntryView(entry: SimpleEntry(date: Date(), FinalInformationList: sampleFinalInformationList))
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        newWidgetSmallEntryView(entry: SimpleEntry(date: Date(), FinalInformationList: sampleFinalInformationList))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
         //            .environment(\.colorScheme, .dark)
     }
 }
