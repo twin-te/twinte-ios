@@ -117,7 +117,7 @@ struct smallWidgetProvider: TimelineProvider {
     }
 }
 
-// 今日の授業情報を受け取って、指定された時限をLecture[0]に、次に予定されている授業を[1]に格納して返却
+
 // periodが0の時は1限が始まる前なので、Lecture[0]は授業がありません、Lecture[1]を1限にする
 func smallWidgetNowAndNextClass(arg:FinalInformationList,period:Int) -> FinalInformationList{
     let LecturesList:[Lecture] = arg.Lectures;

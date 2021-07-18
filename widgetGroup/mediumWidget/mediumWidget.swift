@@ -124,18 +124,18 @@ func mediumWidgetNowAndNextClass(arg:FinalInformationList,period:Int) -> FinalIn
     
     if period == 0 {
         returnLecturesList.insert(Lecture(period: 0, name: "授業がありません", room: "-"), at: 0);
-        returnLecturesList.insert(LecturesList[0], at: 1);
     }else{
         returnLecturesList.insert(LecturesList[period-1], at: 0);
-        for i in period ... arg.Lectures.count{
-            if i >= arg.Lectures.count {
-                returnLecturesList.insert(Lecture(period: 0, name: "授業がありません", room: "-"), at: 1);
+    }
+    
+    for i in period ... arg.Lectures.count{
+        if i >= arg.Lectures.count {
+            returnLecturesList.insert(Lecture(period: 0, name: "授業がありません", room: "-"), at: 1);
+            break;
+        }else{
+            if arg.Lectures[i].name != "授業がありません" {
+                returnLecturesList.insert(LecturesList[i], at: 1);
                 break;
-            }else{
-                if arg.Lectures[i].name != "授業がありません" {
-                    returnLecturesList.insert(LecturesList[i], at: 1);
-                    break;
-                }
             }
         }
     }
@@ -382,7 +382,7 @@ struct mediumWidgetEntryView : View {
                         
                         VStack(alignment: .leading, spacing: 3) {
                             if entry.FinalInformationList.Lectures[1].name == "授業がありません"{
-                                Text(entry.FinalInformationList.Lectures[0].name)
+                                Text(entry.FinalInformationList.Lectures[1].name)
                                     .fontWeight(.medium)
                                     .font(.caption)
                                     .foregroundColor(noneLectureColor)
