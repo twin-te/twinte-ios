@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,15 +17,15 @@
 		3C5851C62609E16F00F53835 /* ScheduleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5851C52609E16F00F53835 /* ScheduleNotification.swift */; };
 		3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C829CE02383D5EE008C3475 /* WebKit.framework */; };
-		3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C88956023B71C79002557E0 /* NotificationCenter.framework */; };
+		3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C88956023B71C79002557E0 /* NotificationCenter.framework */; platformFilter = ios; };
 		3C88956423B71C79002557E0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88956323B71C79002557E0 /* TodayViewController.swift */; };
 		3C88956723B71C79002557E0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C88956523B71C79002557E0 /* MainInterface.storyboard */; };
-		3C88956B23B71C79002557E0 /* todayTimeTable.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C88955F23B71C79002557E0 /* todayTimeTable.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C88956B23B71C79002557E0 /* todayTimeTable.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C88955F23B71C79002557E0 /* todayTimeTable.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C9A69C126A304E800638B53 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA72610DFB6006D306E /* WidgetKit.framework */; };
 		3C9A69C226A304E800638B53 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA92610DFB6006D306E /* SwiftUI.framework */; };
 		3C9A69C526A304E800638B53 /* widgetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69C426A304E800638B53 /* widgetGroup.swift */; };
 		3C9A69C726A304EE00638B53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C9A69C626A304EE00638B53 /* Assets.xcassets */; };
-		3C9A69CB26A304EE00638B53 /* widgetGroupExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C9A69C026A304E800638B53 /* widgetGroupExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C9A69CB26A304EE00638B53 /* widgetGroupExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3C9A69C026A304E800638B53 /* widgetGroupExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C9A69D426A305CC00638B53 /* smallWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69D326A305CC00638B53 /* smallWidget.swift */; };
 		3C9A69D826A32E0900638B53 /* mediumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69D726A32E0900638B53 /* mediumWidget.swift */; };
 		3C9A69DA26A3305000638B53 /* largeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69D926A3305000638B53 /* largeWidget.swift */; };
@@ -398,11 +398,13 @@
 /* Begin PBXTargetDependency section */
 		3C88956A23B71C79002557E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 3C88955E23B71C79002557E0 /* todayTimeTable */;
 			targetProxy = 3C88956923B71C79002557E0 /* PBXContainerItemProxy */;
 		};
 		3C9A69CA26A304EE00638B53 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 3C9A69BF26A304E800638B53 /* widgetGroupExtension */;
 			targetProxy = 3C9A69C926A304EE00638B53 /* PBXContainerItemProxy */;
 		};
@@ -568,10 +570,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -593,10 +596,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -617,10 +621,11 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -641,10 +646,11 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -667,10 +673,11 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.widgetGroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -693,10 +700,11 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.widgetGroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
