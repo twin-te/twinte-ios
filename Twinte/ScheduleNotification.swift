@@ -23,17 +23,17 @@ class ScheduleNotification {
         /// デバッグ用
         ///
         
-        //        let center = UNUserNotificationCenter.current()
-        //        center.getPendingNotificationRequests { requests in
-        //            print(requests.count)
-        //
-        //            for element in requests {
-        //                dump(element)
-        //                print(element.content.body)
-        //                print("****************************")
-        //            }
-        //
-        //        }
+//                let center = UNUserNotificationCenter.current()
+//                center.getPendingNotificationRequests { requests in
+//                    print(requests.count)
+//
+//                    for element in requests {
+//                        dump(element)
+//                        print(element.content.body)
+//                        print("****************************")
+//                    }
+//
+//                }
         
         /// ここまで
         // 現在登録されている全ての通知を消去
@@ -134,11 +134,16 @@ class ScheduleNotification {
     
     /// イベント情報の取得
     /// - Parameters:
-    ///   - date: 取得したいイベントの日付をDate形式で渡す
     ///   - completion: 場合に応じてsemaphore.signal()を実行するとよい
     func schoolCalender(completion: @escaping ([substitute]) -> Void){
-        let requestUrl = "https://app.twinte.net/api/v3/school-calendar/events?year=2021"
         
+        let calendar = Calendar(identifier: .gregorian)
+        let date = Date()
+        let thisMonth = calendar.component(.month, from: date)
+        let schoolYear = thisMonth <= 3 ? String(calendar.component(.year, from:calendar.date(byAdding: .year, value: -1, to: date)!)) : String(calendar.component(.year, from: date))
+        
+        let requestUrl = "https://app.twinte.net/api/v3/school-calendar/events?year=\(schoolYear)"
+
         // URL生成
         guard let url = URL(string: requestUrl) else {
             // URL生成失敗
