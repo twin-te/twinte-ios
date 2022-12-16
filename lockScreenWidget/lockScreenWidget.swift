@@ -14,7 +14,7 @@ struct Provider: TimelineProvider {
         day: "10/14(木)", module: "春A", event: WidgetInfo.WidgetAllInfo.Event(normal: false, content: "水曜日日課"), lectures: [
             WidgetInfo.Lecture(period:1, startTime: "8:40",name:"つくば市史概論",room: "1B202",exist: true),
             WidgetInfo.Lecture(period:2, startTime: "10:10",name:"基礎ネコ語AII",room: "平砂宿舎",exist: true),
-            WidgetInfo.Lecture(period:3, startTime: "12:15",name:"",room: "",exist: false),
+            WidgetInfo.Lecture(period:3, startTime: "12:15",name:"授業がありません",room: "-",exist: false),
             WidgetInfo.Lecture(period:4, startTime: "13:45",name:"筑波大学〜野草と食〜",room: "4C213",exist: true),
             WidgetInfo.Lecture(period:5, startTime: "15:15",name:"東京教育大学の遺産",room: "春日講堂",exist: true),
             WidgetInfo.Lecture(period:6, startTime: "16:45",name:"日常系作品の実際",room: "オンライン",exist: true),
@@ -22,11 +22,11 @@ struct Provider: TimelineProvider {
     )
     
     func placeholder(in context: Context) -> DayInfoEntry {
-        DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[3])
+        DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)])
     }
     
     func getSnapshot(in context: Context, completion: @escaping (DayInfoEntry) -> ()) {
-        let entry = DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[3])
+        let entry = DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)])
         completion(entry)
     }
     
@@ -89,9 +89,14 @@ struct Provider: TimelineProvider {
                 let tommorowLastPeriod = (tommorowExistLectures.last?.period ?? 0) + 1
                 tommorowExistLectures.append(WidgetInfo.Lecture(period: tommorowLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false))
                 for tommorowExistLecturesIndex in 0..<tommorowExistLectures.count {
-                    let tommorowClassUpdateTimesIndex = tommorowExistLectures[tommorowExistLecturesIndex].period - 2
-                    entries.append(DayInfoEntry(date: tommorowClassUpdateTimes[tommorowClassUpdateTimesIndex],
-                                                lectureInfo: tommorowExistLectures[tommorowExistLecturesIndex]))
+                    if(tommorowExistLecturesIndex == 0){
+                        entries.append(DayInfoEntry(date: Date(),
+                                                    lectureInfo: tommorowExistLectures[tommorowExistLecturesIndex]))
+                    }else{
+                        let tommorowClassUpdateTimesIndex = tommorowExistLectures[tommorowExistLecturesIndex].period - 2
+                        entries.append(DayInfoEntry(date: tommorowClassUpdateTimes[tommorowClassUpdateTimesIndex],
+                                                    lectureInfo: tommorowExistLectures[tommorowExistLecturesIndex]))
+                    }
                 }
                 // 明日の更新時間の定義。（前述の更新時間に一日を加えたもの）
                 let tomorrowUpdateTime = Calendar.current.date(byAdding: .day, value: 1, to: todayUpdateTime)!
@@ -144,7 +149,7 @@ struct Provider: TimelineProvider {
                 }
             case .accessoryInline:
                 entry.lectureInfo.exist ?
-                Text(entry.lectureInfo.room+":"+entry.lectureInfo.name)
+                Text(entry.lectureInfo.room+" "+entry.lectureInfo.name)
                 :
                 Text("授業がありません")
             default:
