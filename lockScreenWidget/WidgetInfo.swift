@@ -18,6 +18,7 @@ class WidgetInfo {
         var event: Event
         var lectures:[Lecture]
         var lectureCount: Int
+        var error: Bool
         
         struct Event {
             var normal: Bool // 祝日や通常日課はtrue，授業振替がある場合はfalse
@@ -77,7 +78,7 @@ class WidgetInfo {
         do{
             let myDayLectureEventInfo = try await self.fetchAPI()
             
-            var myWidgetAllInfo = WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: true, content: "通常日課"), lectures: [], lectureCount: 0);
+            var myWidgetAllInfo = WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: true, content: "通常日課"), lectures: [], lectureCount: 0,error: false);
             
             // 重複ありで登録してる授業一覧を格納
             var dayLectureList:[Lecture] = []
@@ -149,7 +150,6 @@ class WidgetInfo {
                     myWidgetAllInfo.lectureCount = myWidgetAllInfo.lectureCount + 1
                 }
             }
-            
             return myWidgetAllInfo
         }catch APIClientError.serverError{
             let message:[Lecture] = [
@@ -160,7 +160,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"改善しない場合", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"運営にご連絡ください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:1"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:1"), lectures: message, lectureCount: 0,error: true)
         }catch APIClientError.badStatus{
             let message:[Lecture] = [
                 Lecture(period:1,startTime:"-", name:"エラーが発生", room:"-", exist: false),
@@ -170,7 +170,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"改善しない場合", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"運営にご連絡ください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:2"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:2"), lectures: message, lectureCount: 0,error: true)
         }catch APIClientError.invalidURL{
             let message:[Lecture] = [
                 Lecture(period:1,startTime:"-", name:"エラーが発生", room:"-", exist: false),
@@ -180,7 +180,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"改善しない場合", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"運営にご連絡ください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:3"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:3"), lectures: message, lectureCount: 0,error: true)
         }catch APIClientError.responseError{
             let message:[Lecture] = [
                 Lecture(period:1,startTime:"-", name:"エラーが発生", room:"-", exist: false),
@@ -190,7 +190,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"改善しない場合", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"運営にご連絡ください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:4"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:4"), lectures: message, lectureCount: 0,error: true)
         }catch AppInternalError.jsonDecodeError{
             let message:[Lecture] = [
                 Lecture(period:1,startTime:"-", name:"未認証です。", room:"-", exist: false),
@@ -200,7 +200,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"改善しない場合", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"運営にご連絡ください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:5"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:5"), lectures: message, lectureCount: 0,error: true)
         }catch AppInternalError.cookieError{
             let message:[Lecture] = [
                 Lecture(period:1,startTime:"-", name:"未認証です。", room:"-", exist: false),
@@ -210,7 +210,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"アプリを再起動して", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"やり直してください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:6"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:6"), lectures: message, lectureCount: 0,error: true)
         }catch{
             let message:[Lecture] = [
                 Lecture(period:1,startTime:"-", name:"エラーが発生しました。", room:"-", exist: false),
@@ -220,7 +220,7 @@ class WidgetInfo {
                 Lecture(period:5,startTime:"-", name:"運営にご連絡", room:"-", exist: false),
                 Lecture(period:6,startTime:"-", name:"ください。", room:"-", exist: false),
             ]
-            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:7"), lectures: message, lectureCount: 0)
+            return WidgetAllInfo(day: dateToString(format:"MM/dd(EEE)"),module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:7"), lectures: message, lectureCount: 0,error: true)
         }
         
         // dateの曜日をSun,Mon... 形式の文字列で返す
