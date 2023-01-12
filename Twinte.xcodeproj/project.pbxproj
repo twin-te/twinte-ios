@@ -29,7 +29,8 @@
 		3C9A69D426A305CC00638B53 /* smallWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69D326A305CC00638B53 /* smallWidget.swift */; };
 		3C9A69D826A32E0900638B53 /* mediumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69D726A32E0900638B53 /* mediumWidget.swift */; };
 		3C9A69DA26A3305000638B53 /* largeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69D926A3305000638B53 /* largeWidget.swift */; };
-		3CC68A22292B528E00B694DD /* WidgetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC68A21292B528E00B694DD /* WidgetInfo.swift */; };
+		3CA479F3296129CB000C1A11 /* WidgetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA479EF296129A9000C1A11 /* WidgetInfo.swift */; };
+		3CA479F4296129CC000C1A11 /* WidgetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA479EF296129A9000C1A11 /* WidgetInfo.swift */; };
 		3CCF54322382FB6F00149E44 /* sp.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CCF54312382FB6E00149E44 /* sp.js */; };
 		3CE721622383A26600363500 /* Twintelogo-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE721612383A26600363500 /* Twintelogo-color.png */; };
 		3CE721682383B42B00363500 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE721672383B42B00363500 /* SecondViewController.swift */; };
@@ -109,7 +110,7 @@
 		3C9A69D326A305CC00638B53 /* smallWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallWidget.swift; sourceTree = "<group>"; };
 		3C9A69D726A32E0900638B53 /* mediumWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mediumWidget.swift; sourceTree = "<group>"; };
 		3C9A69D926A3305000638B53 /* largeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = largeWidget.swift; sourceTree = "<group>"; };
-		3CC68A21292B528E00B694DD /* WidgetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetInfo.swift; sourceTree = "<group>"; };
+		3CA479EF296129A9000C1A11 /* WidgetInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetInfo.swift; sourceTree = "<group>"; };
 		3CCF54312382FB6E00149E44 /* sp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = sp.js; sourceTree = "<group>"; };
 		3CE721612383A26600363500 /* Twintelogo-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twintelogo-color.png"; sourceTree = "<group>"; };
 		3CE721672383B42B00363500 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -165,10 +166,9 @@
 				3C9A69CF26A3050000638B53 /* widgetGroupExtension.entitlements */,
 				3C0FC898238247CC00055141 /* Twinte */,
 				3C88956223B71C79002557E0 /* todayTimeTable */,
-				3C9A69C326A304E800638B53 /* widgetGroup */,
-				3CF748FE28F546700001D49B /* lockScreenWidget */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
+				3CA479F529612A1C000C1A11 /* widget */,
 				3C829CDF2383D5EE008C3475 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -262,13 +262,22 @@
 			path = largeWidget;
 			sourceTree = "<group>";
 		};
+		3CA479F529612A1C000C1A11 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				3C9A69C326A304E800638B53 /* widgetGroup */,
+				3CF748FE28F546700001D49B /* lockScreenWidget */,
+				3CA479EF296129A9000C1A11 /* WidgetInfo.swift */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
 		3CF748FE28F546700001D49B /* lockScreenWidget */ = {
 			isa = PBXGroup;
 			children = (
 				3CF748FF28F546700001D49B /* lockScreenWidget.swift */,
 				3CF7490128F546700001D49B /* Assets.xcassets */,
 				3CF7490328F546700001D49B /* Info.plist */,
-				3CC68A21292B528E00B694DD /* WidgetInfo.swift */,
 			);
 			path = lockScreenWidget;
 			sourceTree = "<group>";
@@ -460,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C9A69C526A304E800638B53 /* widgetGroup.swift in Sources */,
+				3CA479F3296129CB000C1A11 /* WidgetInfo.swift in Sources */,
 				3C9A69D826A32E0900638B53 /* mediumWidget.swift in Sources */,
 				3C9A69D426A305CC00638B53 /* smallWidget.swift in Sources */,
 				3C9A69DA26A3305000638B53 /* largeWidget.swift in Sources */,
@@ -471,7 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CF7490028F546700001D49B /* lockScreenWidget.swift in Sources */,
-				3CC68A22292B528E00B694DD /* WidgetInfo.swift in Sources */,
+				3CA479F4296129CC000C1A11 /* WidgetInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,12 +662,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -678,12 +688,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -702,13 +712,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -727,13 +737,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.todayTimeTable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -753,14 +763,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
-				INFOPLIST_FILE = widgetGroup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				INFOPLIST_FILE = widget/widgetGroup/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.widgetGroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -780,14 +790,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
-				INFOPLIST_FILE = widgetGroup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				INFOPLIST_FILE = widget/widgetGroup/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.widgetGroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -809,7 +819,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = lockScreenWidget/Info.plist;
+				INFOPLIST_FILE = widget/lockScreenWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = lockScreenWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 tako. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -818,7 +828,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.lockScreenWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -841,7 +851,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = lockScreenWidget/Info.plist;
+				INFOPLIST_FILE = widget/lockScreenWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = lockScreenWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 tako. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -850,7 +860,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.4;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.lockScreenWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

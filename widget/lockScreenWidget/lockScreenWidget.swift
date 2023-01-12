@@ -121,98 +121,99 @@ struct Provider: TimelineProvider {
             }
         }
     }
-    
-    struct DayInfoEntry: TimelineEntry {
-        let date: Date
-        let lectureInfo: WidgetInfo.Lecture
-    }
-    
-    struct lockScreenWidgetEntryView : View {
-        @Environment(\.widgetFamily) var widgetFamily
-        var entry: Provider.Entry
-        var body: some View {
-            switch widgetFamily {
-            case .accessoryCircular:
-                ZStack{
-                    Color.white.opacity(0.12)
-                    Image("twinteIcon")
+}
+
+struct DayInfoEntry: TimelineEntry {
+    let date: Date
+    let lectureInfo: WidgetInfo.Lecture
+}
+
+struct lockScreenWidgetEntryView : View {
+    @Environment(\.widgetFamily) var widgetFamily
+    var entry: Provider.Entry
+    var body: some View {
+        switch widgetFamily {
+        case .accessoryCircular:
+            ZStack{
+                Color.white.opacity(0.12)
+                Image("twinteIcon")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+            }
+        case .accessoryRectangular:
+            VStack(alignment : .leading,spacing: 0) {
+                HStack{
+                    Text(entry.lectureInfo.name)
+                        .lineLimit(1)
+                        .fontWeight(.semibold)
+                    Spacer()
+                }
+                HStack(spacing: 3){
+                    Image("room")
                         .resizable()
-                        .frame(width: 40, height: 40)
+                        .frame(width: 12, height: 12)
+                    Text(entry.lectureInfo.room)
+                        .lineLimit(1)
+                    Spacer()
                 }
-            case .accessoryRectangular:
-                VStack(alignment : .leading,spacing: 0) {
-                    HStack{
-                        Text(entry.lectureInfo.name)
-                            .lineLimit(1)
-                            .fontWeight(.semibold)
-                        Spacer()
-                    }
-                    HStack(spacing: 3){
-                        Image("room")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                        Text(entry.lectureInfo.room)
-                            .lineLimit(1)
-                        Spacer()
-                    }
-                    HStack(spacing: 3){
-                        Image("schedule")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                        Text(entry.lectureInfo.startTime)
-                        Spacer()
-                    }
+                HStack(spacing: 3){
+                    Image("schedule")
+                        .resizable()
+                        .frame(width: 12, height: 12)
+                    Text(entry.lectureInfo.startTime)
+                    Spacer()
                 }
-            case .accessoryInline:
-                entry.lectureInfo.exist ?
-                Text(entry.lectureInfo.room+" "+entry.lectureInfo.name)
-                :
-                Text(entry.lectureInfo.name)
-            default:
-                Text("Not implemented")
             }
-            
+        case .accessoryInline:
+            entry.lectureInfo.exist ?
+            Text(entry.lectureInfo.room+" "+entry.lectureInfo.name)
+            :
+            Text(entry.lectureInfo.name)
+        default:
+            Text("Not implemented")
         }
-    }
-    
-    @main
-    struct lockScreenWidget: Widget {
-        let kind: String = "lockScreenWidget"
         
-        var body: some WidgetConfiguration {
-            StaticConfiguration(kind: kind, provider: Provider()) { entry in
-                lockScreenWidgetEntryView(entry: entry)
-            }
-            .configurationDisplayName("Twin:te")
-            .description("次の授業を表示します")
-            .supportedFamilies([.accessoryInline,.accessoryCircular,.accessoryRectangular])
-        }
-    }
-    
-    struct lockScreenWidget_Previews: PreviewProvider {
-        static var previews: some View {
-            let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-                day: "10/14(木)", module: "秋A", event: WidgetInfo.WidgetAllInfo.Event(normal: true, content: ""), lectures: [
-                    WidgetInfo.Lecture(period:1, startTime: "8:40",name:"つくば市史概論",room: "1B202",exist: true),
-                    WidgetInfo.Lecture(period:2, startTime: "10:10",name:"基礎ネコ語AII",room: "平砂宿舎",exist: true),
-                    WidgetInfo.Lecture(period:3, startTime: "12:15",name:"",room: "",exist: false),
-                    WidgetInfo.Lecture(period:4, startTime: "13:45",name:"筑波大学〜野草と食〜",room: "4C213",exist: true),
-                    WidgetInfo.Lecture(period:5, startTime: "15:15",name:"東京教育大学の遺産",room: "春日講堂",exist: true),
-                    WidgetInfo.Lecture(period:6, startTime: "16:45",name:"日常系作品の実際",room: "オンライン",exist: true),
-                ], lectureCount: 5,error: false
-            )
-            
-            lockScreenWidgetEntryView(entry: DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[0]))
-                .previewContext(WidgetPreviewContext(family: .accessoryInline))
-                .previewDisplayName("Inline")
-            
-            lockScreenWidgetEntryView(entry: DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[0]))
-                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-                .previewDisplayName("Circular")
-            
-            lockScreenWidgetEntryView(entry: DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[0]))
-                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-                .previewDisplayName("Rectangular")
-        }
     }
 }
+
+@main
+struct lockScreenWidget: Widget {
+    let kind: String = "lockScreenWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            lockScreenWidgetEntryView(entry: entry)
+        }
+        .configurationDisplayName("Twin:te")
+        .description("次の授業を表示します")
+        .supportedFamilies([.accessoryInline,.accessoryCircular,.accessoryRectangular])
+    }
+}
+
+struct lockScreenWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
+            day: "10/14(木)", module: "秋A", event: WidgetInfo.WidgetAllInfo.Event(normal: true, content: ""), lectures: [
+                WidgetInfo.Lecture(period:1, startTime: "8:40",name:"つくば市史概論",room: "1B202",exist: true),
+                WidgetInfo.Lecture(period:2, startTime: "10:10",name:"基礎ネコ語AII",room: "平砂宿舎",exist: true),
+                WidgetInfo.Lecture(period:3, startTime: "12:15",name:"",room: "",exist: false),
+                WidgetInfo.Lecture(period:4, startTime: "13:45",name:"筑波大学〜野草と食〜",room: "4C213",exist: true),
+                WidgetInfo.Lecture(period:5, startTime: "15:15",name:"東京教育大学の遺産",room: "春日講堂",exist: true),
+                WidgetInfo.Lecture(period:6, startTime: "16:45",name:"日常系作品の実際",room: "オンライン",exist: true),
+            ], lectureCount: 5,error: false
+        )
+        
+        lockScreenWidgetEntryView(entry: DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[0]))
+            .previewContext(WidgetPreviewContext(family: .accessoryInline))
+            .previewDisplayName("Inline")
+        
+        lockScreenWidgetEntryView(entry: DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[0]))
+            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+            .previewDisplayName("Circular")
+        
+        lockScreenWidgetEntryView(entry: DayInfoEntry(date: Date(),lectureInfo: sampleWidgetAllInfo.lectures[0]))
+            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+            .previewDisplayName("Rectangular")
+    }
+}
+

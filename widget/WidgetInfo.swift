@@ -1,9 +1,9 @@
 //
-//  File.swift
-//  lockScreenWidgetExtension
+//  WidgetInfo.swift
+//  Twinte
 //
 //  Created by takonasu on 2022/11/21.
-//  Copyright © 2022 tako. All rights reserved.
+//  Copyright © 2023 tako. All rights reserved.
 //
 
 import Foundation
@@ -144,7 +144,7 @@ class WidgetInfo {
                 if tmpArray.count > 1 {
                     myWidgetAllInfo.lectures.append(Lecture(period:i,startTime: LectureStartTime(number: i), name:"授業が重複しています",room:"-",exist: true))
                 }else if tmpArray.count == 0{ // その時限に授業が登録されていない場合
-                    myWidgetAllInfo.lectures.append(Lecture(period:i,startTime: LectureStartTime(number: i), name:"-",room:"-",exist: false))
+                    myWidgetAllInfo.lectures.append(Lecture(period:i,startTime: "-", name:"授業がありません",room:"-",exist: false))
                 }else{
                     myWidgetAllInfo.lectures.append(tmpArray[0])
                     myWidgetAllInfo.lectureCount = myWidgetAllInfo.lectureCount + 1
@@ -228,7 +228,7 @@ class WidgetInfo {
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "en")
             formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "E", options: 0, locale: Locale.current)
-            return formatter.string(from: date)
+            return formatter.string(from: self.date)
         }
         
         func convertModuleEnglishToJapanese(module:String)->String{
@@ -363,3 +363,4 @@ class WidgetInfo {
     }
     
 }
+
