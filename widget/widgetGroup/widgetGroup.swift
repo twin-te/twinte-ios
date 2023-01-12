@@ -6,8 +6,8 @@
 //  Copyright © 2021 tako. All rights reserved.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 // サンプル表示用
 func getDate(format: String = "MM/dd(EEE)") -> String {
@@ -21,12 +21,9 @@ func getDate(format: String = "MM/dd(EEE)") -> String {
 
 @main
 struct widgetGroup: WidgetBundle {
-    
     var body: some Widget {
-        largeWidget();
-        mediumWidget();
-        smallWidget();
+        largeWidget()
+        mediumWidget()
+        smallWidget()
     }
 }
-
-

@@ -1,0 +1,10 @@
+--ranges no-space
+--disable redundanttype
+--disable extensionAccessControl
+--disable redundantExtensionACL
+--disable preferKeyPath
+--disable redundantSelf
+--disable sortDeclarations
+--disable unusedArguments
+--disable wrap
+--disable wrapMultilineStatementBraces
