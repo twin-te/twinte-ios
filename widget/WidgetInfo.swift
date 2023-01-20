@@ -10,6 +10,8 @@ import Foundation
 
 class WidgetInfo {
     private(set) var date: Date = Date()
+    // 任意の日付を設定することができる
+    // private(set) var date:Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2023, month: 1, day: 23))!
     private let apiEndpoint = "https://app.twinte.net/api/v3/timetable/"
 
     struct WidgetAllInfo {

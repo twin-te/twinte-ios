@@ -659,7 +659,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Twinte/Twin:te.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -685,7 +685,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Twinte/Twin:te.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = Twinte/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -709,7 +709,7 @@
 				CODE_SIGN_ENTITLEMENTS = todayTimeTable/todayTimeTable.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -734,7 +734,7 @@
 				CODE_SIGN_ENTITLEMENTS = todayTimeTable/todayTimeTable.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = todayTimeTable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -761,7 +761,7 @@
 				CODE_SIGN_ENTITLEMENTS = widgetGroupExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = widget/widgetGroup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -788,7 +788,7 @@
 				CODE_SIGN_ENTITLEMENTS = widgetGroupExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				INFOPLIST_FILE = widget/widgetGroup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -816,7 +816,7 @@
 				CODE_SIGN_ENTITLEMENTS = lockScreenWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/lockScreenWidget/Info.plist;
@@ -848,7 +848,7 @@
 				CODE_SIGN_ENTITLEMENTS = lockScreenWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 48TCPC25C3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/lockScreenWidget/Info.plist;
