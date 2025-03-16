@@ -160,6 +160,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
                 self.performSegue(withIdentifier: "toSecond", sender: nil)
                 decisionHandler(WKNavigationActionPolicy.cancel)
             }
+        } else {
+            decisionHandler(WKNavigationActionPolicy.cancel)
         }
     }
 
