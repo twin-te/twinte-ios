@@ -6,7 +6,7 @@
 //  Copyright © 2025 Arata. All rights reserved.
 //
 
-internal import Connect
+import Connect
 import Foundation
 
 public final class V4APIClient {
