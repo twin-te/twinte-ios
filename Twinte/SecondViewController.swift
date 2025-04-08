@@ -50,9 +50,9 @@ class SecondViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
                 let dispatchGroup = DispatchGroup()
                 let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
 
-                Lectures.forEach {
-                    let year = $0.year
-                    let code = $0.code
+                for Lecture in Lectures {
+                    let year = Lecture.year
+                    let code = Lecture.code
                     dispatchGroup.enter()
                     dispatchQueue.async(group: dispatchGroup) {
                         /// URLリクエストの生成

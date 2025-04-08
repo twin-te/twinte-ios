@@ -120,16 +120,16 @@ class WidgetInfo {
                     if let schedules = element.schedules {
                         // 指定日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
                         let newScheduleArray = schedules.filter { $0.day == changeTo && $0.module == myDayLectureEventInfo.module!.module }
-                        newScheduleArray.forEach {
-                            dayLectureList.append(Lecture(period: $0.period, startTime: LectureStartTime(number: $0.period), name: lectureName, room: $0.room, exist: true))
+                        for item in newScheduleArray {
+                            dayLectureList.append(Lecture(period: item.period, startTime: LectureStartTime(number: item.period), name: lectureName, room: item.room, exist: true))
                         }
                     } else {
                         // スケジュール変更されていない場合
                         if let course = element.course {
                             // 指定日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
                             let newScheduleArray = course.schedules.filter { $0.day == changeTo && $0.module == myDayLectureEventInfo.module!.module }
-                            newScheduleArray.forEach {
-                                dayLectureList.append(Lecture(period: $0.period, startTime: LectureStartTime(number: $0.period), name: lectureName, room: $0.room, exist: true))
+                            for item in newScheduleArray {
+                                dayLectureList.append(Lecture(period: item.period, startTime: LectureStartTime(number: item.period), name: lectureName, room: item.room, exist: true))
                             }
                         } else {
                             // スケジュール変更していない授業&カスタムじゃない授業は必ずcourseが存在するので発生し得ない。
