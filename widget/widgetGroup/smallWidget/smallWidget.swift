@@ -10,17 +10,6 @@ import SwiftUI
 import WidgetKit
 
 struct smallWidgetProvider: TimelineProvider {
-    let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-        day: getDate(), module: "春A", event: WidgetInfo.WidgetAllInfo.Event(normal: false, content: "水曜日日課"), lectures: [
-            WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", exist: true),
-            WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", exist: true),
-            WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", exist: false),
-            WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", exist: true),
-            WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", exist: true),
-            WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", exist: true),
-        ], lectureCount: 5, error: false
-    )
-
     func placeholder(in context: Context) -> smallWidgetDayInfoEntry {
         smallWidgetDayInfoEntry(date: Date(), lectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)], lectureAllInfo: sampleWidgetAllInfo)
     }
@@ -52,7 +41,7 @@ struct smallWidgetProvider: TimelineProvider {
                 // エラー発生時は更新頻度を10分毎に&表示をエラー表示に
                 if todayWidgetAllInfo.error {
                     let entries: [smallWidgetDayInfoEntry] = [
-                        smallWidgetDayInfoEntry(date: Date(), lectureInfo: WidgetInfo.Lecture(period: 1, startTime: "", name: todayWidgetAllInfo.event.content, room: "", exist: false), lectureAllInfo: todayWidgetAllInfo),
+                        smallWidgetDayInfoEntry(date: Date(), lectureInfo: .content(period: 1, name: todayWidgetAllInfo.event.content), lectureAllInfo: todayWidgetAllInfo),
                     ]
                     let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .minute, value: 10, to: Date())!))
                     completion(timeline)
@@ -62,7 +51,7 @@ struct smallWidgetProvider: TimelineProvider {
                 // Generate a timeline consisting of five entries an hour apart, starting from the current date.
                 var todayExistLectures: [WidgetInfo.Lecture] = todayWidgetAllInfo.lectures.filter { $0.exist }
                 let todayLastPeriod = (todayExistLectures.last?.period ?? 0) + 1
-                todayExistLectures.append(WidgetInfo.Lecture(period: todayLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false))
+                todayExistLectures.append(.empty(period: todayLastPeriod))
                 for todayExistLecturesIndex in 0..<todayExistLectures.count {
                     if todayExistLecturesIndex == 0 {
                         // 最初の授業が始まる前ならすぐに最初の授業の情報(or授業が全くない旨)を表示する．
@@ -80,38 +69,38 @@ struct smallWidgetProvider: TimelineProvider {
             } else {
                 // 今が19時以降の場合。明日の予定を表示&次表示を更新するのは明日の19時以降
                 // 更新タイムラインの日付を明日にする
-                let tommorowFirstClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayFirstClassTime)!
-                let tommorowSecondClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todaySecondClassTime)!
-                let tommorowThirdClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayThirdClassTime)!
-                let tommorowFourthClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayFourthClassTime)!
-                let tommorowFifthClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayFifthClassTime)!
-                let tommorowSixthClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todaySixthClassTime)!
-                let tommorowClassUpdateTimes = [tommorowFirstClassTime, tommorowSecondClassTime, tommorowThirdClassTime, tommorowFourthClassTime, tommorowFifthClassTime, tommorowSixthClassTime]
+                let tomorrowFirstClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayFirstClassTime)!
+                let tomorrowSecondClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todaySecondClassTime)!
+                let tomorrowThirdClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayThirdClassTime)!
+                let tomorrowFourthClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayFourthClassTime)!
+                let tomorrowFifthClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todayFifthClassTime)!
+                let tomorrowSixthClassTime = Calendar.current.date(byAdding: .day, value: 1, to: todaySixthClassTime)!
+                let tomorrowClassUpdateTimes = [tomorrowFirstClassTime, tomorrowSecondClassTime, tomorrowThirdClassTime, tomorrowFourthClassTime, tomorrowFifthClassTime, tomorrowSixthClassTime]
 
                 let widgetInfo = WidgetInfo()
                 widgetInfo.updateDate(newDate: Calendar.current.date(byAdding: .day, value: 1, to: widgetInfo.date)!)
-                let tommorowWidgetAllInfo = await widgetInfo.getWidgetAllInfo()
+                let tomorrowWidgetAllInfo = await widgetInfo.getWidgetAllInfo()
                 // エラー発生時は更新頻度を10分毎に&表示をエラー表示に
-                if tommorowWidgetAllInfo.error {
+                if tomorrowWidgetAllInfo.error {
                     let entries: [smallWidgetDayInfoEntry] = [
-                        smallWidgetDayInfoEntry(date: Date(), lectureInfo: WidgetInfo.Lecture(period: 1, startTime: "", name: tommorowWidgetAllInfo.event.content, room: "", exist: false), lectureAllInfo: tommorowWidgetAllInfo),
+                        smallWidgetDayInfoEntry(date: Date(), lectureInfo: .content(period: 1, name: tomorrowWidgetAllInfo.event.content), lectureAllInfo: tomorrowWidgetAllInfo),
                     ]
                     let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .minute, value: 10, to: Date())!))
                     completion(timeline)
                 }
 
                 var entries: [smallWidgetDayInfoEntry] = []
-                var tommorowExistLectures: [WidgetInfo.Lecture] = tommorowWidgetAllInfo.lectures.filter { $0.exist }
-                let tommorowLastPeriod = (tommorowExistLectures.last?.period ?? 0) + 1
-                tommorowExistLectures.append(WidgetInfo.Lecture(period: tommorowLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false))
-                for tommorowExistLecturesIndex in 0..<tommorowExistLectures.count {
-                    if tommorowExistLecturesIndex == 0 {
+                var tomorrowExistLectures: [WidgetInfo.Lecture] = tomorrowWidgetAllInfo.lectures.filter { $0.exist }
+                let tomorrowLastPeriod = (tomorrowExistLectures.last?.period ?? 0) + 1
+                tomorrowExistLectures.append(.empty(period: tomorrowLastPeriod))
+                for tomorrowExistLecturesIndex in 0..<tomorrowExistLectures.count {
+                    if tomorrowExistLecturesIndex == 0 {
                         entries.append(smallWidgetDayInfoEntry(date: Date(),
-                                                               lectureInfo: tommorowExistLectures[tommorowExistLecturesIndex], lectureAllInfo: tommorowWidgetAllInfo))
+                                                               lectureInfo: tomorrowExistLectures[tomorrowExistLecturesIndex], lectureAllInfo: tomorrowWidgetAllInfo))
                     } else {
-                        let tommorowClassUpdateTimesIndex = tommorowExistLectures[tommorowExistLecturesIndex].period - 2
-                        entries.append(smallWidgetDayInfoEntry(date: tommorowClassUpdateTimes[tommorowClassUpdateTimesIndex],
-                                                               lectureInfo: tommorowExistLectures[tommorowExistLecturesIndex], lectureAllInfo: tommorowWidgetAllInfo))
+                        let tomorrowClassUpdateTimesIndex = tomorrowExistLectures[tomorrowExistLecturesIndex].period - 2
+                        entries.append(smallWidgetDayInfoEntry(date: tomorrowClassUpdateTimes[tomorrowClassUpdateTimesIndex],
+                                                               lectureInfo: tomorrowExistLectures[tomorrowExistLecturesIndex], lectureAllInfo: tomorrowWidgetAllInfo))
                     }
                 }
                 // 明日の更新時間の定義。（前述の更新時間に一日を加えたもの）
@@ -247,17 +236,6 @@ struct smallWidget: Widget {
 
 struct smallWidget_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-            day: getDate(), module: "秋A", event: WidgetInfo.WidgetAllInfo.Event(normal: true, content: "通常日課"), lectures: [
-                WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", exist: true),
-                WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", exist: true),
-                WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", exist: false),
-                WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", exist: true),
-                WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", exist: true),
-                WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", exist: true),
-            ], lectureCount: 5, error: false
-        )
-
         smallWidgetEntryView(entry: smallWidgetDayInfoEntry(date: Date(), lectureInfo: sampleWidgetAllInfo.lectures[0], lectureAllInfo: sampleWidgetAllInfo))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }

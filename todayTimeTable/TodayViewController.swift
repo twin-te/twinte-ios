@@ -8,44 +8,7 @@
 
 import NotificationCenter
 import UIKit
-
-// 新ウィジェットAPI用
-struct todayList: Codable {
-    let module: module?
-    let events: [event]
-    let courses: [eachCourse]
-
-    struct module: Codable {
-        let module: String
-    }
-
-    struct event: Codable {
-        let eventType: String
-        let description: String
-        // 存在しないことがある
-        let changeTo: String?
-    }
-
-    struct eachCourse: Codable {
-        let name: String?
-        let course: course? // カスタム講義の場合は存在しない
-        let schedules: [schedule]? // ユーザーが変更した場合に追加される
-        let methods: [String]? // ユーザーが変更した場合に追加される
-
-        struct course: Codable {
-            let name: String
-            let schedules: [schedule]
-            let methods: [String]
-        }
-
-        struct schedule: Codable {
-            let module: String
-            let day: String
-            let period: Int
-            let room: String
-        }
-    }
-}
+import V4API
 
 // 最終的にウィジェットで使う授業情報
 struct ReturnObject {
@@ -58,197 +21,87 @@ struct ReturnObject {
 struct Lecture {
     let name: String
     let room: String
-    let methods: [String]
-    let period: Int
+    let methods: [Timetable_V1_CourseMethod]
+    let period: Int32
 }
 
 /// データ読み込み処理
 func fetchAPI(date: String, completion: @escaping (ReturnObject) -> Void) {
-    // 重複している時間帯は"重複しています"という授業を登録
-    // 最後に返すオブジェクトの中に入れる配列
-    var todayLectureListWithoutDuplicate: [Lecture] = []
-
-    /// URLの生成
-    guard let url = URL(string: "https://app.twinte.net/api/v3/timetable/" + date) else {
-        /// 文字列が有効なURLでない場合の処理
-        return
-    }
-    /// URLリクエストの生成
-    var request = URLRequest(url: url)
-    // UserDefaults のインスタンス
-    let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-    if let stringCookie = userDefaults?.string(forKey: "stringCookie") {
-        // UserDefaultsからCookieを取得
-        request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
-    }
-    /// URLにアクセス
-    URLSession.shared.dataTask(with: request) { data, response, error in
-        if let data = data { // データ取得チェック
-            let decorder = JSONDecoder()
-            guard let decodedResponse = try? decorder.decode(todayList.self, from: data) else {
-                print("Json decode エラー")
-                todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "未認証です", methods: [], period: 1))
-                todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "Twin:teにログインしてください", methods: [], period: 2))
-                todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "ログイン済みでこのエラーが出る場合は", methods: [], period: 3))
-                todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "お手数ですが運営までご連絡ください。", methods: [], period: 4))
-                for i in 5...6 {
-                    todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "", methods: [], period: i))
-                }
-
-                completion(ReturnObject(Lectures: todayLectureListWithoutDuplicate, description: "", changeTo: "", module: ""))
-                return
+    V4APIClient.shared.unifiedClient.getByDate(request: .with {
+        $0.date = .with { $0.value = date }
+    }) { response in
+        guard let message = response.message else {
+            var todayLectureListWithoutDuplicate: [Lecture] = []
+            todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "未認証です", methods: [], period: 1))
+            todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "Twin:teにログインしてください", methods: [], period: 2))
+            todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "ログイン済みでこのエラーが出る場合は", methods: [], period: 3))
+            todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "お手数ですが運営までご連絡ください。", methods: [], period: 4))
+            for i: Int32 in 5...6 {
+                todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "", methods: [], period: i))
             }
-            // 重複ありでとりあえず今日登録してる授業一覧を格納
-            var todayLectureList: [Lecture] = []
-            // 日課変更がない場合は指定された日の曜日を取得
-            // ある場合には後ほど格納
-            var changeTo: String = getWeekDate()
-
-            // ウィジェットに表示する用
-            var displayDescription: String = ""
-            var displayChangeTo: String = ""
-            var displayModule: String = ""
-
-            // print(decodedResponse.module.module)
-            if decodedResponse.events.count > 0 {
-                displayDescription = decodedResponse.events[0].description
-                // 日課変更がある場合にはchangeToに格納する
-                if decodedResponse.events[0].changeTo != nil {
-                    changeTo = decodedResponse.events[0].changeTo!
-                    displayChangeTo = convertDayEnglishToJapanese(day: decodedResponse.events[0].changeTo!)
-                }
-            }
-            // モジュールが記載されない時（冬休み）があるのでその対処
-            if decodedResponse.module != nil {
-                displayModule = convertModuleEnglishToJapanese(module: decodedResponse.module!.module)
-                for element in decodedResponse.courses {
-                    var lectureName: String
-                    if let name = element.name {
-                        // 授業名を変更されている場合 or カスタム講義の場合
-                        lectureName = name
-                    } else {
-                        // 授業名を変更されていない場合
-                        if let course = element.course {
-                            lectureName = course.name
-                        } else {
-                            // 授業名を変更していない授業は必ずcourseが存在するので発生し得ない。
-                            lectureName = "不明な授業（エラー）"
-                        }
-                    }
-
-                    var methods: [String] = []
-                    if let changedMethods = element.methods {
-                        // 授業方法を変更されている場合 or カスタム講義の場合
-                        methods = changedMethods
-                    } else {
-                        // 授業名を変更されていない場合
-                        if let course = element.course {
-                            methods = course.methods
-                        } else {
-                            // 授業方法を変更していない授業は必ずcourseが存在するので発生し得ない。
-                        }
-                    }
-
-                    // スケジュール変更されている場合
-                    if let schedules = element.schedules {
-                        // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
-                        let newScheduleArray = schedules.filter { $0.day == changeTo && $0.module == decodedResponse.module!.module }
-                        for item in newScheduleArray {
-                            todayLectureList.append(Lecture(name: lectureName, room: item.room, methods: methods, period: item.period))
-                        }
-                    } else {
-                        // スケジュール変更されていない場合
-                        if let course = element.course {
-                            // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
-                            let newScheduleArray = course.schedules.filter { $0.day == changeTo && $0.module == decodedResponse.module!.module }
-                            for item in newScheduleArray {
-                                todayLectureList.append(Lecture(name: lectureName, room: item.room, methods: methods, period: item.period))
-                            }
-                        } else {
-                            // スケジュール変更していない授業&カスタムじゃない授業は必ずcourseが存在するので発生し得ない。
-                        }
-                    }
-                }
-            }
-            // 授業時間順にソート
-            todayLectureList.sort(by: { $0.period < $1.period })
-
-            for i in 1...6 {
-                let tmpArray = todayLectureList.filter { $0.period == i }
-                // その時間の授業が2つ以上ある場合
-                if tmpArray.count > 1 {
-                    todayLectureListWithoutDuplicate.append(Lecture(name: "授業が重複しています", room: "", methods: [], period: i))
-                } else if tmpArray.count == 0 { // その時限に授業が登録されていない場合
-                    todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "---", methods: [], period: i))
-                } else {
-                    todayLectureListWithoutDuplicate.append(tmpArray[0])
-                }
-            }
-            completion(ReturnObject(Lectures: todayLectureListWithoutDuplicate, description: displayDescription, changeTo: displayChangeTo, module: displayModule))
-
-        } else {
-            /// データが取得できなかった場合の処理
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+            completion(ReturnObject(Lectures: todayLectureListWithoutDuplicate, description: "", changeTo: "", module: ""))
+            return
         }
-    }.resume()
+
+        // 最後に返すオブジェクトの中に入れる配列
+        var todayLectureListWithoutDuplicate: [Lecture] = []
+        // 重複ありでとりあえず今日登録してる授業一覧を格納
+        var todayLectureList: [Lecture] = []
+        // 日課変更がない場合は指定された日の曜日を取得
+        // ある場合には後ほど格納
+        var changeTo = convertDateToWeekday(Date())
+
+        // ウィジェットに表示する用
+        var displayDescription: String = ""
+        var displayChangeTo: String = ""
+        var displayModule: String = ""
+
+        // print(decodedResponse.module.module)
+        if message.events.count > 0 {
+            displayDescription = message.events[0].description_p
+            // 日課変更がある場合にはchangeToに格納する
+            if message.events[0].changeTo != .unspecified {
+                changeTo = message.events[0].changeTo
+                displayChangeTo = convertWeekdayToJapanese(message.events[0].changeTo)
+            }
+        }
+        // モジュールが記載されない時（冬休み）があるのでその対処
+        if message.module != .unspecified {
+            displayModule = convertModuleToJapanese(message.module)
+            for course in message.registeredCourses {
+                // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
+                let newScheduleArray = course.schedules.filter { schedule in
+                    areModulesEquivalent(schedule.module, message.module) && areWeekdaysEquivalent(schedule.day, changeTo)
+                }
+                for schedule in newScheduleArray {
+                    todayLectureList.append(Lecture(
+                        name: course.name,
+                        room: schedule.locations,
+                        methods: course.methods,
+                        period: schedule.period,
+                    ))
+                }
+            }
+        }
+        // 授業時間順にソート
+        todayLectureList.sort(by: { $0.period < $1.period })
+
+        for i: Int32 in 1...6 {
+            let tmpArray = todayLectureList.filter { $0.period == i }
+            if tmpArray.count > 1 { // その時間の授業が2つ以上ある場合
+                todayLectureListWithoutDuplicate.append(Lecture(name: "授業が重複しています", room: "", methods: [], period: i))
+            } else if tmpArray.count == 0 { // その時限に授業が登録されていない場合
+                todayLectureListWithoutDuplicate.append(Lecture(name: "---", room: "---", methods: [], period: i))
+            } else {
+                todayLectureListWithoutDuplicate.append(tmpArray[0])
+            }
+        }
+        completion(ReturnObject(Lectures: todayLectureListWithoutDuplicate, description: displayDescription, changeTo: displayChangeTo, module: displayModule))
+    }
 }
 
 // ここに格納される日付がAPIから取得する対象の日付
 var modifiedDate: Date = Date()
-
-// modifiedDateの曜日をSun,Mon... 形式の文字列で返す
-func getWeekDate() -> String {
-    let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en")
-    formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "E", options: 0, locale: Locale.current)
-    return formatter.string(from: modifiedDate)
-}
-
-func convertModuleEnglishToJapanese(module: String) -> String {
-    switch module {
-    case "SpringA":
-        return "春A"
-    case "SpringB":
-        return "春AB"
-    case "SpringC":
-        return "春C"
-    case "SummerVacation":
-        return "夏休み"
-    case "FallA":
-        return "秋A"
-    case "FallB":
-        return "秋B"
-    case "FallC":
-        return "秋C"
-    case "SpringVacation":
-        return "春休み"
-    default:
-        return ""
-    }
-}
-
-func convertDayEnglishToJapanese(day: String) -> String {
-    switch day {
-    case "Sun":
-        return "日曜"
-    case "Mon":
-        return "月曜"
-    case "Tue":
-        return "火曜"
-    case "Wed":
-        return "水曜"
-    case "Thu":
-        return "木曜"
-    case "Fri":
-        return "金曜"
-    case "Sat":
-        return "土曜"
-    case "":
-        return ""
-    default:
-        return "特殊"
-    }
-}
 
 // カスタムセルの専用クラス
 class CustomTableViewCell: UITableViewCell {
@@ -390,22 +243,22 @@ extension TodayViewController: UITableViewDataSource {
                 // ダークモード判定
                 if UITraitCollection.isDarkMode {
                     switch method {
-                    case "Asynchronous":
+                    case .onlineAsynchronous:
                         cell.onlineAsynchronous.image = UIImage(named: "dark-online-asynchronous")
-                    case "Synchronous":
+                    case .onlineSynchronous:
                         cell.onlineSynchronous.image = UIImage(named: "dark-online-synchronous")
-                    case "FaceToFace":
+                    case .faceToFace:
                         cell.faceToFace.image = UIImage(named: "dark-face-to-face")
                     default:
                         break
                     }
                 } else {
                     switch method {
-                    case "Asynchronous":
+                    case .onlineAsynchronous:
                         cell.onlineAsynchronous.image = UIImage(named: "light-online-asynchronous")
-                    case "Synchronous":
+                    case .onlineSynchronous:
                         cell.onlineSynchronous.image = UIImage(named: "light-online-synchronous")
-                    case "FaceToFace":
+                    case .faceToFace:
                         cell.faceToFace.image = UIImage(named: "light-face-to-face")
                     default:
                         break
