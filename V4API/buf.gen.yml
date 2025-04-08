@@ -1,0 +1,13 @@
+version: v2
+plugins:
+  - remote: buf.build/connectrpc/swift
+    out: Generated
+    opt:
+      - FileNaming=PathToUnderscores
+      - GenerateCallbackMethods=true
+      - Visibility=Public
+  - remote: buf.build/apple/swift
+    out: Generated
+    opt:
+      - FileNaming=PathToUnderscores
+      - Visibility=Public
