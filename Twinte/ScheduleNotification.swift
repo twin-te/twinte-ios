@@ -39,22 +39,23 @@ class ScheduleNotification {
                     for event in events {
                         // イベントタイプが授業変更の時のみ通知
                         if event.type == .substituteDay || event.type == .holiday {
-                            var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
-                            dateComponents.hour = userDefaults.integer(forKey: "notificationHour")
-                            dateComponents.minute = userDefaults.integer(forKey: "notificationMinute")
+                            // 今日の設定された時間に通知をスケジュールする
+                            var notificationTime = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+                            notificationTime.hour = userDefaults.integer(forKey: "notificationHour")
+                            notificationTime.minute = userDefaults.integer(forKey: "notificationMinute")
 
                             // print(element)
                             if event.type == .substituteDay {
                                 self.createNotification(
                                     title: "特別日程のお知らせ",
                                     body: "明日は\(convertWeekdayToJapanese(event.changeTo))日課です。ウィジェットから詳細をご確認ください。",
-                                    notificationTime: dateComponents
+                                    notificationTime: notificationTime,
                                 )
                             } else {
                                 self.createNotification(
                                     title: "臨時休講のお知らせ",
                                     body: "明日は\(event.description_p)のため休講です。詳細は学年暦をご覧ください。",
-                                    notificationTime: dateComponents
+                                    notificationTime: notificationTime,
                                 )
                             }
                         }
