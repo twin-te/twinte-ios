@@ -153,16 +153,16 @@ func fetchAPI(date: String, completion: @escaping (ReturnObject) -> Void) {
                     if let schedules = element.schedules {
                         // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
                         let newScheduleArray = schedules.filter { $0.day == changeTo && $0.module == decodedResponse.module!.module }
-                        newScheduleArray.forEach {
-                            todayLectureList.append(Lecture(name: lectureName, room: $0.room, methods: methods, period: $0.period))
+                        for item in newScheduleArray {
+                            todayLectureList.append(Lecture(name: lectureName, room: item.room, methods: methods, period: item.period))
                         }
                     } else {
                         // スケジュール変更されていない場合
                         if let course = element.course {
                             // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
                             let newScheduleArray = course.schedules.filter { $0.day == changeTo && $0.module == decodedResponse.module!.module }
-                            newScheduleArray.forEach {
-                                todayLectureList.append(Lecture(name: lectureName, room: $0.room, methods: methods, period: $0.period))
+                            for item in newScheduleArray {
+                                todayLectureList.append(Lecture(name: lectureName, room: item.room, methods: methods, period: item.period))
                             }
                         } else {
                             // スケジュール変更していない授業&カスタムじゃない授業は必ずcourseが存在するので発生し得ない。
@@ -386,10 +386,10 @@ extension TodayViewController: UITableViewDataSource {
         }
         // 授業フォーマットに記載がある場合
         if article.methods.count != 0 {
-            article.methods.forEach {
+            for method in article.methods {
                 // ダークモード判定
                 if UITraitCollection.isDarkMode {
-                    switch $0 {
+                    switch method {
                     case "Asynchronous":
                         cell.onlineAsynchronous.image = UIImage(named: "dark-online-asynchronous")
                     case "Synchronous":
@@ -400,7 +400,7 @@ extension TodayViewController: UITableViewDataSource {
                         break
                     }
                 } else {
-                    switch $0 {
+                    switch method {
                     case "Asynchronous":
                         cell.onlineAsynchronous.image = UIImage(named: "light-online-asynchronous")
                     case "Synchronous":

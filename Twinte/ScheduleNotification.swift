@@ -7,14 +7,7 @@
 //
 //  通知関連の機能を集めたクラス
 import UIKit
-
-// 授業振替情報を格納
-struct substitute: Codable {
-    let date: String
-    let changeTo: String?
-    let eventType: String
-    let description: String
-}
+import V4API
 
 class ScheduleNotification {
     /// 全ての通知をスケジューリング
@@ -39,31 +32,31 @@ class ScheduleNotification {
         // 現在登録されている全ての通知を消去
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         // UserDefaults のインスタンス
-        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-        if userDefaults?.object(forKey: "notificationSwitch") != nil {
-            if userDefaults!.bool(forKey: "notificationSwitch") {
-                schoolCalender { substitutes in
-                    // UserDefaults のインスタンス
-                    let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-
-                    for element in substitutes {
+        guard let userDefaults = UserDefaults(suiteName: "group.net.twinte.app") else { return }
+        if userDefaults.object(forKey: "notificationSwitch") != nil {
+            if userDefaults.bool(forKey: "notificationSwitch") {
+                fetchTomorrowEvents { events in
+                    for event in events {
                         // イベントタイプが授業変更の時のみ通知
-                        if element.eventType == "SubstituteDay" || element.eventType == "Holiday" {
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd"
-                            dateFormatter.locale = Locale(identifier: "ja")
-                            let notificationDate = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: String(element.date.prefix(10)))!) // 2021-04-06T00:00:00.000Zという文字列形式なので、先頭から10文字切り取って扱う
-                            var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: notificationDate!)
-                            dateComponents.hour = userDefaults?.integer(forKey: "notificationHour")
-                            dateComponents.minute = userDefaults?.integer(forKey: "notificationMinute")
+                        if event.type == .substituteDay || event.type == .holiday {
+                            // 今日の設定された時間に通知をスケジュールする
+                            var notificationTime = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+                            notificationTime.hour = userDefaults.integer(forKey: "notificationHour")
+                            notificationTime.minute = userDefaults.integer(forKey: "notificationMinute")
 
                             // print(element)
-                            if Date() < Calendar(identifier: .gregorian).date(from: dateComponents)! {
-                                if element.eventType == "SubstituteDay" {
-                                    self.createNotification(title: "特別日程のお知らせ", body: "明日は\(self.convertDayEnglishToJapanese(en: element.changeTo!))日課です。ウィジェットから詳細をご確認ください。", notificationTime: dateComponents)
-                                } else {
-                                    self.createNotification(title: "臨時休講のお知らせ", body: "明日は\(element.description)のため休講です。詳細は学年暦をご覧ください。", notificationTime: dateComponents)
-                                }
+                            if event.type == .substituteDay {
+                                self.createNotification(
+                                    title: "特別日程のお知らせ",
+                                    body: "明日は\(convertWeekdayToJapanese(event.changeTo))日課です。ウィジェットから詳細をご確認ください。",
+                                    notificationTime: notificationTime,
+                                )
+                            } else {
+                                self.createNotification(
+                                    title: "臨時休講のお知らせ",
+                                    body: "明日は\(event.description_p)のため休講です。詳細は学年暦をご覧ください。",
+                                    notificationTime: notificationTime,
+                                )
                             }
                         }
                     }
@@ -109,85 +102,19 @@ class ScheduleNotification {
         return formatter.string(from: modifiedDate)
     }
 
-    func convertDayEnglishToJapanese(en: String) -> String {
-        switch en {
-        case "Sun":
-            return "日曜"
-        case "Mon":
-            return "月曜"
-        case "Tue":
-            return "火曜"
-        case "Wed":
-            return "水曜"
-        case "Thu":
-            return "木曜"
-        case "Fri":
-            return "金曜"
-        case "Sat":
-            return "土曜"
-        default:
-            return "特殊"
-        }
-    }
-
-    /// イベント情報の取得
+    /// 明日のイベント情報の取得
     /// - Parameters:
     ///   - completion: 場合に応じてsemaphore.signal()を実行するとよい
-    func schoolCalender(completion: @escaping ([substitute]) -> Void) {
-        let calendar = Calendar(identifier: .gregorian)
-        let date = Date()
-        let thisMonth = calendar.component(.month, from: date)
-        let schoolYear = thisMonth <= 3 ? String(calendar.component(.year, from: calendar.date(byAdding: .year, value: -1, to: date)!)) : String(calendar.component(.year, from: date))
-
-        let requestUrl = "https://app.twinte.net/api/v3/school-calendar/events?year=\(schoolYear)"
-
-        // URL生成
-        guard let url = URL(string: requestUrl) else {
-            // URL生成失敗
-            return
+    func fetchTomorrowEvents(completion: @escaping ([Schoolcalendar_V1_Event]) -> Void) {
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        V4APIClient.shared.schoolcalendarClient.listEventsByDate(
+            request: .with { $0.date = convertDateToRFC3339FullDate(tomorrow) }
+        ) { response in
+            if let message = response.message {
+                completion(message.events)
+            } else {
+                completion([])
+            }
         }
-
-        // リクエスト生成
-        var request = URLRequest(url: url)
-        // Cookieをセット
-        // UserDefaults のインスタンス
-        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-        if let stringCookie = userDefaults?.string(forKey: "stringCookie") {
-            // UserDefaultsからCookieを取得
-            request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
-        }
-        // APIを殴る
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { (data: Data?,
-                                                      response: URLResponse?, error: Error?) in
-                // 通信完了後の処理
-                // エラーチェック
-                guard error == nil else {
-                    // エラー表示
-                    let alert = UIAlertController(title: "エラー",
-                                                  message: error?.localizedDescription,
-                                                  preferredStyle: UIAlertController.Style.alert)
-                    print(alert)
-                    return
-                }
-
-                // JSONで返却されたデータをパースして格納する
-                guard let data = data else {
-                    // データなし
-                    return
-                }
-
-                do {
-                    // jsonのパース実施
-                    let resultSet = try JSONDecoder().decode([substitute].self, from: data)
-                    completion(resultSet)
-                } catch {
-                    print("## error: \(error)")
-                    let resultSet = [substitute]()
-                    completion(resultSet)
-                }
-        }
-        // 通信開始
-        task.resume()
     }
 }
