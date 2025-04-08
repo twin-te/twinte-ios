@@ -95,3 +95,13 @@ public func areModulesEquivalent(_ s: Timetable_V1_Module, _ t: Schoolcalendar_V
     default: return false
     }
 }
+
+/// Date を Shared_RFC3339FullDateに変換する
+/// - Parameter date: Swift の Date 型
+/// - Returns: 対応するShared_RFC3339FullDate
+public func convertDateToRFC3339FullDate(_ date: Date) -> Shared_RFC3339FullDate {
+    let dateFormatter = ISO8601DateFormatter()
+    dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+    dateFormatter.formatOptions = .withFullDate
+    return .with { $0.value = dateFormatter.string(from: date) }
+}
