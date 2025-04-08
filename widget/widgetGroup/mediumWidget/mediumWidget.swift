@@ -10,17 +10,6 @@ import SwiftUI
 import WidgetKit
 
 struct mediumWidgetProvider: TimelineProvider {
-    let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-        day: getDate(), module: "春A", event: WidgetInfo.WidgetAllInfo.Event(normal: false, content: "水曜日日課"), lectures: [
-            WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", exist: true),
-            WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", exist: true),
-            WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", exist: false),
-            WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", exist: true),
-            WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", exist: true),
-            WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", exist: true),
-        ], lectureCount: 5, error: false
-    )
-
     func placeholder(in context: Context) -> mediumWidgetDayInfoEntry {
         mediumWidgetDayInfoEntry(date: Date(), nowLectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)], nextLectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)], lectureAllInfo: sampleWidgetAllInfo)
     }
@@ -54,7 +43,7 @@ struct mediumWidgetProvider: TimelineProvider {
                 // エラー発生時は更新頻度を10分毎に&表示をエラー表示に
                 if todayWidgetAllInfo.error {
                     let entries: [mediumWidgetDayInfoEntry] = [
-                        mediumWidgetDayInfoEntry(date: Date(), nowLectureInfo: WidgetInfo.Lecture(period: 1, startTime: "", name: todayWidgetAllInfo.event.content, room: "", exist: false), nextLectureInfo: WidgetInfo.Lecture(period: 1, startTime: "", name: todayWidgetAllInfo.event.content, room: "", exist: false), lectureAllInfo: todayWidgetAllInfo),
+                        mediumWidgetDayInfoEntry(date: Date(), nowLectureInfo: .content(period: 1, name: todayWidgetAllInfo.event.content), nextLectureInfo: .content(period: 1, name: todayWidgetAllInfo.event.content), lectureAllInfo: todayWidgetAllInfo),
                     ]
                     let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .minute, value: 10, to: Date())!))
                     completion(timeline)
@@ -63,9 +52,9 @@ struct mediumWidgetProvider: TimelineProvider {
                 var entries: [mediumWidgetDayInfoEntry] = []
                 // Generate a timeline consisting of five entries an hour apart, starting from the current date.
                 var todayExistLectures: [WidgetInfo.Lecture] = todayWidgetAllInfo.lectures.filter { $0.exist }
-                todayExistLectures.insert(WidgetInfo.Lecture(period: 0, startTime: "-", name: "授業がありません", room: "-", exist: false), at: 0)
+                todayExistLectures.insert(.empty(period: 0), at: 0)
                 let todayLastPeriod = (todayExistLectures.last?.period ?? 0) + 1
-                todayExistLectures.append(WidgetInfo.Lecture(period: todayLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false))
+                todayExistLectures.append(.empty(period: todayLastPeriod))
                 for todayExistLecturesIndex in 0..<todayExistLectures.count {
                     if todayExistLecturesIndex == 0 {
                         // 最初の授業が始まる前ならすぐに最初の授業の情報(or授業が全くない旨)を表示する．
@@ -77,7 +66,7 @@ struct mediumWidgetProvider: TimelineProvider {
                         if todayExistLecturesIndex + 1 < todayExistLectures.count {
                             entries.append(mediumWidgetDayInfoEntry(date: todayClassUpdateTimes[todayNowClassUpdateTimesIndex], nowLectureInfo: todayExistLectures[todayExistLecturesIndex], nextLectureInfo: todayExistLectures[todayExistLecturesIndex + 1], lectureAllInfo: todayWidgetAllInfo))
                         } else {
-                            entries.append(mediumWidgetDayInfoEntry(date: todayClassUpdateTimes[todayNowClassUpdateTimesIndex], nowLectureInfo: WidgetInfo.Lecture(period: todayLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false), nextLectureInfo: WidgetInfo.Lecture(period: todayLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false), lectureAllInfo: todayWidgetAllInfo))
+                            entries.append(mediumWidgetDayInfoEntry(date: todayClassUpdateTimes[todayNowClassUpdateTimesIndex], nowLectureInfo: .empty(period: todayLastPeriod), nextLectureInfo: .empty(period: todayLastPeriod), lectureAllInfo: todayWidgetAllInfo))
                         }
                     }
                 }
@@ -101,7 +90,7 @@ struct mediumWidgetProvider: TimelineProvider {
                 // エラー発生時は更新頻度を10分毎に&表示をエラー表示に
                 if tommorowWidgetAllInfo.error {
                     let entries: [mediumWidgetDayInfoEntry] = [
-                        mediumWidgetDayInfoEntry(date: Date(), nowLectureInfo: WidgetInfo.Lecture(period: 1, startTime: "", name: tommorowWidgetAllInfo.event.content, room: "", exist: false), nextLectureInfo: WidgetInfo.Lecture(period: 1, startTime: "", name: tommorowWidgetAllInfo.event.content, room: "", exist: false), lectureAllInfo: tommorowWidgetAllInfo),
+                        mediumWidgetDayInfoEntry(date: Date(), nowLectureInfo: .content(period: 1, name: tommorowWidgetAllInfo.event.content), nextLectureInfo: .content(period: 1, name: tommorowWidgetAllInfo.event.content), lectureAllInfo: tommorowWidgetAllInfo),
                     ]
                     let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .minute, value: 10, to: Date())!))
                     completion(timeline)
@@ -109,9 +98,9 @@ struct mediumWidgetProvider: TimelineProvider {
 
                 var entries: [mediumWidgetDayInfoEntry] = []
                 var tommorowExistLectures: [WidgetInfo.Lecture] = tommorowWidgetAllInfo.lectures.filter { $0.exist }
-                tommorowExistLectures.insert(WidgetInfo.Lecture(period: 0, startTime: "-", name: "授業がありません", room: "-", exist: false), at: 0)
+                tommorowExistLectures.insert(.empty(period: 0), at: 0)
                 let tommorowLastPeriod = (tommorowExistLectures.last?.period ?? 0) + 1
-                tommorowExistLectures.append(WidgetInfo.Lecture(period: tommorowLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false))
+                tommorowExistLectures.append(.empty(period: tommorowLastPeriod))
 
                 for tommorowExistLecturesIndex in 0..<tommorowExistLectures.count {
                     if tommorowExistLecturesIndex == 0 {
@@ -124,7 +113,7 @@ struct mediumWidgetProvider: TimelineProvider {
                         if tommorowExistLecturesIndex + 1 < tommorowExistLectures.count {
                             entries.append(mediumWidgetDayInfoEntry(date: tommorowClassUpdateTimes[tommorowClassUpdateTimesIndex], nowLectureInfo: tommorowExistLectures[tommorowExistLecturesIndex], nextLectureInfo: tommorowExistLectures[tommorowExistLecturesIndex + 1], lectureAllInfo: tommorowWidgetAllInfo))
                         } else {
-                            entries.append(mediumWidgetDayInfoEntry(date: tommorowClassUpdateTimes[tommorowClassUpdateTimesIndex], nowLectureInfo: WidgetInfo.Lecture(period: tommorowLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false), nextLectureInfo: WidgetInfo.Lecture(period: tommorowLastPeriod, startTime: "-", name: "授業がありません", room: "-", exist: false), lectureAllInfo: tommorowWidgetAllInfo))
+                            entries.append(mediumWidgetDayInfoEntry(date: tommorowClassUpdateTimes[tommorowClassUpdateTimesIndex], nowLectureInfo: .empty(period: tommorowLastPeriod), nextLectureInfo: .empty(period: tommorowLastPeriod), lectureAllInfo: tommorowWidgetAllInfo))
                         }
                     }
                 }
@@ -352,17 +341,6 @@ struct mediumWidget: Widget {
 
 struct mediumWidget_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-            day: getDate(), module: "春A", event: WidgetInfo.WidgetAllInfo.Event(normal: false, content: "水曜日日課"), lectures: [
-                WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", exist: true),
-                WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", exist: true),
-                WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", exist: false),
-                WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", exist: true),
-                WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", exist: true),
-                WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", exist: true),
-            ], lectureCount: 5, error: false
-        )
-
         mediumWidgetEntryView(entry: mediumWidgetDayInfoEntry(date: Date(), nowLectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)], nextLectureInfo: sampleWidgetAllInfo.lectures[Int.random(in: 0...5)], lectureAllInfo: sampleWidgetAllInfo))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }

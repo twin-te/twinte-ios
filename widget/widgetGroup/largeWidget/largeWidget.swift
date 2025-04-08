@@ -10,17 +10,6 @@ import SwiftUI
 import WidgetKit
 
 struct largeWidgetProvider: TimelineProvider {
-    let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-        day: getDate(), module: "春A", event: WidgetInfo.WidgetAllInfo.Event(normal: false, content: "水曜日日課"), lectures: [
-            WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", exist: true),
-            WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", exist: true),
-            WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", exist: false),
-            WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", exist: true),
-            WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", exist: true),
-            WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", exist: true),
-        ], lectureCount: 5, error: false
-    )
-
     func placeholder(in context: Context) -> largeWidgetDayInfoEntry {
         largeWidgetDayInfoEntry(date: Date(), lectureAllInfo: sampleWidgetAllInfo)
     }
@@ -221,17 +210,6 @@ struct largeWidget: Widget {
 
 struct largeWidget_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
-            day: getDate(), module: "秋A", event: WidgetInfo.WidgetAllInfo.Event(normal: true, content: "通常日課"), lectures: [
-                WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", exist: true),
-                WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", exist: true),
-                WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", exist: false),
-                WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", exist: true),
-                WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", exist: true),
-                WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", exist: true),
-            ], lectureCount: 5, error: false
-        )
-
         largeWidgetEntryView(entry: largeWidgetDayInfoEntry(date: Date(), lectureAllInfo: sampleWidgetAllInfo))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }

@@ -6,13 +6,14 @@
 //  Copyright © 2023 tako. All rights reserved.
 //
 
+import Connect
 import Foundation
+import V4API
 
 class WidgetInfo {
     private(set) var date: Date = Date()
     // 任意の日付を設定することができる
     // private(set) var date:Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2023, month: 1, day: 23))!
-    private let apiEndpoint = "https://app.twinte.net/api/v3/timetable/"
 
     struct WidgetAllInfo {
         var day: String
@@ -33,42 +34,15 @@ class WidgetInfo {
         let startTime: String
         let name: String
         let room: String
+        let methods: [Timetable_V1_CourseMethod]
         let exist: Bool // 授業が登録されているかどうか．されていない場合他の情報は無視される．
-    }
 
-    // APIデコード用
-    private struct dayLectureEventInfo: Codable {
-        let module: module?
-        let events: [event]
-        let courses: [eachCourse]
-
-        struct module: Codable {
-            let module: String
+        static func empty(period: Int) -> WidgetInfo.Lecture {
+            return WidgetInfo.Lecture(period: period, startTime: "-", name: "授業がありません", room: "-", methods: [], exist: false)
         }
 
-        struct event: Codable {
-            let eventType: String
-            let description: String
-            // 存在しないことがある
-            let changeTo: String?
-        }
-
-        struct eachCourse: Codable {
-            let name: String?
-            let course: course? // カスタム講義の場合は存在しない
-            let schedules: [schedule]? // ユーザーが変更した場合に追加される
-
-            struct course: Codable {
-                let name: String
-                let schedules: [schedule]
-            }
-
-            struct schedule: Codable {
-                let module: String
-                let day: String
-                let period: Int
-                let room: String
-            }
+        static func content(period: Int, name: String) -> WidgetInfo.Lecture {
+            return WidgetInfo.Lecture(period: period, startTime: "-", name: name, room: "-", methods: [], exist: false)
         }
     }
 
@@ -77,211 +51,109 @@ class WidgetInfo {
     }
 
     func getWidgetAllInfo() async -> WidgetAllInfo {
-        do {
-            let myDayLectureEventInfo = try await self.fetchAPI()
+        let response = await V4APIClient.shared.unifiedClient.getByDate(request: .with {
+            $0.date = .with { $0.value = dateToString() }
+        })
+        guard let message = response.message else {
+            print(response)
+            return handleError(error: response.error!)
+        }
 
-            var myWidgetAllInfo = WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: true, content: "通常日課"), lectures: [], lectureCount: 0, error: false)
+        // 日課変更がない場合は指定された日の曜日を取得
+        // ある場合には後ほど格納
+        var changeTo = convertDateToWeekday(self.date)
 
-            // 重複ありで登録してる授業一覧を格納
-            var dayLectureList: [Lecture] = []
-
-            // 日課変更がない場合は指定された日の曜日を取得
-            // ある場合には後ほど格納
-            var changeTo: String = getWeekDate()
-
-            if myDayLectureEventInfo.events.count > 0 {
-                myWidgetAllInfo.event.content = myDayLectureEventInfo.events[0].description
+        var event: WidgetAllInfo.Event
+        if let eventMsg = message.events.first {
+            if eventMsg.changeTo != .unspecified {
                 // 日課変更がある場合
-                if myDayLectureEventInfo.events[0].changeTo != nil {
-                    changeTo = myDayLectureEventInfo.events[0].changeTo!
-                    myWidgetAllInfo.event.normal = false
-                    myWidgetAllInfo.event.content = convertDayEnglishToJapanese(day: myDayLectureEventInfo.events[0].changeTo!) + "日課"
-                }
+                changeTo = eventMsg.changeTo
+                event = WidgetAllInfo.Event(
+                    normal: false,
+                    content: convertWeekdayToJapanese(changeTo) + "日課",
+                )
+            } else {
+                // 日課変更でないイベントがある場合
+                event = WidgetAllInfo.Event(
+                    normal: true,
+                    content: eventMsg.description_p,
+                )
             }
-            // モジュールが記載されない時（冬休み）があるのでその対処
-            if myDayLectureEventInfo.module != nil {
-                myWidgetAllInfo.module = convertModuleEnglishToJapanese(module: myDayLectureEventInfo.module!.module)
-                for element in myDayLectureEventInfo.courses {
-                    var lectureName: String
-                    if let name = element.name {
-                        // 授業名が変更されている場合 or カスタム講義の場合
-                        lectureName = name
-                    } else {
-                        // 授業名が変更されていない場合
-                        if let course = element.course {
-                            lectureName = course.name
-                        } else {
-                            // 授業名を変更していない授業は必ずcourseが存在するので発生し得ない。
-                            lectureName = "不明な授業（エラー）"
-                        }
-                    }
-
-                    // スケジュール変更されている場合 or カスタム講義の場合
-                    if let schedules = element.schedules {
-                        // 指定日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
-                        let newScheduleArray = schedules.filter { $0.day == changeTo && $0.module == myDayLectureEventInfo.module!.module }
-                        for item in newScheduleArray {
-                            dayLectureList.append(Lecture(period: item.period, startTime: LectureStartTime(number: item.period), name: lectureName, room: item.room, exist: true))
-                        }
-                    } else {
-                        // スケジュール変更されていない場合
-                        if let course = element.course {
-                            // 指定日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
-                            let newScheduleArray = course.schedules.filter { $0.day == changeTo && $0.module == myDayLectureEventInfo.module!.module }
-                            for item in newScheduleArray {
-                                dayLectureList.append(Lecture(period: item.period, startTime: LectureStartTime(number: item.period), name: lectureName, room: item.room, exist: true))
-                            }
-                        } else {
-                            // スケジュール変更していない授業&カスタムじゃない授業は必ずcourseが存在するので発生し得ない。
-                        }
-                    }
-                }
-            }
-            // 授業時間順にソート
-            dayLectureList.sort(by: { $0.period < $1.period })
-
-            for i in 1...6 {
-                let tmpArray = dayLectureList.filter { $0.period == i }
-                // その時間の授業が2つ以上ある場合
-                if tmpArray.count > 1 {
-                    myWidgetAllInfo.lectures.append(Lecture(period: i, startTime: LectureStartTime(number: i), name: "授業が重複しています", room: "-", exist: true))
-                } else if tmpArray.count == 0 { // その時限に授業が登録されていない場合
-                    myWidgetAllInfo.lectures.append(Lecture(period: i, startTime: "-", name: "授業がありません", room: "-", exist: false))
-                } else {
-                    myWidgetAllInfo.lectures.append(tmpArray[0])
-                    myWidgetAllInfo.lectureCount = myWidgetAllInfo.lectureCount + 1
-                }
-            }
-            return myWidgetAllInfo
-        } catch APIClientError.serverError {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "エラーが発生", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "しました。", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "時間を置いて", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "アプリを再起動後", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "改善しない場合", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "運営にご連絡ください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:1"), lectures: message, lectureCount: 0, error: true)
-        } catch APIClientError.badStatus {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "エラーが発生", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "しました。", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "---", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "BadStatus", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "改善しない場合", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "運営にご連絡ください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:2"), lectures: message, lectureCount: 0, error: true)
-        } catch APIClientError.invalidURL {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "エラーが発生", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "しました。", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "---", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "InvalidURL", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "改善しない場合", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "運営にご連絡ください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:3"), lectures: message, lectureCount: 0, error: true)
-        } catch APIClientError.responseError {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "エラーが発生", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "しました。", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "インターネット接続", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "をご確認ください。", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "改善しない場合", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "運営にご連絡ください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:4"), lectures: message, lectureCount: 0, error: true)
-        } catch AppInternalError.jsonDecodeError {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "未認証です。", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "Twin:teに", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "ログインしてください。", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "JsonParseError", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "改善しない場合", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "運営にご連絡ください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:5"), lectures: message, lectureCount: 0, error: true)
-        } catch AppInternalError.cookieError {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "未認証です。", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "Twin:teに", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "ログインしてください。", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "ログイン済みの場合は", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "アプリを再起動して", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "やり直してください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:6"), lectures: message, lectureCount: 0, error: true)
-        } catch {
-            let message: [Lecture] = [
-                Lecture(period: 1, startTime: "-", name: "エラーが発生しました。", room: "-", exist: false),
-                Lecture(period: 2, startTime: "-", name: "アプリ・端末の", room: "-", exist: false),
-                Lecture(period: 3, startTime: "-", name: "再起動を", room: "-", exist: false),
-                Lecture(period: 4, startTime: "-", name: "お試しください。", room: "-", exist: false),
-                Lecture(period: 5, startTime: "-", name: "運営にご連絡", room: "-", exist: false),
-                Lecture(period: 6, startTime: "-", name: "ください。", room: "-", exist: false),
-            ]
-            return WidgetAllInfo(day: dateToString(format: "MM/dd(EEE)"), module: "", event: WidgetAllInfo.Event(normal: false, content: "Error:7"), lectures: message, lectureCount: 0, error: true)
+        } else {
+            // 通常日課
+            event = WidgetAllInfo.Event(normal: true, content: "通常日課")
         }
 
-        // dateの曜日をSun,Mon... 形式の文字列で返す
-        func getWeekDate() -> String {
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en")
-            formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "E", options: 0, locale: Locale.current)
-            return formatter.string(from: self.date)
+        // 重複ありでとりあえず今日登録してる授業一覧を格納
+        var todayLectureList: [Lecture] = []
+        for course in message.registeredCourses {
+            // 今日のモジュールかつ、今日の曜日(日課変更の場合は変更後の曜日)のもの
+            let newScheduleArray = course.schedules.filter { schedule in
+                areModulesEquivalent(schedule.module, message.module) && areWeekdaysEquivalent(schedule.day, changeTo)
+            }
+            for schedule in newScheduleArray {
+                todayLectureList.append(Lecture(
+                    period: Int(schedule.period),
+                    startTime: convertPeriodToLectureStartTime(period: Int(schedule.period)),
+                    name: course.name,
+                    room: schedule.locations,
+                    methods: course.methods,
+                    exist: true,
+                ))
+            }
+        }
+        // 授業時間順にソート
+        todayLectureList.sort(by: { $0.period < $1.period })
+
+        var lectureCount = 0
+        var todayLectureListWithoutDuplicate: [Lecture] = []
+        for i in 1...6 {
+            let tmpArray = todayLectureList.filter { $0.period == i }
+            if tmpArray.count > 1 { // その時間の授業が2つ以上ある場合
+                todayLectureListWithoutDuplicate.append(Lecture(period: i, startTime: convertPeriodToLectureStartTime(period: i), name: "授業が重複しています", room: "", methods: [], exist: true))
+            } else if tmpArray.count == 0 { // その時限に授業が登録されていない場合
+                todayLectureListWithoutDuplicate.append(.empty(period: i))
+            } else {
+                todayLectureListWithoutDuplicate.append(tmpArray[0])
+                lectureCount += 1
+            }
         }
 
-        func convertModuleEnglishToJapanese(module: String) -> String {
-            switch module {
-            case "SpringA":
-                return "春A"
-            case "SpringB":
-                return "春AB"
-            case "SpringC":
-                return "春C"
-            case "SummerVacation":
-                return "夏休み"
-            case "FallA":
-                return "秋A"
-            case "FallB":
-                return "秋B"
-            case "FallC":
-                return "秋C"
-            case "SpringVacation":
-                return "春休み"
+        return WidgetAllInfo(
+            day: dateToString(format: "MM/dd(EEE)"),
+            module: convertModuleToJapanese(message.module),
+            event: event,
+            lectures: todayLectureListWithoutDuplicate,
+            lectureCount: lectureCount,
+            error: false,
+        )
+
+        func handleError(error: ConnectError) -> WidgetAllInfo {
+            let (errorCode, messages) = switch error.code {
+            case .unknown:
+                (1, ["エラーが発生", "しました。", "時間を置いて", "アプリを再起動後", "改善しない場合", "運営にご連絡ください。"])
+            case .unimplemented:
+                (2, ["エラーが発生", "しました。", "時間を置いて", "アプリを再起動後", "改善しない場合", "運営にご連絡ください。"])
+            case .unavailable:
+                (4, ["エラーが発生", "しました。", "インターネット接続", "をご確認ください。", "改善しない場合", "運営にご連絡ください。"])
+            case .unauthenticated:
+                (6, ["未認証です。", "Twin:teに", "ログインしてください。", "ログイン済みの場合は", "アプリを再起動して", "やり直してください。"])
             default:
-                return ""
+                (7, ["エラーが発生しました。", "アプリ・端末の", "再起動を", "お試しください。", "運営にご連絡", "ください。"])
             }
-        }
-
-        func convertDayEnglishToJapanese(day: String) -> String {
-            switch day {
-            case "Sun":
-                return "日曜"
-            case "Mon":
-                return "月曜"
-            case "Tue":
-                return "火曜"
-            case "Wed":
-                return "水曜"
-            case "Thu":
-                return "木曜"
-            case "Fri":
-                return "金曜"
-            case "Sat":
-                return "土曜"
-            case "":
-                return ""
-            default:
-                return "特殊"
-            }
+            return WidgetAllInfo(
+                day: dateToString(format: "MM/dd(EEE)"),
+                module: "",
+                event: WidgetAllInfo.Event(normal: false, content: "Error:\(errorCode)"),
+                lectures: messages.enumerated().map { i, message in .content(period: i, name: message) },
+                lectureCount: 0,
+                error: true
+            )
         }
 
         // 授業時限と開始時間の対応
-        func LectureStartTime(number: Int) -> String {
-            switch number {
+        func convertPeriodToLectureStartTime(period: Int) -> String {
+            switch period {
             case 1:
                 return "8:40"
             case 2:
@@ -297,49 +169,6 @@ class WidgetInfo {
             default:
                 return "-"
             }
-        }
-    }
-
-    private func fetchAPI() async throws -> dayLectureEventInfo {
-        let urlString = self.apiEndpoint + dateToString()
-        guard let url = URL(string: urlString) else {
-            /// 文字列が有効なURLでない場合の処理
-            throw APIClientError.invalidURL
-        }
-        do {
-            // ①リクエスト
-            var request = URLRequest(url: url)
-            // UserDefaultsからCookieを取得して付与
-            let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
-            if let stringCookie = userDefaults?.string(forKey: "stringCookie") {
-                // もしCookieがなかったらエラー表示
-                if !stringCookie.contains("twinte_session") {
-                    throw AppInternalError.cookieError
-                }
-                // UserDefaultsからCookieを取得して付与
-                request.setValue(stringCookie, forHTTPHeaderField: "Cookie")
-            }
-            let (data, urlResponse) = try await URLSession.shared.data(for: request, delegate: nil)
-            guard let httpStatus = urlResponse as? HTTPURLResponse else {
-                // ネットにつながっていないなど（？）
-                throw APIClientError.responseError
-            }
-
-            // ②ステータスコードによって処理を分ける
-            switch httpStatus.statusCode {
-            case 200..<400:
-                let decorder = JSONDecoder()
-                guard let decodedResponse = try? decorder.decode(dayLectureEventInfo.self, from: data) else {
-                    throw AppInternalError.jsonDecodeError
-                }
-                return decodedResponse
-            case 400...:
-                throw APIClientError.badStatus(statusCode: httpStatus.statusCode)
-            default:
-                fatalError()
-            }
-        } catch {
-            throw APIClientError.serverError(error)
         }
     }
 
@@ -364,3 +193,14 @@ class WidgetInfo {
         case cookieError
     }
 }
+
+let sampleWidgetAllInfo = WidgetInfo.WidgetAllInfo(
+    day: "10/14(木)", module: "秋A", event: WidgetInfo.WidgetAllInfo.Event(normal: true, content: "通常日課"), lectures: [
+        WidgetInfo.Lecture(period: 1, startTime: "8:40", name: "つくば市史概論", room: "1B202", methods: [], exist: true),
+        WidgetInfo.Lecture(period: 2, startTime: "10:10", name: "基礎ネコ語AII", room: "平砂宿舎", methods: [], exist: true),
+        WidgetInfo.Lecture(period: 3, startTime: "12:15", name: "授業がありません", room: "-", methods: [], exist: false),
+        WidgetInfo.Lecture(period: 4, startTime: "13:45", name: "筑波大学〜野草と食〜", room: "4C213", methods: [], exist: true),
+        WidgetInfo.Lecture(period: 5, startTime: "15:15", name: "東京教育大学の遺産", room: "春日講堂", methods: [], exist: true),
+        WidgetInfo.Lecture(period: 6, startTime: "16:45", name: "日常系作品の実際", room: "オンライン", methods: [], exist: true),
+    ], lectureCount: 5, error: false
+)
