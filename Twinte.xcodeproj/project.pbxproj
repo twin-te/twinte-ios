@@ -42,6 +42,12 @@
 		CE6C80CD2DA519DC0060FAE4 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
 		CE6C80CE2DA519DC0060FAE4 /* V4API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE6C81022DA51A160060FAE4 /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = CE6C81012DA51A160060FAE4 /* Connect */; };
+		CEC3CA842DDE78C500971004 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
+		CEC3CA852DDE78C500971004 /* V4API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEC3CA892DDE78CB00971004 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
+		CEC3CA8A2DDE78CB00971004 /* V4API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEC3CA8E2DDE78CE00971004 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
+		CEC3CA8F2DDE78CE00971004 /* V4API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +79,27 @@
 			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
 			remoteInfo = V4API;
 		};
+		CEC3CA862DDE78C500971004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
+			remoteInfo = V4API;
+		};
+		CEC3CA8B2DDE78CB00971004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
+			remoteInfo = V4API;
+		};
+		CEC3CA902DDE78CE00971004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
+			remoteInfo = V4API;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +123,39 @@
 			dstSubfolderSpec = 10;
 			files = (
 				CE6C80CE2DA519DC0060FAE4 /* V4API.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEC3CA882DDE78C500971004 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEC3CA852DDE78C500971004 /* V4API.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEC3CA8D2DDE78CB00971004 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEC3CA8A2DDE78CB00971004 /* V4API.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEC3CA922DDE78CE00971004 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEC3CA8F2DDE78CE00971004 /* V4API.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */,
+				CEC3CA842DDE78C500971004 /* V4API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC3CA892DDE78CB00971004 /* V4API.framework in Frameworks */,
 				3C9A69C226A304E800638B53 /* SwiftUI.framework in Frameworks */,
 				3C9A69C126A304E800638B53 /* WidgetKit.framework in Frameworks */,
 			);
@@ -178,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC3CA8E2DDE78CE00971004 /* V4API.framework in Frameworks */,
 				3CF748FD28F546700001D49B /* SwiftUI.framework in Frameworks */,
 				3CF748FC28F546700001D49B /* WidgetKit.framework in Frameworks */,
 			);
@@ -362,10 +425,12 @@
 				3C88955B23B71C79002557E0 /* Sources */,
 				3C88955C23B71C79002557E0 /* Frameworks */,
 				3C88955D23B71C79002557E0 /* Resources */,
+				CEC3CA882DDE78C500971004 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CEC3CA872DDE78C500971004 /* PBXTargetDependency */,
 			);
 			name = todayTimeTable;
 			productName = todayTimeTable;
@@ -379,10 +444,12 @@
 				3C9A69BC26A304E800638B53 /* Sources */,
 				3C9A69BD26A304E800638B53 /* Frameworks */,
 				3C9A69BE26A304E800638B53 /* Resources */,
+				CEC3CA8D2DDE78CB00971004 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CEC3CA8C2DDE78CB00971004 /* PBXTargetDependency */,
 			);
 			name = widgetGroupExtension;
 			productName = widgetGroupExtension;
@@ -396,10 +463,12 @@
 				3CF748F728F546700001D49B /* Sources */,
 				3CF748F828F546700001D49B /* Frameworks */,
 				3CF748F928F546700001D49B /* Resources */,
+				CEC3CA922DDE78CE00971004 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CEC3CA912DDE78CE00971004 /* PBXTargetDependency */,
 			);
 			name = lockScreenWidgetExtension;
 			productName = lockScreenWidgetExtension;
@@ -603,6 +672,21 @@
 			isa = PBXTargetDependency;
 			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
 			targetProxy = CE6C80CB2DA519DC0060FAE4 /* PBXContainerItemProxy */;
+		};
+		CEC3CA872DDE78C500971004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
+			targetProxy = CEC3CA862DDE78C500971004 /* PBXContainerItemProxy */;
+		};
+		CEC3CA8C2DDE78CB00971004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
+			targetProxy = CEC3CA8B2DDE78CB00971004 /* PBXContainerItemProxy */;
+		};
+		CEC3CA912DDE78CE00971004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
+			targetProxy = CEC3CA902DDE78CE00971004 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
