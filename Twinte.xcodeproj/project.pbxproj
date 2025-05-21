@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000540C52DDE10BA0029793B /* twinte-watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 000540BB2DDE10B80029793B /* twinte-watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		000540CA2DDE13DC0029793B /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
+		000540D12DDE18170029793B /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
+		000540D72DDE18670029793B /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = 000540D62DDE18670029793B /* Connect */; };
+		0005410C2DDE18CB0029793B /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = 0005410B2DDE18CB0029793B /* Connect */; };
+		0005410D2DDE18E10029793B /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
+		0005414D2DDE1FFB0029793B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0005414C2DDE1FFB0029793B /* SwiftProtobuf */; };
+		0005414F2DDE201D0029793B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0005414E2DDE201D0029793B /* SwiftProtobuf */; };
+		000541512DDE20200029793B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 000541502DDE20200029793B /* SwiftProtobuf */; };
+		0005418A2DDE20D60029793B /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = 000541892DDE20D60029793B /* Connect */; };
+		0005418C2DDE20D90029793B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0005418B2DDE20D90029793B /* SwiftProtobuf */; };
+		0005418E2DDE210F0029793B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0005418D2DDE210F0029793B /* SwiftProtobuf */; };
+		000541902DDE21220029793B /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = 0005418F2DDE21220029793B /* Connect */; };
+		000541962DDE21510029793B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA72610DFB6006D306E /* WidgetKit.framework */; };
+		000541972DDE21510029793B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA92610DFB6006D306E /* SwiftUI.framework */; };
+		000541A02DDE21520029793B /* twinte-watch-compExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 000541952DDE21510029793B /* twinte-watch-compExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C0FC89A238247CC00055141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC899238247CC00055141 /* AppDelegate.swift */; };
 		3C0FC89C238247CC00055141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC89B238247CC00055141 /* SceneDelegate.swift */; };
 		3C0FC89E238247CC00055141 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC89D238247CC00055141 /* ViewController.swift */; };
@@ -45,6 +61,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		000540C32DDE10BA0029793B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000540BA2DDE10B80029793B;
+			remoteInfo = "twinte-watch Watch App";
+		};
+		000540CC2DDE13DC0029793B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
+			remoteInfo = V4API;
+		};
+		000540D32DDE18170029793B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
+			remoteInfo = V4API;
+		};
+		0005410F2DDE18E10029793B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
+			remoteInfo = V4API;
+		};
+		0005419E2DDE21520029793B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000541942DDE21510029793B;
+			remoteInfo = "twinte-watch-compExtension";
+		};
 		3C88956923B71C79002557E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
@@ -76,6 +127,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		000540C62DDE10BA0029793B /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				000540C52DDE10BA0029793B /* twinte-watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000541A52DDE21520029793B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				000541A02DDE21520029793B /* twinte-watch-compExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C88956C23B71C79002557E0 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -103,6 +176,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000540BB2DDE10B80029793B /* twinte-watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "twinte-watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		000541952DDE21510029793B /* twinte-watch-compExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "twinte-watch-compExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0FC896238247CC00055141 /* Twin:te.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twin:te.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0FC899238247CC00055141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C0FC89B238247CC00055141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,17 +218,47 @@
 		CE6C80C52DA519DC0060FAE4 /* V4API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = V4API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		000541A12DDE21520029793B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 000541942DDE21510029793B /* twinte-watch-compExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		000540BC2DDE10B80029793B /* twinte-watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "twinte-watch Watch App"; sourceTree = "<group>"; };
+		000541982DDE21510029793B /* twinte-watch-comp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (000541A12DDE21520029793B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "twinte-watch-comp"; sourceTree = "<group>"; };
 		CE6C80C62DA519DC0060FAE4 /* V4API */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = V4API; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		000540B82DDE10B80029793B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000541922DDE21510029793B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000541972DDE21510029793B /* SwiftUI.framework in Frameworks */,
+				000541962DDE21510029793B /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C0FC893238247CC00055141 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0005418A2DDE20D60029793B /* Connect in Frameworks */,
 				3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */,
 				CE6C80CD2DA519DC0060FAE4 /* V4API.framework in Frameworks */,
+				0005418C2DDE20D90029793B /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +267,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */,
+				000541902DDE21220029793B /* Connect in Frameworks */,
+				000540CA2DDE13DC0029793B /* V4API.framework in Frameworks */,
+				0005418E2DDE210F0029793B /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +278,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C9A69C226A304E800638B53 /* SwiftUI.framework in Frameworks */,
+				000540D72DDE18670029793B /* Connect in Frameworks */,
 				3C9A69C126A304E800638B53 /* WidgetKit.framework in Frameworks */,
+				0005414F2DDE201D0029793B /* SwiftProtobuf in Frameworks */,
+				000540D12DDE18170029793B /* V4API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,8 +289,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0005410C2DDE18CB0029793B /* Connect in Frameworks */,
 				3CF748FD28F546700001D49B /* SwiftUI.framework in Frameworks */,
 				3CF748FC28F546700001D49B /* WidgetKit.framework in Frameworks */,
+				000541512DDE20200029793B /* SwiftProtobuf in Frameworks */,
+				0005410D2DDE18E10029793B /* V4API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6C81022DA51A160060FAE4 /* Connect in Frameworks */,
+				0005414D2DDE1FFB0029793B /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +317,8 @@
 				3C0FC898238247CC00055141 /* Twinte */,
 				3C88956223B71C79002557E0 /* todayTimeTable */,
 				CE6C80C62DA519DC0060FAE4 /* V4API */,
+				000540BC2DDE10B80029793B /* twinte-watch Watch App */,
+				000541982DDE21510029793B /* twinte-watch-comp */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
 				3CA479F529612A1C000C1A11 /* widget */,
@@ -217,6 +334,8 @@
 				3C9A69C026A304E800638B53 /* widgetGroupExtension.appex */,
 				3CF748FB28F546700001D49B /* lockScreenWidgetExtension.appex */,
 				CE6C80C52DA519DC0060FAE4 /* V4API.framework */,
+				000540BB2DDE10B80029793B /* twinte-watch Watch App.app */,
+				000541952DDE21510029793B /* twinte-watch-compExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,6 +451,52 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		000540BA2DDE10B80029793B /* twinte-watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000540C92DDE10BA0029793B /* Build configuration list for PBXNativeTarget "twinte-watch Watch App" */;
+			buildPhases = (
+				000540B72DDE10B80029793B /* Sources */,
+				000540B82DDE10B80029793B /* Frameworks */,
+				000540B92DDE10B80029793B /* Resources */,
+				000541A52DDE21520029793B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0005419F2DDE21520029793B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				000540BC2DDE10B80029793B /* twinte-watch Watch App */,
+			);
+			name = "twinte-watch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "twinte-watch Watch App";
+			productReference = 000540BB2DDE10B80029793B /* twinte-watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		000541942DDE21510029793B /* twinte-watch-compExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000541A22DDE21520029793B /* Build configuration list for PBXNativeTarget "twinte-watch-compExtension" */;
+			buildPhases = (
+				000541912DDE21510029793B /* Sources */,
+				000541922DDE21510029793B /* Frameworks */,
+				000541932DDE21510029793B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				000541982DDE21510029793B /* twinte-watch-comp */,
+			);
+			name = "twinte-watch-compExtension";
+			packageProductDependencies = (
+			);
+			productName = "twinte-watch-compExtension";
+			productReference = 000541952DDE21510029793B /* twinte-watch-compExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		3C0FC895238247CC00055141 /* Twinte */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C0FC8AA238247CD00055141 /* Build configuration list for PBXNativeTarget "Twinte" */;
@@ -341,6 +506,7 @@
 				3C0FC894238247CC00055141 /* Resources */,
 				3C88956C23B71C79002557E0 /* Embed Foundation Extensions */,
 				CE6C80CF2DA519DC0060FAE4 /* Embed Frameworks */,
+				000540C62DDE10BA0029793B /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -349,6 +515,7 @@
 				3C9A69CA26A304EE00638B53 /* PBXTargetDependency */,
 				3CF7490528F546700001D49B /* PBXTargetDependency */,
 				CE6C80CC2DA519DC0060FAE4 /* PBXTargetDependency */,
+				000540C42DDE10BA0029793B /* PBXTargetDependency */,
 			);
 			name = Twinte;
 			productName = Twinte;
@@ -366,6 +533,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				000540CD2DDE13DC0029793B /* PBXTargetDependency */,
 			);
 			name = todayTimeTable;
 			productName = todayTimeTable;
@@ -383,6 +551,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				000540D42DDE18170029793B /* PBXTargetDependency */,
 			);
 			name = widgetGroupExtension;
 			productName = widgetGroupExtension;
@@ -400,6 +569,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				000541102DDE18E10029793B /* PBXTargetDependency */,
 			);
 			name = lockScreenWidgetExtension;
 			productName = lockScreenWidgetExtension;
@@ -425,6 +595,7 @@
 			name = V4API;
 			packageProductDependencies = (
 				CE6C81012DA51A160060FAE4 /* Connect */,
+				0005414C2DDE1FFB0029793B /* SwiftProtobuf */,
 			);
 			productName = V4API;
 			productReference = CE6C80C52DA519DC0060FAE4 /* V4API.framework */;
@@ -440,6 +611,12 @@
 				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = tako;
 				TargetAttributes = {
+					000540BA2DDE10B80029793B = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					000541942DDE21510029793B = {
+						CreatedOnToolsVersion = 16.3;
+					};
 					3C0FC895238247CC00055141 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -468,6 +645,7 @@
 			mainGroup = 3C0FC88D238247CC00055141;
 			packageReferences = (
 				CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */,
+				000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */,
 			);
 			productRefGroup = 3C0FC897238247CC00055141 /* Products */;
 			projectDirPath = "";
@@ -478,11 +656,27 @@
 				3C9A69BF26A304E800638B53 /* widgetGroupExtension */,
 				3CF748FA28F546700001D49B /* lockScreenWidgetExtension */,
 				CE6C80C42DA519DC0060FAE4 /* V4API */,
+				000540BA2DDE10B80029793B /* twinte-watch Watch App */,
+				000541942DDE21510029793B /* twinte-watch-compExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		000540B92DDE10B80029793B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000541932DDE21510029793B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C0FC894238247CC00055141 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -530,6 +724,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		000540B72DDE10B80029793B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000541912DDE21510029793B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C0FC892238247CC00055141 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,6 +790,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		000540C42DDE10BA0029793B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 000540BA2DDE10B80029793B /* twinte-watch Watch App */;
+			targetProxy = 000540C32DDE10BA0029793B /* PBXContainerItemProxy */;
+		};
+		000540CD2DDE13DC0029793B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
+			targetProxy = 000540CC2DDE13DC0029793B /* PBXContainerItemProxy */;
+		};
+		000540D42DDE18170029793B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
+			targetProxy = 000540D32DDE18170029793B /* PBXContainerItemProxy */;
+		};
+		000541102DDE18E10029793B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
+			targetProxy = 0005410F2DDE18E10029793B /* PBXContainerItemProxy */;
+		};
+		0005419F2DDE21520029793B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 000541942DDE21510029793B /* twinte-watch-compExtension */;
+			targetProxy = 0005419E2DDE21520029793B /* PBXContainerItemProxy */;
+		};
 		3C88956A23B71C79002557E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -634,6 +867,150 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		000540C72DDE10BA0029793B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "twinte-watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = tako.Twinte;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.4;
+			};
+			name = Debug;
+		};
+		000540C82DDE10BA0029793B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "twinte-watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = tako.Twinte;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.4;
+			};
+			name = Release;
+		};
+		000541A32DDE21520029793B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "twinte-watch-comp/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "twinte-watch-comp";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 tako. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "tako.Twinte.watchkitapp.twinte-watch-comp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.4;
+			};
+			name = Debug;
+		};
+		000541A42DDE21520029793B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 48TCPC25C3;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "twinte-watch-comp/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "twinte-watch-comp";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 tako. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "tako.Twinte.watchkitapp.twinte-watch-comp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.4;
+			};
+			name = Release;
+		};
 		3C0FC8A8238247CD00055141 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -873,6 +1250,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.widgetGroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -900,6 +1278,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte.widgetGroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -973,6 +1352,7 @@
 		CE6C80D02DA519DC0060FAE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1002,6 +1382,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = group.net.twinte.app.V4API;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
@@ -1010,12 +1392,14 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
 		};
 		CE6C80D12DA519DC0060FAE4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1045,6 +1429,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = group.net.twinte.app.V4API;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1052,12 +1438,31 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		000540C92DDE10BA0029793B /* Build configuration list for PBXNativeTarget "twinte-watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000540C72DDE10BA0029793B /* Debug */,
+				000540C82DDE10BA0029793B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000541A22DDE21520029793B /* Build configuration list for PBXNativeTarget "twinte-watch-compExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000541A32DDE21520029793B /* Debug */,
+				000541A42DDE21520029793B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3C0FC891238247CC00055141 /* Build configuration list for PBXProject "Twinte" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1115,6 +1520,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.29.0;
+			};
+		};
 		CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/connectrpc/connect-swift";
@@ -1126,6 +1539,51 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		000540D62DDE18670029793B /* Connect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = Connect;
+		};
+		0005410B2DDE18CB0029793B /* Connect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = Connect;
+		};
+		0005414C2DDE1FFB0029793B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		0005414E2DDE201D0029793B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		000541502DDE20200029793B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		000541892DDE20D60029793B /* Connect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = Connect;
+		};
+		0005418B2DDE20D90029793B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		0005418D2DDE210F0029793B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000541452DDE1F0D0029793B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		0005418F2DDE21220029793B /* Connect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = Connect;
+		};
 		CE6C81012DA51A160060FAE4 /* Connect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE6C81002DA51A090060FAE4 /* XCRemoteSwiftPackageReference "connect-swift" */;
