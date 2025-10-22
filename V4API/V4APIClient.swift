@@ -44,7 +44,7 @@ private final class AuthInterceptor: UnaryInterceptor {
             return
         }
 
-        if let userDefaults = UserDefaults(suiteName: "group.net.twinte.app"),
+        if let userDefaults = UserDefaults(suiteName: "group.net.twinte"),
            let stringCookie = userDefaults.string(forKey: "stringCookie") {
             var headers = request.headers
             headers["Cookie"] = [stringCookie]

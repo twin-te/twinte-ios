@@ -59,7 +59,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
                     stringCookie += "\(eachcookie.name)=\(eachcookie.value);"
                 }
                 // UserDefaults のインスタンス
-                let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+                let userDefaults = UserDefaults(suiteName: "group.net.twinte")
                 // AppGroupのUserDefaults に特定のドメインのCookieを保存（共有）
                 userDefaults?.set(stringCookie, forKey: "stringCookie")
                 userDefaults?.synchronize()

@@ -38,7 +38,7 @@ class AppSettingsViewController: UIViewController {
             }
         }
 
-        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte")
 
         // ユーザーが通知ONOFFを設定していない場合はOFFに
         if userDefaults?.object(forKey: "notificationSwitch") == nil {
@@ -91,7 +91,7 @@ class AppSettingsViewController: UIViewController {
         notificationDateLabel.text = getday(format: "HH:mm", modifiedDate: datePicker.date)
         // 設定時刻をUserDefaultsに保存
         // UserDefaults のインスタンス
-        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte")
         // AppGroupのUserDefaultsに通知時間を保存
         userDefaults?.set(getday(format: "HH", modifiedDate: datePicker.date), forKey: "notificationHour")
         userDefaults?.set(getday(format: "mm", modifiedDate: datePicker.date), forKey: "notificationMinute")
@@ -102,7 +102,7 @@ class AppSettingsViewController: UIViewController {
 
     @IBAction func notificationSwitch(_ sender: UISwitch) {
         // UserDefaults のインスタンス
-        let userDefaults = UserDefaults(suiteName: "group.net.twinte.app")
+        let userDefaults = UserDefaults(suiteName: "group.net.twinte")
         // AppGroupのUserDefaultsに通知するかどうか保存
         userDefaults?.set(sender.isOn, forKey: "notificationSwitch")
 

@@ -32,7 +32,7 @@ class ScheduleNotification {
         // 現在登録されている全ての通知を消去
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         // UserDefaults のインスタンス
-        guard let userDefaults = UserDefaults(suiteName: "group.net.twinte.app") else { return }
+        guard let userDefaults = UserDefaults(suiteName: "group.net.twinte") else { return }
         if userDefaults.object(forKey: "notificationSwitch") != nil {
             if userDefaults.bool(forKey: "notificationSwitch") {
                 fetchTomorrowEvents { events in

@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.net.twinte.app</string>
+		<string>group.net.twinte</string>
 	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>
