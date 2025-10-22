@@ -217,7 +217,7 @@ struct smallWidgetEntryView: View {
         }
         .padding()
         .padding(.leading, 10)
-        .background(widgetBaseColor)
+        .widgetBackground(widgetBaseColor)
         .cornerRadius(21.67)
     }
 }

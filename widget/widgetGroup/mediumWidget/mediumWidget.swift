@@ -311,7 +311,7 @@ struct mediumWidgetEntryView: View {
             }
             .padding(20)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(LinearGradient(gradient: Gradient(stops: [
+            .widgetBackground(LinearGradient(gradient: Gradient(stops: [
                 .init(color: Color("BorderShadowRight"), location: 0.0),
                 .init(color: widgetBaseColor, location: 0.03),
 
@@ -321,7 +321,7 @@ struct mediumWidgetEntryView: View {
             .compositingGroup()
             .shadow(radius: 10, x: 13, y: 0)
         }
-        .background(widgetBaseColor)
+        .widgetBackground(widgetBaseColor)
         .cornerRadius(21.67)
     }
 }

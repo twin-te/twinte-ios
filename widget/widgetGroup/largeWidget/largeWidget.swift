@@ -179,7 +179,7 @@ struct largeWidgetEntryView: View {
             .padding(.leading, 20)
             .padding(.top, 20)
             .frame(maxWidth: .infinity)
-            .background(LinearGradient(gradient: Gradient(stops: [
+            .widgetBackground(LinearGradient(gradient: Gradient(stops: [
                 .init(color: Color("BorderShadowRight"), location: 0.0),
                 .init(color: widgetBaseColor, location: 0.03),
 
@@ -191,7 +191,7 @@ struct largeWidgetEntryView: View {
             .shadow(radius: 10, x: 13, y: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(widgetBaseColor)
+        .widgetBackground(widgetBaseColor)
         .cornerRadius(21.67)
     }
 }
@@ -214,3 +214,4 @@ struct largeWidget_Previews: PreviewProvider {
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
+
