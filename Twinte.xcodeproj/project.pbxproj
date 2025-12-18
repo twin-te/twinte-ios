@@ -121,11 +121,7 @@
 		3C5851C52609E16F00F53835 /* ScheduleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotification.swift; sourceTree = "<group>"; };
 		3C829CE02383D5EE008C3475 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3C88956023B71C79002557E0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		3C88956323B71C79002557E0 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		3C88956623B71C79002557E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		3C88956823B71C79002557E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C88957023B72039002557E0 /* Twin:te.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Twin:te.entitlements"; sourceTree = "<group>"; };
-		3C88957123B72080002557E0 /* todayTimeTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = todayTimeTable.entitlements; sourceTree = "<group>"; };
 		3C9A69C026A304E800638B53 /* widgetGroupExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetGroupExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9A69C426A304E800638B53 /* widgetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = widgetGroup.swift; sourceTree = "<group>"; };
 		3C9A69C626A304EE00638B53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,7 +194,6 @@
 				3CF7490728F546700001D49B /* lockScreenWidgetExtension.entitlements */,
 				3C9A69CF26A3050000638B53 /* widgetGroupExtension.entitlements */,
 				3C0FC898238247CC00055141 /* Twinte */,
-				3C88956223B71C79002557E0 /* todayTimeTable */,
 				CE6C80C62DA519DC0060FAE4 /* V4API */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
@@ -246,17 +241,6 @@
 				3C2B9CA92610DFB6006D306E /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3C88956223B71C79002557E0 /* todayTimeTable */ = {
-			isa = PBXGroup;
-			children = (
-				3C88957123B72080002557E0 /* todayTimeTable.entitlements */,
-				3C88956323B71C79002557E0 /* TodayViewController.swift */,
-				3C88956523B71C79002557E0 /* MainInterface.storyboard */,
-				3C88956823B71C79002557E0 /* Info.plist */,
-			);
-			path = todayTimeTable;
 			sourceTree = "<group>";
 		};
 		3C9A69C326A304E800638B53 /* widgetGroup */ = {
@@ -587,14 +571,6 @@
 				3C0FC8A5238247CD00055141 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		3C88956523B71C79002557E0 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C88956623B71C79002557E0 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
