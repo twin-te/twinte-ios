@@ -15,12 +15,7 @@
 		3C0FC8A6238247CD00055141 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A4238247CD00055141 /* LaunchScreen.storyboard */; };
 		3C1C731B243259A900A6C494 /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1C731A243259A900A6C494 /* AppSettingsViewController.swift */; };
 		3C5851C62609E16F00F53835 /* ScheduleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5851C52609E16F00F53835 /* ScheduleNotification.swift */; };
-		3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0FC8A2238247CD00055141 /* Assets.xcassets */; };
 		3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C829CE02383D5EE008C3475 /* WebKit.framework */; };
-		3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C88956023B71C79002557E0 /* NotificationCenter.framework */; platformFilter = ios; };
-		3C88956423B71C79002557E0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88956323B71C79002557E0 /* TodayViewController.swift */; };
-		3C88956723B71C79002557E0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C88956523B71C79002557E0 /* MainInterface.storyboard */; };
-		3C88956B23B71C79002557E0 /* todayTimeTable.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C88955F23B71C79002557E0 /* todayTimeTable.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C9A69C126A304E800638B53 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA72610DFB6006D306E /* WidgetKit.framework */; };
 		3C9A69C226A304E800638B53 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA92610DFB6006D306E /* SwiftUI.framework */; };
 		3C9A69C526A304E800638B53 /* widgetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A69C426A304E800638B53 /* widgetGroup.swift */; };
@@ -42,20 +37,12 @@
 		CE6C81022DA51A160060FAE4 /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = CE6C81012DA51A160060FAE4 /* Connect */; };
 		CE82FCDA2EA8EBFD00366E2E /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
 		CE82FCDB2EA8EBFD00366E2E /* V4API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CEC3CA842DDE78C500971004 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
 		CEC3CA892DDE78CB00971004 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
 		CEC3CA8E2DDE78CE00971004 /* V4API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C80C52DA519DC0060FAE4 /* V4API.framework */; };
 		CECBF5B52EA8EF730042675E /* widgetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECBF5B42EA8EF730042675E /* widgetExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3C88956923B71C79002557E0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C88955E23B71C79002557E0;
-			remoteInfo = todayTimeTable;
-		};
 		3C9A69C926A304EE00638B53 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
@@ -71,13 +58,6 @@
 			remoteInfo = lockScreenWidgetExtension;
 		};
 		CE6C80CB2DA519DC0060FAE4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CE6C80C42DA519DC0060FAE4;
-			remoteInfo = V4API;
-		};
-		CEC3CA862DDE78C500971004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3C0FC88E238247CC00055141 /* Project object */;
 			proxyType = 1;
@@ -109,7 +89,6 @@
 			files = (
 				3CF7490628F546700001D49B /* lockScreenWidgetExtension.appex in Embed Foundation Extensions */,
 				3C9A69CB26A304EE00638B53 /* widgetGroupExtension.appex in Embed Foundation Extensions */,
-				3C88956B23B71C79002557E0 /* todayTimeTable.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,13 +120,8 @@
 		3C2B9CA92610DFB6006D306E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3C5851C52609E16F00F53835 /* ScheduleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotification.swift; sourceTree = "<group>"; };
 		3C829CE02383D5EE008C3475 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		3C88955F23B71C79002557E0 /* todayTimeTable.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayTimeTable.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C88956023B71C79002557E0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		3C88956323B71C79002557E0 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		3C88956623B71C79002557E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		3C88956823B71C79002557E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C88957023B72039002557E0 /* Twin:te.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Twin:te.entitlements"; sourceTree = "<group>"; };
-		3C88957123B72080002557E0 /* todayTimeTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = todayTimeTable.entitlements; sourceTree = "<group>"; };
 		3C9A69C026A304E800638B53 /* widgetGroupExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetGroupExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9A69C426A304E800638B53 /* widgetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = widgetGroup.swift; sourceTree = "<group>"; };
 		3C9A69C626A304EE00638B53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -180,15 +154,6 @@
 			files = (
 				3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */,
 				CE82FCDA2EA8EBFD00366E2E /* V4API.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C88955C23B71C79002557E0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C88956123B71C79002557E0 /* NotificationCenter.framework in Frameworks */,
-				CEC3CA842DDE78C500971004 /* V4API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +194,6 @@
 				3CF7490728F546700001D49B /* lockScreenWidgetExtension.entitlements */,
 				3C9A69CF26A3050000638B53 /* widgetGroupExtension.entitlements */,
 				3C0FC898238247CC00055141 /* Twinte */,
-				3C88956223B71C79002557E0 /* todayTimeTable */,
 				CE6C80C62DA519DC0060FAE4 /* V4API */,
 				3C0FC897238247CC00055141 /* Products */,
 				3CCF54312382FB6E00149E44 /* sp.js */,
@@ -242,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				3C0FC896238247CC00055141 /* Twin:te.app */,
-				3C88955F23B71C79002557E0 /* todayTimeTable.appex */,
 				3C9A69C026A304E800638B53 /* widgetGroupExtension.appex */,
 				3CF748FB28F546700001D49B /* lockScreenWidgetExtension.appex */,
 				CE6C80C52DA519DC0060FAE4 /* V4API.framework */,
@@ -278,17 +241,6 @@
 				3C2B9CA92610DFB6006D306E /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3C88956223B71C79002557E0 /* todayTimeTable */ = {
-			isa = PBXGroup;
-			children = (
-				3C88957123B72080002557E0 /* todayTimeTable.entitlements */,
-				3C88956323B71C79002557E0 /* TodayViewController.swift */,
-				3C88956523B71C79002557E0 /* MainInterface.storyboard */,
-				3C88956823B71C79002557E0 /* Info.plist */,
-			);
-			path = todayTimeTable;
 			sourceTree = "<group>";
 		};
 		3C9A69C326A304E800638B53 /* widgetGroup */ = {
@@ -375,7 +327,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3C88956A23B71C79002557E0 /* PBXTargetDependency */,
 				3C9A69CA26A304EE00638B53 /* PBXTargetDependency */,
 				3CF7490528F546700001D49B /* PBXTargetDependency */,
 				CE6C80CC2DA519DC0060FAE4 /* PBXTargetDependency */,
@@ -384,24 +335,6 @@
 			productName = Twinte;
 			productReference = 3C0FC896238247CC00055141 /* Twin:te.app */;
 			productType = "com.apple.product-type.application";
-		};
-		3C88955E23B71C79002557E0 /* todayTimeTable */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C88956F23B71C79002557E0 /* Build configuration list for PBXNativeTarget "todayTimeTable" */;
-			buildPhases = (
-				3C88955B23B71C79002557E0 /* Sources */,
-				3C88955C23B71C79002557E0 /* Frameworks */,
-				3C88955D23B71C79002557E0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CEC3CA872DDE78C500971004 /* PBXTargetDependency */,
-			);
-			name = todayTimeTable;
-			productName = todayTimeTable;
-			productReference = 3C88955F23B71C79002557E0 /* todayTimeTable.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 		3C9A69BF26A304E800638B53 /* widgetGroupExtension */ = {
 			isa = PBXNativeTarget;
@@ -476,9 +409,6 @@
 					3C0FC895238247CC00055141 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
-					3C88955E23B71C79002557E0 = {
-						CreatedOnToolsVersion = 11.3;
-					};
 					3C9A69BF26A304E800638B53 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -507,7 +437,6 @@
 			projectRoot = "";
 			targets = (
 				3C0FC895238247CC00055141 /* Twinte */,
-				3C88955E23B71C79002557E0 /* todayTimeTable */,
 				3C9A69BF26A304E800638B53 /* widgetGroupExtension */,
 				3CF748FA28F546700001D49B /* lockScreenWidgetExtension */,
 				CE6C80C42DA519DC0060FAE4 /* V4API */,
@@ -525,15 +454,6 @@
 				3C0FC8A3238247CD00055141 /* Assets.xcassets in Resources */,
 				3C0FC8A1238247CC00055141 /* Main.storyboard in Resources */,
 				3CCF54322382FB6F00149E44 /* sp.js in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C88955D23B71C79002557E0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C60BCC323BB2E86003E8F6F /* Assets.xcassets in Resources */,
-				3C88956723B71C79002557E0 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,14 +496,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3C88955B23B71C79002557E0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C88956423B71C79002557E0 /* TodayViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C9A69BC26A304E800638B53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -616,12 +528,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3C88956A23B71C79002557E0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 3C88955E23B71C79002557E0 /* todayTimeTable */;
-			targetProxy = 3C88956923B71C79002557E0 /* PBXContainerItemProxy */;
-		};
 		3C9A69CA26A304EE00638B53 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -637,11 +543,6 @@
 			isa = PBXTargetDependency;
 			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
 			targetProxy = CE6C80CB2DA519DC0060FAE4 /* PBXContainerItemProxy */;
-		};
-		CEC3CA872DDE78C500971004 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CE6C80C42DA519DC0060FAE4 /* V4API */;
-			targetProxy = CEC3CA862DDE78C500971004 /* PBXContainerItemProxy */;
 		};
 		CEC3CA8C2DDE78CB00971004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -670,14 +571,6 @@
 				3C0FC8A5238247CD00055141 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		3C88956523B71C79002557E0 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C88956623B71C79002557E0 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -847,54 +740,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tako.Twinte;
 				PRODUCT_NAME = "Twin:te";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		3C88956D23B71C79002557E0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = todayTimeTable/todayTimeTable.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NJ69566W75;
-				INFOPLIST_FILE = todayTimeTable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "tako.Twinte.todayTimeTable-v4";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3C88956E23B71C79002557E0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = todayTimeTable/todayTimeTable.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NJ69566W75;
-				INFOPLIST_FILE = todayTimeTable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "tako.Twinte.todayTimeTable-v4";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1117,15 +962,6 @@
 			buildConfigurations = (
 				3C0FC8AB238247CD00055141 /* Debug */,
 				3C0FC8AC238247CD00055141 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3C88956F23B71C79002557E0 /* Build configuration list for PBXNativeTarget "todayTimeTable" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C88956D23B71C79002557E0 /* Debug */,
-				3C88956E23B71C79002557E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
