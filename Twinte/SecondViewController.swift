@@ -112,7 +112,7 @@ class SecondViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
     // Twinsの履修画面でJSを挿入
     func webView(_ TwinsWebView: WKWebView, didFinish navigation: WKNavigation!) {
         // ページのタイトルが履修登録ページのものだった場合に実行
-        if TwinsWebView.title == "履修登録・登録状況照会 [CampusSquare]" || TwinsWebView.title == "CampusSquare for WEB [CampusSquare]" {
+        if TwinsWebView.title == "履修登録・登録状況照会" || TwinsWebView.title == "Course registration・Registration status" {
             // sp.jsのパスを取得
             guard let jsFilePath = Bundle.main.path(forResource: "sp", ofType: "js") else {
                 // ファイルがない場合
