@@ -23,6 +23,9 @@
 		000541962DDE21510029793B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA72610DFB6006D306E /* WidgetKit.framework */; };
 		000541972DDE21510029793B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2B9CA92610DFB6006D306E /* SwiftUI.framework */; };
 		000541A02DDE21520029793B /* twinte-watch-compExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 000541952DDE21510029793B /* twinte-watch-compExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		000541A72DDE25500029793B /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000541A62DDE25500029793B /* WatchConnectivity.framework */; };
+		000541A92DDE255E0029793B /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000541A82DDE255E0029793B /* WatchConnectivity.framework */; };
+		000541AB2DDE25A30029793B /* AppWatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000541AA2DDE25A30029793B /* AppWatchSessionManager.swift */; };
 		3C0FC89A238247CC00055141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC899238247CC00055141 /* AppDelegate.swift */; };
 		3C0FC89C238247CC00055141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC89B238247CC00055141 /* SceneDelegate.swift */; };
 		3C0FC89E238247CC00055141 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FC89D238247CC00055141 /* ViewController.swift */; };
@@ -178,6 +181,10 @@
 /* Begin PBXFileReference section */
 		000540BB2DDE10B80029793B /* twinte-watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "twinte-watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		000541952DDE21510029793B /* twinte-watch-compExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "twinte-watch-compExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		000541A62DDE25500029793B /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/iOSSupport/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		000541A82DDE255E0029793B /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS11.4.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		000541AA2DDE25A30029793B /* AppWatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWatchSessionManager.swift; sourceTree = "<group>"; };
+		005DE5DE2DF0688600236FEA /* twinte-watch-compExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "twinte-watch-compExtension.entitlements"; sourceTree = "<group>"; };
 		3C0FC896238247CC00055141 /* Twin:te.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twin:te.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0FC899238247CC00055141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C0FC89B238247CC00055141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -239,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000541A92DDE255E0029793B /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +267,7 @@
 				3C829CE12383D5EE008C3475 /* WebKit.framework in Frameworks */,
 				CE6C80CD2DA519DC0060FAE4 /* V4API.framework in Frameworks */,
 				0005418C2DDE20D90029793B /* SwiftProtobuf in Frameworks */,
+				000541A72DDE25500029793B /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +321,7 @@
 		3C0FC88D238247CC00055141 = {
 			isa = PBXGroup;
 			children = (
+				005DE5DE2DF0688600236FEA /* twinte-watch-compExtension.entitlements */,
 				3CF7490728F546700001D49B /* lockScreenWidgetExtension.entitlements */,
 				3C9A69CF26A3050000638B53 /* widgetGroupExtension.entitlements */,
 				3C0FC898238247CC00055141 /* Twinte */,
@@ -355,6 +365,7 @@
 				3C0FC8A2238247CD00055141 /* Assets.xcassets */,
 				3C0FC8A4238247CD00055141 /* LaunchScreen.storyboard */,
 				3C0FC8A7238247CD00055141 /* Info.plist */,
+				000541AA2DDE25A30029793B /* AppWatchSessionManager.swift */,
 			);
 			path = Twinte;
 			sourceTree = "<group>";
@@ -362,6 +373,8 @@
 		3C829CDF2383D5EE008C3475 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				000541A62DDE25500029793B /* WatchConnectivity.framework */,
+				000541A82DDE255E0029793B /* WatchConnectivity.framework */,
 				3C829CE02383D5EE008C3475 /* WebKit.framework */,
 				3C88956023B71C79002557E0 /* NotificationCenter.framework */,
 				3C2B9CA72610DFB6006D306E /* WidgetKit.framework */,
@@ -743,6 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE721682383B42B00363500 /* SecondViewController.swift in Sources */,
+				000541AB2DDE25A30029793B /* AppWatchSessionManager.swift in Sources */,
 				3C0FC89E238247CC00055141 /* ViewController.swift in Sources */,
 				3C1C731B243259A900A6C494 /* AppSettingsViewController.swift in Sources */,
 				3C5851C62609E16F00F53835 /* ScheduleNotification.swift in Sources */,
@@ -874,6 +888,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "twinte-watch Watch App/twinte-watch Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -910,6 +925,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "twinte-watch Watch App/twinte-watch Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -945,6 +961,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "twinte-watch-compExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -982,6 +999,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "twinte-watch-compExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

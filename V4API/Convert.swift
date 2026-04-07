@@ -14,7 +14,7 @@ import Foundation
 public func convertModuleToJapanese(_ module: Schoolcalendar_V1_Module) -> String {
     switch module {
     case .springA: return "春A"
-    case .springB: return "春AB"
+    case .springB: return "春B"
     case .springC: return "春C"
     case .summerVacation: return "夏休み"
     case .fallA: return "秋A"

@@ -10,9 +10,15 @@ import SwiftUI
 
 @main
 struct twinte_watch_Watch_AppApp: App {
+    @StateObject var sessionManager = WatchOSSessionManager.shared
+    
+    init() {
+        
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(sessionManager)
         }
     }
 }
