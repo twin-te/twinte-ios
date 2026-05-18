@@ -136,6 +136,7 @@ class SecondViewController: UIViewController, WKUIDelegate, WKNavigationDelegate
 
         if let host: String = TwinsWebView.url?.host {
             if let absoluteURL = TwinsWebView.url?.absoluteString {
+                // MARK: - ステージング環境を呼び出したいときはここをapp.stg.twinte.netに変更する。
                 if host == "app.twinte.net" { // この部分を処理したいURLにする
                     // 親のviewcontorollerを取得して関数を実行
                     let parentVC = self.presentingViewController as! ViewController

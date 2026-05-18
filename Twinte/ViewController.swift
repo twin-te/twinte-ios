@@ -15,6 +15,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
     // 通知作成のためのクラス
     let Notification = ScheduleNotification()
 
+    // MARK: ステージング環境を呼び出したいときはここをapp.stg.twinte.netに変更する。
     let myRequest = URLRequest(url: URL(string: "https://app.twinte.net")!)
 
     override func viewDidLoad() {
@@ -153,6 +154,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         if let host: String = navigationAction.request.url?.host {
             // グローバル変数に格納
             g_Url = navigationAction.request.url
+            // MARK: ステージング環境を呼び出したいときはここをapp.stg.twinte.netに変更する。
             if host == "app.twinte.net" || host == "appleid.apple.com" { // この部分を処理したいURLにする
                 saveCookie()
                 decisionHandler(WKNavigationActionPolicy.allow)
@@ -176,10 +178,25 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         }
     }
 
-    // subWebViewから戻ってきたときはリロードする
+    // subWebViewから戻ってきたときはリロードする。（シラバス/responを除く）
     @IBAction func returnToMe(segue: UIStoryboardSegue) {
-        // Twinsから帰ってきたときのみリロード
-        if g_Url!.absoluteString == "https://twins.tsukuba.ac.jp/" {
+        
+        guard let g_url = g_Url else {
+            return
+        }
+        
+        let host: String?
+        if #available(iOS 16.0, *) {
+            host = g_url.host()
+        } else {
+            host = g_url.host
+        }
+        
+        // 遷移先の操作が、遷移前の画面に影響を与えるようなホスト(ログイン認証/twinsインポート)については、リロードする。
+        // 以下のホスト(シラバス/respon)については、リロードしない。
+        if let host_str = host, ["atmnb.tsukuba.ac.jp", "kdb.tsukuba.ac.jp"].contains(host_str) {
+            // リロードしない
+        } else {
             MainWebView.reload()
         }
     }

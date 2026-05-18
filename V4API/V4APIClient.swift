@@ -18,6 +18,7 @@ public final class V4APIClient {
     public private(set) lazy var schoolcalendarClient = Schoolcalendar_V1_SchoolCalendarServiceClient(client: client)
     public private(set) lazy var unifiedClient = Unified_V1_UnifiedServiceClient(client: client)
 
+    // MARK: ステージング環境を呼び出したいときはここのURLを変更する。
     private init() {
         self.client = ProtocolClient(
             httpClient: URLSessionHTTPClient(),
